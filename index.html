@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konstrukteurspult – Lernplattform Metallbaukonstrukteur/in</title>
+  <meta name="description" content="Persönliche Lernplattform für die Zusatzlehre Metallbaukonstrukteur/in EFZ: alle 4 Semester mit Erklärungen, Lernmethoden, eigenen Notizen und Fortschrittsbalken.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232F5670'/%3E%3Cpath d='M10 22 L16 10 L22 22 M12.5 17 H19.5' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="titleblock">
+    <div class="titleblock-inner">
+      <div>
+        <div class="eyebrow">Zusatzlehre &middot; Metallbaukonstrukteur/in EFZ</div>
+        <h1>Konstrukteurspult</h1>
+        <div class="subtitle">Deine persönliche Lernplattform für alle 4 Semester. Themenbereiche einzeln anwählen, mit eigenem Stoff füttern und Fortschritt tracken – alles bleibt lokal in diesem Browser gespeichert.</div>
+      </div>
+      <div class="overall-gauge">
+        <div class="overall-gauge-top">
+          <span class="overall-gauge-label">Gesamtfortschritt</span>
+          <span class="overall-gauge-value" id="overallPct">0%</span>
+        </div>
+        <div class="bar tick"><div class="bar-fill" id="overallFill" style="width:0%"></div></div>
+        <div class="overall-gauge-sub" id="overallSub">0 / 640 Lekt. erledigt</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <details class="toolbox" id="toolbox">
+      <summary>Lernmethoden-Werkzeugkasten <span class="arrow">&rsaquo;</span></summary>
+      <div class="toolbox-grid">
+        <div class="toolbox-item">
+          <h4>Karteikarten &amp; Active Recall</h4>
+          <p>Formeln, Vorschriften und Begriffe auf Karten schreiben; Antwort verdecken und aktiv abrufen statt nur nochmals lesen.</p>
+        </div>
+        <div class="toolbox-item">
+          <h4>Spaced Repetition</h4>
+          <p>Schwierige Karten häufiger wiederholen (nach 1, 3, 7, 14 Tagen), gut sitzende Themen seltener – so bleibt Wissen langfristig hängen.</p>
+        </div>
+        <div class="toolbox-item">
+          <h4>Rechenschema-Methode</h4>
+          <p>Für Statik-, Bauphysik- und Algebra-Aufgaben immer denselben Ablauf einüben (z.&nbsp;B. Freikörperbild &rarr; Gleichgewicht &rarr; Auflösen &rarr; Probe), bis er automatisch sitzt.</p>
+        </div>
+        <div class="toolbox-item">
+          <h4>Skizzier-Drill</h4>
+          <p>Bauteile dreistufig üben: Vorlage abzeichnen &rarr; aus dem Gedächtnis skizzieren &rarr; mit korrekter Bemassung beschriften.</p>
+        </div>
+        <div class="toolbox-item">
+          <h4>Feynman-Technik</h4>
+          <p>Ein Thema so erklären, als würdest du es einem Lehrling im 1. Lehrjahr beibringen. Lücken in der eigenen Erklärung zeigen, was noch fehlt.</p>
+        </div>
+        <div class="toolbox-item">
+          <h4>Praxis-Transfer</h4>
+          <p>Zu jedem Thema ein reales Bauteil oder Beispiel aus dem eigenen Betrieb suchen – Theorie ohne Bezug bleibt abstrakt und wird schneller vergessen.</p>
+        </div>
+      </div>
+    </details>
+
+    <div class="controls">
+      <div class="search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Thema suchen … z.B. Festigkeitslehre">
+      </div>
+      <div class="chipbar" id="tbChips"></div>
+      <div class="btnrow">
+        <button class="btn" id="expandAll">Alle aufklappen</button>
+        <button class="btn" id="collapseAll">Alle zuklappen</button>
+        <button class="btn danger" id="resetProgress">Fortschritt zurücksetzen</button>
+      </div>
+    </div>
+
+    <div class="semtabs" id="semTabs"></div>
+
+    <div class="board" id="board"></div>
+
+    <footer>Fortschritt &amp; Notizen werden ausschliesslich lokal im Browser gespeichert (localStorage) — kein Server, kein Sync.</footer>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
