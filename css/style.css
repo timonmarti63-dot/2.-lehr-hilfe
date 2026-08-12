@@ -299,6 +299,36 @@ details.toolbox[open] summary .arrow{ transform:rotate(90deg); display:inline-bl
 }
 .method-text{ font-size:13px; color:var(--ink); }
 
+/* ---------- Flashcards ---------- */
+.flash-section{ margin:0 0 12px; }
+.flash-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+.flash-title{ font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint); }
+.flash-progress{ font-family:var(--font-mono); font-size:11px; color:var(--structural); font-variant-numeric:tabular-nums; }
+.flashcard{
+  background:var(--structural-soft); border:1px solid var(--structural);
+  border-radius:8px; padding:16px 14px; margin-bottom:8px; min-height:76px;
+  display:flex; flex-direction:column; justify-content:center; gap:4px;
+  transition:background .15s;
+}
+.flashcard.is-flipped{ background:var(--success-soft); border-color:var(--success); }
+.flashcard-label{ font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--structural); }
+.flashcard.is-flipped .flashcard-label{ color:var(--success); }
+.flashcard-text{ font-size:14px; line-height:1.5; color:var(--ink); }
+.flash-controls{ display:flex; flex-wrap:wrap; gap:6px; }
+.flash-controls .btn{ font-size:12px; padding:6px 10px; }
+.btn.flash-know:hover{ border-color:var(--success); color:var(--success); }
+.btn.flash-dontknow:hover{ border-color:var(--accent); color:var(--accent); }
+
+/* ---------- Exercises ---------- */
+.exercise-section{ margin:0 0 12px; }
+.exercise-head{ font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint); margin-bottom:6px; }
+.exercise-list{ display:flex; flex-direction:column; gap:8px; }
+.exercise-item{ border:1px solid var(--line); border-radius:8px; padding:9px 11px; background:var(--surface); }
+.exercise-task{ font-size:13px; color:var(--ink); margin-bottom:8px; }
+.exercise-num{ font-family:var(--font-mono); color:var(--structural); font-weight:700; }
+.exercise-toggle{ font-size:12px; padding:5px 10px; }
+.exercise-solution{ margin-top:8px; padding:8px 10px; background:var(--success-soft); border-left:3px solid var(--success); border-radius:0 6px 6px 0; font-size:13px; color:var(--ink); font-family:var(--font-mono); }
+
 .notes-label{
   font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em;
   color:var(--ink-faint); margin:2px 0 5px; display:flex; justify-content:space-between; align-items:center;

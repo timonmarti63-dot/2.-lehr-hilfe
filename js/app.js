@@ -84,6 +84,152 @@
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  // Interactive flashcard deck for a topic: click-to-reveal, "weiss ich" /
+  // "nochmal" sorts cards out of / back into the current round, and known
+  // cards are remembered per topic in localStorage.
+  function buildFlashcards(container, t, ts) {
+    if (!ts.flashKnown) ts.flashKnown = {};
+    var order = [];
+    var pos = 0;
+    var revealed = false;
+
+    container.innerHTML =
+      '<div class="flash-head"><span class="flash-title">Karteikarten</span><span class="flash-progress" data-flash-progress></span></div>' +
+      '<div class="flashcard" data-flashcard>' +
+        '<div class="flashcard-label" data-flashcard-label>Frage</div>' +
+        '<div class="flashcard-text" data-flashcard-text></div>' +
+      '</div>' +
+      '<div class="flash-controls">' +
+        '<button class="btn" type="button" data-flash-reveal>Antwort zeigen</button>' +
+        '<button class="btn flash-know" type="button" data-flash-know hidden>Weiss ich</button>' +
+        '<button class="btn flash-dontknow" type="button" data-flash-dontknow hidden>Nochmal üben</button>' +
+        '<button class="btn" type="button" data-flash-shuffle>Mischen</button>' +
+        '<button class="btn" type="button" data-flash-reset>Zurücksetzen</button>' +
+      '</div>';
+
+    var cardEl = container.querySelector("[data-flashcard]");
+    var labelEl = container.querySelector("[data-flashcard-label]");
+    var textEl = container.querySelector("[data-flashcard-text]");
+    var progressEl = container.querySelector("[data-flash-progress]");
+    var revealBtn = container.querySelector("[data-flash-reveal]");
+    var knowBtn = container.querySelector("[data-flash-know]");
+    var dontknowBtn = container.querySelector("[data-flash-dontknow]");
+
+    function knownCount() {
+      var n = 0;
+      for (var i = 0; i < t.flashcards.length; i++) if (ts.flashKnown[i]) n++;
+      return n;
+    }
+
+    function buildOrder() {
+      var open = [];
+      for (var i = 0; i < t.flashcards.length; i++) if (!ts.flashKnown[i]) open.push(i);
+      order = shuffle(open);
+      pos = 0;
+    }
+
+    function render() {
+      var total = t.flashcards.length;
+      progressEl.textContent = knownCount() + " / " + total + " gewusst";
+
+      if (!order.length) {
+        cardEl.classList.remove("is-flipped");
+        labelEl.textContent = "Runde geschafft";
+        textEl.textContent = knownCount() === total
+          ? "Alle Karten dieses Themas sind als „gewusst“ markiert. Mit Zurücksetzen kannst du die Runde erneut starten."
+          : "Alle offenen Karten dieser Runde wurden gezeigt. Klicke auf Mischen, um verbleibende Karten erneut zu üben.";
+        revealBtn.hidden = true;
+        knowBtn.hidden = true;
+        dontknowBtn.hidden = true;
+        return;
+      }
+
+      revealBtn.hidden = false;
+      var card = t.flashcards[order[pos]];
+      revealed = false;
+      labelEl.textContent = "Frage " + (pos + 1) + " / " + order.length;
+      textEl.textContent = card.q;
+      cardEl.classList.remove("is-flipped");
+      knowBtn.hidden = true;
+      dontknowBtn.hidden = true;
+    }
+
+    function reveal() {
+      if (!order.length || revealed) return;
+      revealed = true;
+      var card = t.flashcards[order[pos]];
+      labelEl.textContent = "Antwort";
+      textEl.textContent = card.a;
+      cardEl.classList.add("is-flipped");
+      revealBtn.hidden = true;
+      knowBtn.hidden = false;
+      dontknowBtn.hidden = false;
+    }
+
+    function next(markKnown) {
+      var idx = order[pos];
+      if (markKnown) {
+        ts.flashKnown[idx] = true;
+        order.splice(pos, 1);
+      } else {
+        pos++;
+      }
+      if (pos >= order.length) pos = 0;
+      saveState();
+      render();
+    }
+
+    revealBtn.addEventListener("click", reveal);
+    knowBtn.addEventListener("click", function () { next(true); });
+    dontknowBtn.addEventListener("click", function () { next(false); });
+    container.querySelector("[data-flash-shuffle]").addEventListener("click", function () {
+      buildOrder();
+      render();
+    });
+    container.querySelector("[data-flash-reset]").addEventListener("click", function () {
+      ts.flashKnown = {};
+      saveState();
+      buildOrder();
+      render();
+    });
+
+    buildOrder();
+    render();
+  }
+
+  function buildExercises(container, t) {
+    var html = '<div class="exercise-head">Lernaufgaben</div><div class="exercise-list">';
+    t.exercises.forEach(function (ex, i) {
+      html +=
+        '<div class="exercise-item">' +
+          '<div class="exercise-task"><span class="exercise-num">' + (i + 1) + '.</span> ' + escapeHtml(ex.task) + '</div>' +
+          '<button class="btn exercise-toggle" type="button" data-ex-toggle>Lösung anzeigen</button>' +
+          '<div class="exercise-solution" data-ex-solution hidden>' + escapeHtml(ex.answer) + '</div>' +
+        '</div>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+
+    Array.prototype.forEach.call(container.querySelectorAll(".exercise-item"), function (item) {
+      var btn = item.querySelector("[data-ex-toggle]");
+      var sol = item.querySelector("[data-ex-solution]");
+      btn.addEventListener("click", function () {
+        var show = sol.hidden;
+        sol.hidden = !show;
+        btn.textContent = show ? "Lösung verstecken" : "Lösung anzeigen";
+      });
+    });
+  }
+
   // Render board
   DATA.forEach(function (s, idx) {
     var col = document.createElement("div");
@@ -131,10 +277,23 @@
         html += '<div class="formula-box">' + escapeHtml(t.formulas) + '</div>';
       }
       html += '<div class="method-box"><span class="method-label">Lernmethode</span><span class="method-text">' + escapeHtml(t.method) + '</span></div>';
+      if (t.flashcards && t.flashcards.length) {
+        html += '<div class="flash-section" data-flash-section></div>';
+      }
+      if (t.exercises && t.exercises.length) {
+        html += '<div class="exercise-section" data-exercise-section></div>';
+      }
       html += '<div class="notes-label"><span>Eigene Notizen &amp; Unterrichtsstoff</span><span class="savehint" data-savehint>gespeichert</span></div>';
       html += '<textarea class="notes" placeholder="Füge hier eigenen Unterrichtsstoff, Merksätze, Links oder Beispiele ein …" data-notes>' + escapeHtml(ts.notes || "") + '</textarea>';
       bodyEl.innerHTML = html;
       topicEl.appendChild(bodyEl);
+
+      if (t.flashcards && t.flashcards.length) {
+        buildFlashcards(bodyEl.querySelector("[data-flash-section]"), t, ts);
+      }
+      if (t.exercises && t.exercises.length) {
+        buildExercises(bodyEl.querySelector("[data-exercise-section]"), t);
+      }
 
       // interactions
       headEl.addEventListener("click", function (e) {
