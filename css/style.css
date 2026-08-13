@@ -319,6 +319,36 @@ details.toolbox[open] summary .arrow{ transform:rotate(90deg); display:inline-bl
 .btn.flash-know:hover{ border-color:var(--success); color:var(--success); }
 .btn.flash-dontknow:hover{ border-color:var(--accent); color:var(--accent); }
 
+/* ---------- Chapter subtopics ("Unterseiten") ---------- */
+.subtopics-section{ margin:0 0 14px; }
+.chapters-head{ font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint); margin-bottom:6px; }
+.chapters{ display:flex; flex-direction:column; gap:6px; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.chapter{ background:var(--surface-2); }
+.chapter + .chapter{ border-top:1px solid var(--line); }
+.chapter-head{
+  display:flex; align-items:center; gap:10px; padding:9px 11px; cursor:pointer;
+}
+.chapter-head:hover{ background:var(--surface-3); }
+.chapter-tag{
+  font-family:var(--font-mono); font-size:10px; font-weight:700; color:var(--accent);
+  background:var(--accent-soft); border:1px solid var(--accent); border-radius:4px;
+  padding:1px 6px; flex:none; white-space:nowrap;
+}
+.chapter-title{ font-size:13px; font-weight:600; flex:1; }
+.chapter.open .chev{ transform:rotate(90deg); }
+.chapter-body{ display:none; padding:4px 14px 14px 14px; background:var(--surface); }
+.chapter.open .chapter-body{ display:block; }
+.chapter-body .explain{ margin:8px 0 10px; font-size:13px; }
+.examples-head{ font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--structural); margin:0 0 6px; }
+.examples{ display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
+.example-item{
+  border:1px dashed var(--structural); background:var(--structural-soft);
+  border-radius:6px; padding:8px 10px; font-family:var(--font-mono); font-size:12.5px; line-height:1.6;
+}
+.example-problem{ color:var(--ink); }
+.example-solution{ color:var(--structural); margin-top:3px; }
+.example-solution::before{ content:"→ "; }
+
 /* ---------- Exercises ---------- */
 .exercise-section{ margin:0 0 12px; }
 .exercise-head{ font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint); margin-bottom:6px; }

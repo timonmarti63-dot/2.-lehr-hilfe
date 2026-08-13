@@ -206,9 +206,9 @@
     render();
   }
 
-  function buildExercises(container, t) {
-    var html = '<div class="exercise-head">Lernaufgaben</div><div class="exercise-list">';
-    t.exercises.forEach(function (ex, i) {
+  function exerciseListHtml(exercises) {
+    var html = '<div class="exercise-list">';
+    exercises.forEach(function (ex, i) {
       html +=
         '<div class="exercise-item">' +
           '<div class="exercise-task"><span class="exercise-num">' + (i + 1) + '.</span> ' + escapeHtml(ex.task) + '</div>' +
@@ -217,8 +217,10 @@
         '</div>';
     });
     html += '</div>';
-    container.innerHTML = html;
+    return html;
+  }
 
+  function wireExerciseToggles(container) {
     Array.prototype.forEach.call(container.querySelectorAll(".exercise-item"), function (item) {
       var btn = item.querySelector("[data-ex-toggle]");
       var sol = item.querySelector("[data-ex-solution]");
@@ -228,6 +230,50 @@
         btn.textContent = show ? "Lösung verstecken" : "Lösung anzeigen";
       });
     });
+  }
+
+  function buildExercises(container, t) {
+    container.innerHTML = '<div class="exercise-head">Lernaufgaben</div>' + exerciseListHtml(t.exercises);
+    wireExerciseToggles(container);
+  }
+
+  // Nested chapter/"Unterseiten" accordion for topics that are broken down
+  // into a full chapter-by-chapter walkthrough (currently: Algebra).
+  function buildSubtopics(container, t) {
+    var html = '<div class="chapters-head">Kapitel-Unterseiten (' + t.subtopics.length + ')</div><div class="chapters">';
+    t.subtopics.forEach(function (sub, i) {
+      html += '<div class="chapter">' +
+        '<div class="chapter-head" data-chapter-toggle>' +
+          '<span class="chapter-tag">' + escapeHtml(sub.chapter) + '</span>' +
+          '<span class="chapter-title">' + escapeHtml(sub.title) + '</span>' +
+          '<span class="chev">&rsaquo;</span>' +
+        '</div>' +
+        '<div class="chapter-body">' +
+          '<p class="explain">' + escapeHtml(sub.explain) + '</p>';
+      if (sub.examples && sub.examples.length) {
+        html += '<div class="examples-head">Beispiele</div><div class="examples">';
+        sub.examples.forEach(function (ex) {
+          html += '<div class="example-item">' +
+            '<div class="example-problem">' + escapeHtml(ex.problem) + '</div>' +
+            '<div class="example-solution">' + escapeHtml(ex.solution) + '</div>' +
+          '</div>';
+        });
+        html += '</div>';
+      }
+      if (sub.exercises && sub.exercises.length) {
+        html += '<div class="exercise-head">Aufgaben</div>' + exerciseListHtml(sub.exercises);
+      }
+      html += '</div></div>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+
+    Array.prototype.forEach.call(container.querySelectorAll(".chapter"), function (chapterEl) {
+      chapterEl.querySelector("[data-chapter-toggle]").addEventListener("click", function () {
+        chapterEl.classList.toggle("open");
+      });
+    });
+    wireExerciseToggles(container);
   }
 
   // Render board
@@ -280,6 +326,9 @@
       if (t.flashcards && t.flashcards.length) {
         html += '<div class="flash-section" data-flash-section></div>';
       }
+      if (t.subtopics && t.subtopics.length) {
+        html += '<div class="subtopics-section" data-subtopics-section></div>';
+      }
       if (t.exercises && t.exercises.length) {
         html += '<div class="exercise-section" data-exercise-section></div>';
       }
@@ -290,6 +339,9 @@
 
       if (t.flashcards && t.flashcards.length) {
         buildFlashcards(bodyEl.querySelector("[data-flash-section]"), t, ts);
+      }
+      if (t.subtopics && t.subtopics.length) {
+        buildSubtopics(bodyEl.querySelector("[data-subtopics-section]"), t);
       }
       if (t.exercises && t.exercises.length) {
         buildExercises(bodyEl.querySelector("[data-exercise-section]"), t);
