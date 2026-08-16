@@ -1142,72 +1142,118 @@ window.CURRICULUM = [
         }
       ] },
     { id: "s1-04", name: "Physikalische Grundlagen", lekt: 22, tb: "TB3",
-      explain: "Physikalische Grössen als Zahlenwert × Einheit: Kraft, Masse, Dichte, Arbeit, Leistung, elektrische Grundgrössen. Basis für reale Berechnungen wie Stahlgewicht, Hebelkräfte oder Widerstände in Anlagen.",
-      formulas: "Dichte: ρ = m / V\nArbeit: W = F · s      Leistung: P = F · s / t\nHebelgesetz: Kraft × Hebelarm = Last × Hebelarm der Last\nOhm'sches Gesetz: U = I · R      Widerstand: R = ρ · l / A",
-      method: "Formelsammlung mit Einheiten führen; zu jeder Formel eine konkrete Metallbau-Anwendung notieren, z.B. Gewicht eines Stahlträgers berechnen.",
-      flashcards: [
-        { q: "Wie ist die Dichte definiert?", a: "ρ = m / V  (Masse durch Volumen)" },
-        { q: "Formel für mechanische Arbeit?", a: "W = F · s  (Kraft mal Weg)" },
-        { q: "Formel für Leistung?", a: "P = F · s / t = W / t  (Arbeit pro Zeit)" },
-        { q: "Wie lautet das Hebelgesetz?", a: "Kraft × Hebelarm der Kraft = Last × Hebelarm der Last" },
-        { q: "Wie lautet das Ohm'sche Gesetz?", a: "U = I · R  (Spannung = Stromstärke mal Widerstand)" },
-        { q: "Formel für den elektrischen Widerstand eines Leiters?", a: "R = ρ · l / A  (spez. Widerstand mal Länge, durch Querschnitt)" },
-        { q: "Was ist der Unterschied zwischen Masse und Gewichtskraft?", a: "Masse (kg) ist die Menge an Materie; Gewichtskraft (N) = Masse × Erdbeschleunigung: F = m · g" }
-      ],
-      exercises: [
-        { task: "Ein Stahlblock hat eine Masse von 39 kg und ein Volumen von 5 dm³. Berechne die Dichte.", answer: "ρ = m/V = 39 kg / 5 dm³ = 7,8 kg/dm³" },
-        { task: "Eine Kraft von 250 N hebt eine Last über eine Strecke von 3 m. Berechne die Arbeit.", answer: "W = F·s = 250 N · 3 m = 750 J" },
-        { task: "Eine Maschine leistet eine Arbeit von 1200 J in 4 Sekunden. Berechne die Leistung.", answer: "P = W/t = 1200 J / 4 s = 300 W" },
-        { task: "An einem zweiarmigen Hebel wirkt eine Kraft von 60 N im Abstand von 80 cm vom Drehpunkt. In welchem Abstand muss eine Last von 240 N angreifen, damit Gleichgewicht besteht?", answer: "60·80 = 240·x → x = 4800/240 = 20 cm" },
-        { task: "Durch einen Leiter mit R = 15 Ohm fliesst ein Strom von 4 A. Berechne die Spannung.", answer: "U = I·R = 4 A · 15 Ω = 60 V" },
-        { task: "Ein Kupferdraht (ρ = 0,0175) ist 200 m lang und hat einen Querschnitt von 2,5 mm². Berechne den Widerstand.", answer: "R = ρ·l/A = 0,0175 · 200 / 2,5 = 1,4 Ω" }
-      ],
-      applications: [
-        { task: "Ein Geländerpfosten aus Stahl (Dichte 7,85 kg/dm³) hat ein Volumen von 0,6 dm³. Wie schwer ist er, und mit welcher Kraft (in N) drückt er auf den Boden (g=9,81 m/s²)?", answer: "m = ρ·V = 7,85·0,6 = 4,71 kg  ;  F = m·g = 4,71·9,81 ≈ 46,2 N" },
-        { task: "Ein Motor hebt eine Stahlträger-Last von 180 kg um 3,5 m in 6 Sekunden. Berechne die geleistete Arbeit und die Leistung.", answer: "F=m·g=180·9,81=1765,8 N ; W=F·s=1765,8·3,5≈6180 J ; P=W/t=6180/6=1030 W" },
-        { task: "In einer Anlage wird ein Kupferkabel mit 1,5 mm² Querschnitt und 40 m Länge verlegt (ρ=0,0175). Wie gross ist der Widerstand, und welche Spannung fällt bei 8 A ab?", answer: "R=ρ·l/A=0,0175·40/1,5≈0,47 Ω ; U=I·R=8·0,47≈3,73 V" }
-      ],
-      exam: [
-        { q: "Wie lautet die Formel für die Dichte?", options: ["ρ=m·V", "ρ=m/V", "ρ=V/m", "ρ=m+V"], correct: 1 },
-        { q: "Ein Bauteil mit m=12 kg und V=3 dm³ hat welche Dichte?", options: ["4 kg/dm³", "36 kg/dm³", "0,25 kg/dm³", "15 kg/dm³"], correct: 0 },
-        { q: "Welche Einheit hat die Leistung P?", options: ["Joule", "Newton", "Watt", "Ohm"], correct: 2 },
-        { q: "Ein Hebel: Kraft 40 N wirkt im Abstand 60 cm vom Drehpunkt. Bei welchem Abstand x hält eine Last von 120 N das Gleichgewicht?", options: ["10 cm", "20 cm", "30 cm", "40 cm"], correct: 1 },
-        { q: "Wie lautet das Ohm'sche Gesetz?", options: ["U=I/R", "U=I·R", "U=R/I", "I=U+R"], correct: 1 }
-      ] },
+        explain: "Physikalische Grössen als Zahlenwert × Einheit: Kraft, Masse, Dichte, Arbeit, Leistung, elektrische Grundgrössen. Basis für reale Berechnungen wie Stahlgewicht, Hebelkräfte oder Widerstände in Anlagen.",
+        theorySections: [
+          { type: "h", text: "Physikalische Grössen" },
+          { type: "p", text: "Eine physikalische Grösse ist immer ein Zahlenwert mal Einheit (z. B. m = 4 kg). Für den Metallbau sind vor allem Dichte, Arbeit, Leistung, das Hebelgesetz und die Elektrotechnik-Grundgrössen wichtig." },
+          { type: "h", text: "Dichte" },
+          { type: "code", text: "ρ = m / V      (Dichte = Masse / Volumen)" },
+          { type: "p", text: "Damit lässt sich aus dem Volumen eines Bauteils direkt sein Gewicht berechnen, oder umgekehrt aus dem Gewicht das benötigte Rohmaterial." },
+          { type: "h", text: "Arbeit und Leistung" },
+          { type: "code", text: "Arbeit:    W = F · s          (Kraft mal Weg)\nLeistung:  P = F · s / t = W / t   (Arbeit pro Zeit)" },
+          { type: "h", text: "Hebelgesetz" },
+          { type: "code", text: "Kraft × Hebelarm der Kraft = Last × Hebelarm der Last" },
+          { type: "note", tone: "tip", text: "Immer zuerst eine Skizze mit Drehpunkt, Kraft- und Lastarm zeichnen – dann lässt sich die Formel direkt einsetzen." },
+          { type: "h", text: "Elektrotechnik: Ohm'sches Gesetz & Widerstand" },
+          { type: "code", text: "Ohm'sches Gesetz:  U = I · R        (Spannung = Stromstärke × Widerstand)\nWiderstand:        R = ρ · l / A    (spez. Widerstand × Länge / Querschnittsfläche)" },
+          { type: "h", text: "Masse und Gewichtskraft" },
+          { type: "p", text: "Masse (kg) ist die Menge an Materie eines Körpers und bleibt überall gleich. Die Gewichtskraft (N) ist die Kraft, mit der die Erde den Körper anzieht, und hängt vom Ort ab." },
+          { type: "code", text: "F = m · g      (g ≈ 9,81 m/s² auf der Erde)" }
+        ],
+        method: "Formelsammlung mit Einheiten führen; zu jeder Formel eine konkrete Metallbau-Anwendung notieren, z.B. Gewicht eines Stahlträgers berechnen.",
+        flashcards: [
+          { q: "Wie ist die Dichte definiert?", a: "ρ = m / V  (Masse durch Volumen)" },
+          { q: "Formel für mechanische Arbeit?", a: "W = F · s  (Kraft mal Weg)" },
+          { q: "Formel für Leistung?", a: "P = F · s / t = W / t  (Arbeit pro Zeit)" },
+          { q: "Wie lautet das Hebelgesetz?", a: "Kraft × Hebelarm der Kraft = Last × Hebelarm der Last" },
+          { q: "Wie lautet das Ohm'sche Gesetz?", a: "U = I · R  (Spannung = Stromstärke mal Widerstand)" },
+          { q: "Formel für den elektrischen Widerstand eines Leiters?", a: "R = ρ · l / A  (spez. Widerstand mal Länge, durch Querschnitt)" },
+          { q: "Was ist der Unterschied zwischen Masse und Gewichtskraft?", a: "Masse (kg) ist die Menge an Materie; Gewichtskraft (N) = Masse × Erdbeschleunigung: F = m · g" }
+        ],
+        exercises: [
+          { task: "Ein Stahlblock hat eine Masse von 39 kg und ein Volumen von 5 dm³. Berechne die Dichte.", answer: "ρ = m/V = 39 kg / 5 dm³ = 7,8 kg/dm³" },
+          { task: "Eine Kraft von 250 N hebt eine Last über eine Strecke von 3 m. Berechne die Arbeit.", answer: "W = F·s = 250 N · 3 m = 750 J" },
+          { task: "Eine Maschine leistet eine Arbeit von 1200 J in 4 Sekunden. Berechne die Leistung.", answer: "P = W/t = 1200 J / 4 s = 300 W" },
+          { task: "An einem zweiarmigen Hebel wirkt eine Kraft von 60 N im Abstand von 80 cm vom Drehpunkt. In welchem Abstand muss eine Last von 240 N angreifen, damit Gleichgewicht besteht?", answer: "60·80 = 240·x → x = 4800/240 = 20 cm" },
+          { task: "Durch einen Leiter mit R = 15 Ohm fliesst ein Strom von 4 A. Berechne die Spannung.", answer: "U = I·R = 4 A · 15 Ω = 60 V" },
+          { task: "Ein Kupferdraht (ρ = 0,0175) ist 200 m lang und hat einen Querschnitt von 2,5 mm². Berechne den Widerstand.", answer: "R = ρ·l/A = 0,0175 · 200 / 2,5 = 1,4 Ω" }
+        ],
+        applications: [
+          { task: "Ein Geländerpfosten aus Stahl (Dichte 7,85 kg/dm³) hat ein Volumen von 0,6 dm³. Wie schwer ist er, und mit welcher Kraft (in N) drückt er auf den Boden (g=9,81 m/s²)?", answer: "m = ρ·V = 7,85·0,6 = 4,71 kg  ;  F = m·g = 4,71·9,81 ≈ 46,2 N" },
+          { task: "Ein Motor hebt eine Stahlträger-Last von 180 kg um 3,5 m in 6 Sekunden. Berechne die geleistete Arbeit und die Leistung.", answer: "F=m·g=180·9,81=1765,8 N ; W=F·s=1765,8·3,5≈6180 J ; P=W/t=6180/6=1030 W" },
+          { task: "In einer Anlage wird ein Kupferkabel mit 1,5 mm² Querschnitt und 40 m Länge verlegt (ρ=0,0175). Wie gross ist der Widerstand, und welche Spannung fällt bei 8 A ab?", answer: "R=ρ·l/A=0,0175·40/1,5≈0,47 Ω ; U=I·R=8·0,47≈3,73 V" }
+        ],
+        examOpen: { timeMin: 30, totalPoints: 16, passPoints: 10, parts: [
+          { title: "Theorie (4 Punkte)", questions: [
+              { q: "Formel für die Dichte?", points: 1, answer: "ρ = m / V" },
+              { q: "Formel für die mechanische Arbeit?", points: 1, answer: "W = F · s" },
+              { q: "Formel für die mechanische Leistung?", points: 1, answer: "P = F · s / t" },
+              { q: "Wie lautet das Ohm'sche Gesetz?", points: 1, answer: "U = I · R" }
+            ] },
+          { title: "Rechnen (8 Punkte)", questions: [
+              { q: "Ein Bauteil hat m = 18 kg und V = 4 dm³. Berechne die Dichte.", points: 2, answer: "ρ = 18/4 = 4,5 kg/dm³" },
+              { q: "Eine Kraft von 180 N wirkt über eine Strecke von 3,2 m. Berechne die Arbeit.", points: 2, answer: "W = 180·3,2 = 576 J" },
+              { q: "Ein Widerstand von 45 Ω wird von 2 A durchflossen. Berechne die Spannung.", points: 2, answer: "U = 2·45 = 90 V" },
+              { q: "Berechne R = ρ·l/A für einen Kupferdraht (ρ=0,0175), l=80 m, A=2 mm².", points: 2, answer: "R = 0,0175·80/2 = 0,7 Ω" }
+            ] },
+          { title: "Anwenden (4 Punkte)", questions: [
+              { q: "An einem Hebel wirkt eine Kraft von 70 N im Abstand 50 cm vom Drehpunkt. Bei welchem Abstand hält eine Last von 210 N das Gleichgewicht?", points: 2, answer: "70·50 = 210·x → x = 3500/210 ≈ 16,7 cm" },
+              { q: "Ein Alu-Bauteil (ρ=2,7 kg/dm³) hat ein Volumen von 3,5 dm³. Berechne Masse und Gewichtskraft (g=9,81 m/s²).", points: 2, answer: "m = 2,7·3,5 = 9,45 kg ; F = 9,45·9,81 ≈ 92,7 N" }
+            ] }
+          ] } },
     { id: "s1-05", name: "Sicherheitsvorschriften", lekt: 5, tb: "TB2",
       explain: "Betriebliche und gesetzliche Sicherheitsvorschriften (EKAS-Richtlinien, ArGV) für Werkstatt und Montage, insbesondere Gerüst-, Kran- und Hebezeugsicherheit.",
       method: "Jede Vorschrift in max. 3 eigenen Sätzen zusammenfassen und mit einem konkreten Baustellenbeispiel verknüpfen." },
     { id: "s1-06", name: "Trigonometrie", lekt: 20, tb: "TB3",
-      explain: "Winkelberechnung im rechtwinkligen und allgemeinen Dreieck (Sinus, Cosinus, Tangens, Sinus- und Cosinussatz) – zentral für Schrägschnitte, Treppenwinkel, Geländer und Dachkonstruktionen.",
-      formulas: "sin α = Gegenkathete / Hypotenuse\ncos α = Ankathete / Hypotenuse\ntan α = Gegenkathete / Ankathete\nSinussatz: a/sin α = b/sin β = c/sin γ",
-      method: "Zu jeder Formel eine Skizze eines realen Metallbauteils (z.B. Treppenwinkel) zeichnen, dann erst rechnen.",
-      flashcards: [
-        { q: "sin α = ?", a: "Gegenkathete / Hypotenuse" },
-        { q: "cos α = ?", a: "Ankathete / Hypotenuse" },
-        { q: "tan α = ?", a: "Gegenkathete / Ankathete" },
-        { q: "Wie lautet der Sinussatz?", a: "a / sin α = b / sin β = c / sin γ" },
-        { q: "Wie gross ist die Winkelsumme in jedem Dreieck?", a: "180°" },
-        { q: "Wann verwendet man den Kosinussatz statt den Sinussatz?", a: "Wenn zwei Seiten und der eingeschlossene Winkel bekannt sind, oder wenn alle drei Seiten bekannt sind (kein passendes Winkel-Seiten-Paar für den Sinussatz vorhanden)." }
-      ],
-      exercises: [
-        { task: "In einem rechtwinkligen Dreieck ist die Hypotenuse c = 10 cm und der Winkel α = 30°. Berechne die Gegenkathete a.", answer: "a = c · sin α = 10 · sin30° = 10 · 0,5 = 5 cm" },
-        { task: "Berechne im selben Dreieck die Ankathete b.", answer: "b = c · cos α = 10 · cos30° ≈ 10 · 0,866 = 8,66 cm" },
-        { task: "Ein Geländerpfosten steht senkrecht, eine Strebe führt im Winkel von 45° zum Boden und ist 1,4 m lang. Wie hoch liegt der Anschlusspunkt über dem Boden?", answer: "Höhe = 1,4 · sin45° ≈ 1,4 · 0,707 ≈ 0,99 m" },
-        { task: "Ein Dreieck hat die Seiten a = 7 cm, b = 9 cm und den eingeschlossenen Winkel γ = 60°. Berechne die Seite c mit dem Kosinussatz.", answer: "c² = a²+b²−2ab·cosγ = 49+81−2·7·9·0,5 = 130−63 = 67 → c ≈ 8,19 cm" },
-        { task: "In einem Dreieck sind die Winkel α = 50° und β = 70° bekannt. Wie gross ist γ?", answer: "γ = 180° − 50° − 70° = 60°" }
-      ],
-      applications: [
-        { task: "Eine Rampe steigt auf einer Länge von 6 m um einen Winkel von 12° an. Wie hoch ist der Höhenunterschied?", answer: "h = 6 · sin12° ≈ 6 · 0,208 ≈ 1,25 m" },
-        { task: "Ein Handlauf verläuft entlang einer Treppe mit Steigungswinkel 34°. Die horizontale Ausladung beträgt 3,2 m. Wie lang muss der Handlauf mindestens sein?", answer: "Hypotenuse = 3,2 / cos34° ≈ 3,2 / 0,829 ≈ 3,86 m" },
-        { task: "Ein Dreiecksverband hat die Seiten a=4,5 m, b=6 m und den eingeschlossenen Winkel γ=75°. Berechne die dritte Seite c mit dem Kosinussatz.", answer: "c²=a²+b²−2ab·cosγ=20,25+36−54·0,259≈42,3 → c≈6,5 m" }
-      ],
-      exam: [
-        { q: "sin α entspricht welchem Verhältnis?", options: ["Ankathete/Hypotenuse", "Gegenkathete/Hypotenuse", "Gegenkathete/Ankathete", "Hypotenuse/Gegenkathete"], correct: 1 },
-        { q: "Ein rechtwinkliges Dreieck: Hypotenuse=12 cm, α=40°. Wie lang ist die Gegenkathete a?", options: ["7,71 cm", "9,19 cm", "12 cm", "5,14 cm"], correct: 0 },
-        { q: "Wann verwendet man den Kosinussatz?", options: ["Immer bei rechtwinkligen Dreiecken", "Wenn zwei Seiten und der eingeschlossene Winkel bekannt sind", "Nur bei gleichseitigen Dreiecken", "Nie in der Praxis"], correct: 1 },
-        { q: "Wie gross ist die Winkelsumme in jedem Dreieck?", options: ["90°", "180°", "270°", "360°"], correct: 1 },
-        { q: "tan α = ?", options: ["Gegenkathete/Hypotenuse", "Ankathete/Hypotenuse", "Gegenkathete/Ankathete", "Hypotenuse/Ankathete"], correct: 2 }
-      ] },
+        explain: "Winkelberechnung im rechtwinkligen und allgemeinen Dreieck (Sinus, Cosinus, Tangens, Sinus- und Cosinussatz) – zentral für Schrägschnitte, Treppenwinkel, Geländer und Dachkonstruktionen.",
+        theorySections: [
+          { type: "h", text: "Das rechtwinklige Dreieck" },
+          { type: "code", text: "sin α = Gegenkathete / Hypotenuse\ncos α = Ankathete / Hypotenuse\ntan α = Gegenkathete / Ankathete" },
+          { type: "note", tone: "tip", text: "Die Gegenkathete liegt dem Winkel α gegenüber, die Ankathete liegt an ihm an, die Hypotenuse ist immer die längste Seite (gegenüber dem rechten Winkel)." },
+          { type: "h", text: "Das allgemeine Dreieck: Sinussatz und Kosinussatz" },
+          { type: "p", text: "Ist kein rechter Winkel vorhanden, helfen der Sinus- und der Kosinussatz weiter." },
+          { type: "code", text: "Sinussatz:    a/sin α = b/sin β = c/sin γ\nKosinussatz:  c² = a² + b² − 2ab·cos γ" },
+          { type: "p", text: "Winkelsumme: α + β + γ = 180° (in jedem Dreieck)." },
+          { type: "note", tone: "tip", text: "Sinussatz: passendes Winkel-Seiten-Paar bekannt. Kosinussatz: zwei Seiten und der eingeschlossene Winkel, oder alle drei Seiten bekannt." }
+        ],
+        method: "Zu jeder Formel eine Skizze eines realen Metallbauteils (z.B. Treppenwinkel) zeichnen, dann erst rechnen.",
+        flashcards: [
+          { q: "sin α = ?", a: "Gegenkathete / Hypotenuse" },
+          { q: "cos α = ?", a: "Ankathete / Hypotenuse" },
+          { q: "tan α = ?", a: "Gegenkathete / Ankathete" },
+          { q: "Wie lautet der Sinussatz?", a: "a / sin α = b / sin β = c / sin γ" },
+          { q: "Wie gross ist die Winkelsumme in jedem Dreieck?", a: "180°" },
+          { q: "Wann verwendet man den Kosinussatz statt den Sinussatz?", a: "Wenn zwei Seiten und der eingeschlossene Winkel bekannt sind, oder wenn alle drei Seiten bekannt sind (kein passendes Winkel-Seiten-Paar für den Sinussatz vorhanden)." }
+        ],
+        exercises: [
+          { task: "In einem rechtwinkligen Dreieck ist die Hypotenuse c = 10 cm und der Winkel α = 30°. Berechne die Gegenkathete a.", answer: "a = c · sin α = 10 · sin30° = 10 · 0,5 = 5 cm" },
+          { task: "Berechne im selben Dreieck die Ankathete b.", answer: "b = c · cos α = 10 · cos30° ≈ 10 · 0,866 = 8,66 cm" },
+          { task: "Ein Geländerpfosten steht senkrecht, eine Strebe führt im Winkel von 45° zum Boden und ist 1,4 m lang. Wie hoch liegt der Anschlusspunkt über dem Boden?", answer: "Höhe = 1,4 · sin45° ≈ 1,4 · 0,707 ≈ 0,99 m" },
+          { task: "Ein Dreieck hat die Seiten a = 7 cm, b = 9 cm und den eingeschlossenen Winkel γ = 60°. Berechne die Seite c mit dem Kosinussatz.", answer: "c² = a²+b²−2ab·cosγ = 49+81−2·7·9·0,5 = 130−63 = 67 → c ≈ 8,19 cm" },
+          { task: "In einem Dreieck sind die Winkel α = 50° und β = 70° bekannt. Wie gross ist γ?", answer: "γ = 180° − 50° − 70° = 60°" }
+        ],
+        applications: [
+          { task: "Eine Rampe steigt auf einer Länge von 6 m um einen Winkel von 12° an. Wie hoch ist der Höhenunterschied?", answer: "h = 6 · sin12° ≈ 6 · 0,208 ≈ 1,25 m" },
+          { task: "Ein Handlauf verläuft entlang einer Treppe mit Steigungswinkel 34°. Die horizontale Ausladung beträgt 3,2 m. Wie lang muss der Handlauf mindestens sein?", answer: "Hypotenuse = 3,2 / cos34° ≈ 3,2 / 0,829 ≈ 3,86 m" },
+          { task: "Ein Dreiecksverband hat die Seiten a=4,5 m, b=6 m und den eingeschlossenen Winkel γ=75°. Berechne die dritte Seite c mit dem Kosinussatz.", answer: "c²=a²+b²−2ab·cosγ=20,25+36−54·0,259≈42,3 → c≈6,5 m" }
+        ],
+        examOpen: { timeMin: 30, totalPoints: 15, passPoints: 9, parts: [
+          { title: "Theorie (3 Punkte)", questions: [
+              { q: "sin α entspricht welchem Verhältnis?", points: 1, answer: "Gegenkathete / Hypotenuse" },
+              { q: "Wie gross ist die Winkelsumme in jedem Dreieck?", points: 1, answer: "180°" },
+              { q: "Wann verwendet man den Kosinussatz statt den Sinussatz?", points: 1, answer: "Wenn zwei Seiten und der eingeschlossene Winkel oder alle drei Seiten bekannt sind" }
+            ] },
+          { title: "Rechnen (8 Punkte)", questions: [
+              { q: "Rechtwinkliges Dreieck: Hypotenuse=15cm, α=35°. Berechne die Gegenkathete.", points: 2, answer: "15·sin35° ≈ 8,6 cm" },
+              { q: "Im selben Dreieck: Berechne die Ankathete.", points: 2, answer: "15·cos35° ≈ 12,29 cm" },
+              { q: "Dreieck mit a=6cm, b=8cm, γ=50°. Berechne die Seite c mit dem Kosinussatz.", points: 2, answer: "c²=36+64−96·cos50°≈100−61,7=38,3 → c≈6,19 cm" },
+              { q: "Zwei Winkel eines Dreiecks sind α=55°, β=65°. Wie gross ist γ?", points: 2, answer: "γ = 180°−55°−65° = 60°" }
+            ] },
+          { title: "Anwenden (4 Punkte)", questions: [
+              { q: "Eine Rampe ist 6 m lang und hat einen Steigungswinkel von 10°. Berechne den Höhenunterschied.", points: 2, answer: "6·sin10° ≈ 1,04 m" },
+              { q: "Ein Dreiecksverband hat die Seiten a=5m, b=7m und den eingeschlossenen Winkel 80°. Berechne die dritte Seite.", points: 2, answer: "c²=25+49−70·cos80°≈74−12,16=61,84 → c≈7,86 m" }
+            ] }
+          ] } },
     { id: "s1-07", name: "Qualitätsmanagementsysteme", lekt: 5, tb: "TB1",
       explain: "Aufbau und Zweck von QM-Systemen (z.B. ISO 9001) im Betrieb: Prozessdokumentation, Prüfprotokolle, kontinuierliche Verbesserung nach dem PDCA-Zyklus.",
       method: "Den PDCA-Zyklus (Plan–Do–Check–Act) an einem eigenen Werkstattbeispiel durchdenken und schriftlich festhalten." },
@@ -1233,40 +1279,247 @@ window.CURRICULUM = [
       explain: "Vertiefung der U-Wert-Berechnung für zusammengesetzte Metall-Glas-Konstruktionen inkl. linearem Wärmebrückenverlust Ψ an Anschlussdetails.",
       method: "Eine komplette U-Wert-Berechnung eines Fassadenelements Schritt für Schritt rechnen und mit dem SIA-Grenzwert vergleichen." },
     { id: "s2-02", name: "Längen-, Winkel-, Flächen-, Körperberechnungen", lekt: 15, tb: "TB3",
-      explain: "Umrechnen von Längen, Flächen und Hohlraum-/Volumenmassen zwischen den gebräuchlichen Einheiten – Grundlage für jede Massangabe im Werkplan.",
-      formulas: "Längenmasse (Faktor 10 je Stufe): mm → cm → dm → m → …→ km\n1000 mm = 100 cm = 10 dm = 1 m ; 1000 m = 1 km\n\nFlächenmasse (Faktor 100 je Stufe): mm² → cm² → dm² → m² → a → ha → km²\n1 000 000 mm² = 10 000 cm² = 100 dm² = 1 m² ; 1 000 000 m² = 10 000 a = 100 ha = 1 km²\n\nHohlmasse (Faktor 10 je Stufe, 1 cm³ = 1 ml): ml → cl → dl → l(=dm³) → hl\n1000 ml = 100 cl = 10 dl = 1 l ; 100 l = 1 hl",
-      method: "Für jede Grösse eine eigene „Umrechnungstreppe“ zeichnen und laminieren; täglich 5 Umrechnungen ohne Formelblatt rechnen, danach kontrollieren.",
+      explain: "Umrechnen zwischen den gebräuchlichen Mass-Einheiten für Länge, Fläche und Hohlraum – Grundlage für jede Massangabe im Werkplan. Unten in 3 Unterthemen gegliedert, direkt aus den offiziellen Umrechnungstabellen. Winkelberechnungen (Sinus, Kosinus, Tangens) findest du im eigenen Thema „Trigonometrie“.",
+      method: "Für jede Grösse eine eigene Umrechnungstreppe zeichnen und laminieren; täglich 5 Umrechnungen ohne Formelblatt rechnen, danach kontrollieren.",
       flashcards: [
         { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Längeneinheiten (z.B. cm → dm)?", a: "Faktor 10" },
         { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Flächeneinheiten (z.B. cm² → dm²)?", a: "Faktor 100" },
-        { q: "Wie viele mm sind 1 m?", a: "1000 mm" },
-        { q: "Wie viele cm² sind 1 m²?", a: "10 000 cm²" },
-        { q: "Wie viele m² sind 1 ha?", a: "10 000 m²" },
-        { q: "Was gilt: 1 cm³ = ? ml", a: "1 cm³ = 1 ml" },
-        { q: "Wie viele Liter sind 1 hl?", a: "100 l" },
-        { q: "Wie viele dl sind 1 Liter?", a: "10 dl" }
+        { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Hohlmass-Einheiten (z.B. cl → dl)?", a: "Faktor 10" },
+        { q: "Was gilt: 1 cm³ = ? ml", a: "1 cm³ = 1 ml" }
       ],
-      exercises: [
-        { task: "Rechne um: 3,5 m in cm", answer: "350 cm" },
-        { task: "Rechne um: 0,045 km in m", answer: "45 m" },
-        { task: "Rechne um: 2,4 m² in cm²", answer: "24 000 cm²" },
-        { task: "Rechne um: 850 dm² in m²", answer: "8,5 m²" },
-        { task: "Rechne um: 3,2 a in m²", answer: "320 m²" },
-        { task: "Rechne um: 0,6 hl in Liter", answer: "60 l" },
-        { task: "Rechne um: 275 ml in cl", answer: "27,5 cl" },
-        { task: "Ein rechteckiges Blech misst 1,2 m × 0,85 m. Berechne die Fläche in m² und in cm².", answer: "1,2 · 0,85 = 1,02 m² = 10 200 cm²" }
-      ],
-      applications: [
-        { task: "Ein Fassadenblech misst 2,4 m × 1,15 m. Wie viel m² sind das, und wie viele Bleche braucht es für 50 m² Fassadenfläche (aufgerundet)?", answer: "Fläche=2,4·1,15=2,76 m² ; 50/2,76≈18,1 → 19 Bleche" },
-        { task: "Ein Wassertank für die Werkstattkühlung fasst 3,5 hl. Wie viele Liter sind das, und wie viele 10-Liter-Kanister braucht es, um ihn zu füllen?", answer: "3,5 hl = 350 l ; 350/10 = 35 Kanister" },
-        { task: "Ein Baugrundstück ist 480 a gross. Wie viele ha und km² sind das?", answer: "480 a = 4,8 ha = 0,048 km²" }
-      ],
-      exam: [
-        { q: "Wie viele mm sind 1 m?", options: ["10", "100", "1000", "10000"], correct: 2 },
-        { q: "Wie viele cm² sind 1 m²?", options: ["100", "1000", "10000", "100000"], correct: 2 },
-        { q: "1 cm³ entspricht wie vielen ml?", options: ["0,1 ml", "1 ml", "10 ml", "100 ml"], correct: 1 },
-        { q: "Wie viele m² sind 3,5 a?", options: ["35 m²", "350 m²", "3,5 m²", "0,35 m²"], correct: 1 },
-        { q: "Wie viele Liter sind 2 hl?", options: ["20 l", "200 l", "2000 l", "0,2 l"], correct: 1 }
+      subtopics: [
+        {
+          chapter: "L1", title: "Längenmasse umrechnen",
+          theorySections: [
+            { type: "h", text: "Die Umrechnungsleiter" },
+            { type: "code", text: "1 mm ·10→ 1 cm ·10→ 1 dm ·10→ 1 m ·10→ 1 dam ·10→ 1 hm ·10→ 1 km" },
+            { type: "p", text: "1000 mm = 100 cm = 10 dm = 1 m          1000 m = 1 km" },
+            { type: "note", tone: "tip", text: "Jede Stufe nach rechts = Faktor 10 grösser → mit 10 multiplizieren. Jede Stufe nach links = Faktor 10 kleiner → durch 10 dividieren." },
+            { type: "h", text: "Beispiele" },
+            { type: "code", text: "3,5 dm = 3,5 · 100 mm = 350 mm      (dm → mm: 2 Stufen = ·100)\n2,8 cm = 2,8 · 0,01 m = 0,028 m     (cm → m: 2 Stufen = :100)" }
+          ],
+          flashcards: [
+            { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Längeneinheiten?", a: "Faktor 10" },
+            { q: "Wie viele mm sind 1 m?", a: "1000 mm" },
+            { q: "Wie viele m sind 1 km?", a: "1000 m" },
+            { q: "Wie viele cm sind 1 dm?", a: "10 cm" },
+            { q: "3,5 dm sind wie viele mm?", a: "350 mm (·100, da 2 Stufen)" },
+            { q: "Wie rechnet man von einer kleineren in eine grössere Einheit um?", a: "Man dividiert (je Stufe durch 10)" }
+          ],
+          exercises: [
+            { group: "Tabelle 1 — m in cm", task: "1,4 m = ? cm", answer: "140 cm" },
+            { task: "14 m = ? cm", answer: "1400 cm" },
+            { task: "50 m = ? cm", answer: "5000 cm" },
+            { task: "0,5 m = ? cm", answer: "50 cm" },
+            { task: "1,25 m = ? cm", answer: "125 cm" },
+            { task: "0,07 m = ? cm", answer: "7 cm" },
+            { group: "Tabelle 2 — cm in m", task: "14 cm = ? m", answer: "0,14 m" },
+            { task: "1020 cm = ? m", answer: "10,2 m" },
+            { task: "50 cm = ? m", answer: "0,5 m" },
+            { task: "600 cm = ? m", answer: "6 m" },
+            { task: "12,5 cm = ? m", answer: "0,125 m" },
+            { task: "6 cm = ? m", answer: "0,06 m" },
+            { group: "Tabelle 3 — mm in dm", task: "2 mm = ? dm", answer: "0,02 dm" },
+            { task: "350 mm = ? dm", answer: "3,5 dm" },
+            { task: "5 mm = ? dm", answer: "0,05 dm" },
+            { task: "300 mm = ? dm", answer: "3 dm" },
+            { task: "3 mm = ? dm", answer: "0,03 dm" },
+            { task: "900 mm = ? dm", answer: "9 dm" },
+            { group: "Tabelle 4 — dm in mm", task: "0,04 dm = ? mm", answer: "4 mm" },
+            { task: "0,012 dm = ? mm", answer: "1,2 mm" },
+            { task: "80 dm = ? mm", answer: "8000 mm" },
+            { task: "0,12 dm = ? mm", answer: "12 mm" },
+            { task: "0,14 dm = ? mm", answer: "14 mm" },
+            { task: "0,007 dm = ? mm", answer: "0,7 mm" },
+            { group: "Tabelle 5 — km und m", task: "3 km = ? m", answer: "3000 m" },
+            { task: "120 000 m = ? km", answer: "120 km" },
+            { task: "0,005 km = ? m", answer: "5 m" },
+            { task: "40 000 m = ? km", answer: "40 km" },
+            { task: "0,18 km = ? m", answer: "180 m" },
+            { task: "34 000 m = ? km", answer: "34 km" }
+          ],
+          applications: [
+            { task: "Ein Geländer-Handlauf-Zuschnitt: Rohmaterial 6 m lang. Es werden 3 Stücke à 1450 mm abgeschnitten. Wie viel Restmaterial bleibt in mm (ohne Schnittverlust)?", answer: "6000 − 3·1450 = 6000 − 4350 = 1650 mm" },
+            { task: "Für eine Bestellung werden Profile von 1250 mm, 875 mm und 640 mm Länge benötigt. Wie viele Meter Rohmaterial sind das total?", answer: "1250+875+640 = 2765 mm = 2,765 m" },
+            { task: "Ein Fensterprofil ist 2,15 m lang, ein zweites 875 mm. Wie gross ist die Gesamtlänge in m?", answer: "2,15 + 0,875 = 3,025 m" }
+          ],
+          examOpen: { timeMin: 20, totalPoints: 15, passPoints: 9, parts: [
+            { title: "Theorie (3 Punkte)", questions: [
+                { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Längeneinheiten?", points: 1, answer: "Faktor 10" },
+                { q: "Wie viele mm sind 1 m?", points: 1, answer: "1000 mm" },
+                { q: "Wie viele m sind 1 km?", points: 1, answer: "1000 m" }
+              ] },
+            { title: "Rechnen (8 Punkte)", questions: [
+                { q: "4,2 m = ? cm", points: 1, answer: "420 cm" },
+                { q: "0,65 km = ? m", points: 1, answer: "650 m" },
+                { q: "950 mm = ? m", points: 1, answer: "0,95 m" },
+                { q: "3,4 dm = ? mm", points: 1, answer: "340 mm" },
+                { q: "27 cm = ? m", points: 1, answer: "0,27 m" },
+                { q: "1,05 m = ? dm", points: 1, answer: "10,5 dm" },
+                { q: "8500 mm = ? m", points: 1, answer: "8,5 m" },
+                { q: "0,004 km = ? m", points: 1, answer: "4 m" }
+              ] },
+            { title: "Anwenden (4 Punkte)", questions: [
+                { q: "Aus einem 6-m-Rohr werden 4 Stücke à 1350 mm geschnitten (ohne Verlust). Wie lang ist die Restlänge in mm?", points: 2, answer: "6000 − 4·1350 = 6000 − 5400 = 600 mm" },
+                { q: "Ein Fensterprofil ist 2,15 m lang, ein zweites 875 mm. Berechne die Gesamtlänge in m.", points: 2, answer: "2,15 + 0,875 = 3,025 m" }
+              ] }
+            ] }
+        },
+        {
+          chapter: "L2", title: "Flächenmasse umrechnen",
+          theorySections: [
+            { type: "h", text: "Die Umrechnungsleiter" },
+            { type: "code", text: "1 mm² ·100→ 1 cm² ·100→ 1 dm² ·100→ 1 m² ·100→ 1 a ·100→ 1 ha ·100→ 1 km²" },
+            { type: "p", text: "1 000 000 mm² = 10 000 cm² = 100 dm² = 1 m²          1 000 000 m² = 10 000 a = 100 ha = 1 km²" },
+            { type: "note", tone: "warn", text: "Bei Flächen ist jede Stufe Faktor 100, nicht 10! Das wird oft verwechselt." },
+            { type: "h", text: "Beispiele" },
+            { type: "code", text: "4,2 ha = 4,2 · 10 000 m² = 42 000 m²\n5,6 dm² = 5,6 · 0,01 m² = 0,056 m²" }
+          ],
+          flashcards: [
+            { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Flächeneinheiten?", a: "Faktor 100" },
+            { q: "Wie viele cm² sind 1 m²?", a: "10 000 cm²" },
+            { q: "Wie viele m² sind 1 a?", a: "100 m²" },
+            { q: "Wie viele a sind 1 ha?", a: "100 a" },
+            { q: "Wie viele m² sind 1 ha?", a: "10 000 m²" },
+            { q: "4,2 ha sind wie viele m²?", a: "42 000 m²" }
+          ],
+          exercises: [
+            { group: "Tabelle 1 — m² in dm²", task: "0,25 m² = ? dm²", answer: "25 dm²" },
+            { task: "25 m² = ? dm²", answer: "2500 dm²" },
+            { task: "50 m² = ? dm²", answer: "5000 dm²" },
+            { task: "0,025 m² = ? dm²", answer: "2,5 dm²" },
+            { task: "1,25 m² = ? dm²", answer: "125 dm²" },
+            { task: "5 m² = ? dm²", answer: "500 dm²" },
+            { group: "Tabelle 2 — dm² in cm²", task: "2600 cm² = ? dm²", answer: "26 dm²" },
+            { task: "150 cm² = ? dm²", answer: "1,5 dm²" },
+            { task: "2,5 cm² = ? dm²", answer: "0,025 dm²" },
+            { task: "4000 cm² = ? dm²", answer: "40 dm²" },
+            { task: "200 cm² = ? dm²", answer: "2 dm²" },
+            { task: "8000 cm² = ? dm²", answer: "80 dm²" },
+            { group: "Tabelle 3 — a in km²", task: "60 a = ? km²", answer: "0,006 km²" },
+            { task: "12 500 a = ? km²", answer: "1,25 km²" },
+            { task: "40 000 a = ? km²", answer: "4 km²" },
+            { task: "300 a = ? km²", answer: "0,03 km²" },
+            { task: "50 a = ? km²", answer: "0,005 km²" },
+            { task: "900 a = ? km²", answer: "0,09 km²" },
+            { group: "Tabelle 4 — ha in a", task: "4,5 ha = ? a", answer: "450 a" },
+            { task: "0,28 ha = ? a", answer: "28 a" },
+            { task: "0,028 ha = ? a", answer: "2,8 a" },
+            { task: "3 ha = ? a", answer: "300 a" },
+            { task: "0,003 ha = ? a", answer: "0,3 a" },
+            { task: "0,35 ha = ? a", answer: "35 a" },
+            { group: "Tabelle 5 — mm² und dm²", task: "800 mm² = ? dm²", answer: "0,08 dm²" },
+            { task: "0,8 dm² = ? mm²", answer: "8000 mm²" },
+            { task: "20 mm² = ? dm²", answer: "0,002 dm²" },
+            { task: "0,6 dm² = ? mm²", answer: "6000 mm²" },
+            { task: "90 mm² = ? dm²", answer: "0,009 dm²" },
+            { task: "2 dm² = ? mm²", answer: "20 000 mm²" }
+          ],
+          applications: [
+            { task: "Ein Blech misst 2,4 m × 1,8 m. Wie viele dm² und cm² sind das?", answer: "Fläche = 2,4·1,8 = 4,32 m² = 432 dm² = 43 200 cm²" },
+            { task: "Ein Grundstück für eine neue Werkstatthalle ist 3200 m² gross. Wie viele a und ha sind das?", answer: "32 a = 0,32 ha" },
+            { task: "Ein Fassadenblech misst 2,4 m × 1,15 m. Wie viel m² sind das, und wie viele Bleche braucht es für 50 m² Fassadenfläche (aufgerundet)?", answer: "Fläche=2,4·1,15=2,76 m² ; 50/2,76≈18,1 → 19 Bleche" }
+          ],
+          examOpen: { timeMin: 20, totalPoints: 16, passPoints: 10, parts: [
+            { title: "Theorie (3 Punkte)", questions: [
+                { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Flächeneinheiten?", points: 1, answer: "Faktor 100" },
+                { q: "Wie viele cm² sind 1 m²?", points: 1, answer: "10 000 cm²" },
+                { q: "Wie viele m² sind 1 a?", points: 1, answer: "100 m²" }
+              ] },
+            { title: "Rechnen (9 Punkte)", questions: [
+                { q: "3,2 m² = ? dm²", points: 1, answer: "320 dm²" },
+                { q: "450 cm² = ? dm²", points: 1, answer: "4,5 dm²" },
+                { q: "0,08 ha = ? a", points: 1, answer: "8 a" },
+                { q: "2,5 a = ? m²", points: 1, answer: "250 m²" },
+                { q: "60 000 mm² = ? dm²", points: 1, answer: "6 dm²" },
+                { q: "0,015 km² = ? ha", points: 1, answer: "1,5 ha" },
+                { q: "750 dm² = ? m²", points: 1, answer: "7,5 m²" },
+                { q: "3 ha = ? km²", points: 1, answer: "0,03 km²" },
+                { q: "0,4 dm² = ? cm²", points: 1, answer: "40 cm²" }
+              ] },
+            { title: "Anwenden (4 Punkte)", questions: [
+                { q: "Ein Blech misst 1,6 m × 0,9 m. Berechne die Fläche in m² und cm².", points: 2, answer: "1,6·0,9 = 1,44 m² = 14 400 cm²" },
+                { q: "Ein Werkstattboden von 8 a soll neu beschichtet werden. Wie viele m² sind das?", points: 2, answer: "8·100 = 800 m²" }
+              ] }
+            ] }
+        },
+        {
+          chapter: "L3", title: "Hohlraummasse (Hohlmasse) umrechnen",
+          theorySections: [
+            { type: "h", text: "Die Umrechnungsleiter" },
+            { type: "code", text: "1 cm³ = 1 ml ·10→ 1 cl ·10→ 1 dl ·10→ 1 l (= 1 dm³) ·10→ 10 l ·10→ 1 hl" },
+            { type: "p", text: "1000 ml = 100 cl = 10 dl = 1 l          100 l = 1 hl" },
+            { type: "note", tone: "tip", text: "1 cm³ entspricht immer genau 1 ml – praktisch bei der Umrechnung von Volumen in Flüssigkeitsmasse." },
+            { type: "h", text: "Beispiele" },
+            { type: "code", text: "4,5 l = 4,5 · 100 cl = 450 cl\n14 cl = 14 · 0,1 dl = 1,4 dl" }
+          ],
+          flashcards: [
+            { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Hohlmass-Einheiten?", a: "Faktor 10" },
+            { q: "Was gilt: 1 cm³ = ? ml", a: "1 cm³ = 1 ml" },
+            { q: "Wie viele Liter sind 1 hl?", a: "100 l" },
+            { q: "Wie viele dl sind 1 Liter?", a: "10 dl" },
+            { q: "Wie viele ml sind 1 dl?", a: "100 ml" },
+            { q: "4,5 l sind wie viele cl?", a: "450 cl" }
+          ],
+          exercises: [
+            { group: "Tabelle 1 — dl in ml", task: "3 dl = ? ml", answer: "300 ml" },
+            { task: "0,3 dl = ? ml", answer: "30 ml" },
+            { task: "40 dl = ? ml", answer: "4000 ml" },
+            { task: "0,01 dl = ? ml", answer: "1 ml" },
+            { task: "45 dl = ? ml", answer: "4500 ml" },
+            { task: "0,025 dl = ? ml", answer: "2,5 ml" },
+            { group: "Tabelle 2 — ml in dl", task: "5000 ml = ? dl", answer: "50 dl" },
+            { task: "2 ml = ? dl", answer: "0,02 dl" },
+            { task: "600 ml = ? dl", answer: "6 dl" },
+            { task: "45 ml = ? dl", answer: "0,45 dl" },
+            { task: "8 ml = ? dl", answer: "0,08 dl" },
+            { task: "125 ml = ? dl", answer: "1,25 dl" },
+            { group: "Tabelle 3 — ml in cl", task: "3 ml = ? cl", answer: "0,3 cl" },
+            { task: "350 ml = ? cl", answer: "35 cl" },
+            { task: "0,4 ml = ? cl", answer: "0,04 cl" },
+            { task: "120 ml = ? cl", answer: "12 cl" },
+            { task: "30 ml = ? cl", answer: "3 cl" },
+            { task: "800 ml = ? cl", answer: "80 cl" },
+            { group: "Tabelle 4 — cl in ml", task: "300 cl = ? ml", answer: "3000 ml" },
+            { task: "0,8 cl = ? ml", answer: "8 ml" },
+            { task: "80 cl = ? ml", answer: "800 ml" },
+            { task: "2,5 cl = ? ml", answer: "25 ml" },
+            { task: "4 cl = ? ml", answer: "40 ml" },
+            { task: "0,02 cl = ? ml", answer: "0,2 ml" },
+            { group: "Tabelle 5 — hl und l", task: "4 hl = ? l", answer: "400 l" },
+            { task: "1500 l = ? hl", answer: "15 hl" },
+            { task: "3,5 hl = ? l", answer: "350 l" },
+            { task: "1000 l = ? hl", answer: "10 hl" },
+            { task: "0,05 hl = ? l", answer: "5 l" },
+            { task: "25 l = ? hl", answer: "0,25 hl" }
+          ],
+          applications: [
+            { task: "Ein Kühlschmierstoff-Kanister fasst 25 Liter. Wie viele hl und cl sind das?", answer: "25 l = 0,25 hl = 2500 cl" },
+            { task: "Ein Wassertank für die Werkstattkühlung fasst 3,5 hl. Wie viele Liter sind das, und wie viele 10-Liter-Kanister braucht es, um ihn zu füllen?", answer: "3,5 hl = 350 l ; 350/10 = 35 Kanister" },
+            { task: "Für eine Beschichtungsanlage werden 3,5 hl Lösungsmittel benötigt, geliefert in 10-Liter-Kanistern. Wie viele Kanister braucht es?", answer: "3,5 hl = 350 l ; 350/10 = 35 Kanister" }
+          ],
+          examOpen: { timeMin: 20, totalPoints: 15, passPoints: 9, parts: [
+            { title: "Theorie (3 Punkte)", questions: [
+                { q: "Um welchen Faktor unterscheiden sich zwei benachbarte Hohlmass-Einheiten?", points: 1, answer: "Faktor 10" },
+                { q: "1 cm³ = ? ml", points: 1, answer: "1 ml" },
+                { q: "Wie viele Liter sind 1 hl?", points: 1, answer: "100 l" }
+              ] },
+            { title: "Rechnen (8 Punkte)", questions: [
+                { q: "2,4 l = ? cl", points: 1, answer: "240 cl" },
+                { q: "35 cl = ? dl", points: 1, answer: "3,5 dl" },
+                { q: "0,6 hl = ? l", points: 1, answer: "60 l" },
+                { q: "450 ml = ? cl", points: 1, answer: "45 cl" },
+                { q: "1,2 dl = ? ml", points: 1, answer: "120 ml" },
+                { q: "8000 ml = ? l", points: 1, answer: "8 l" },
+                { q: "0,05 hl = ? l", points: 1, answer: "5 l" },
+                { q: "275 l = ? hl", points: 1, answer: "2,75 hl" }
+              ] },
+            { title: "Anwenden (4 Punkte)", questions: [
+                { q: "Ein Kühlmittel-Kanister fasst 20 Liter. Wie viele hl und ml sind das?", points: 2, answer: "0,2 hl ; 20 000 ml" },
+                { q: "Für eine Anlage werden 4,5 hl Reinigungsmittel in 15-Liter-Gebinden geliefert. Wie viele Gebinde braucht es?", points: 2, answer: "450 l / 15 = 30 Gebinde" }
+              ] }
+            ] }
+        }
       ] },
     { id: "s2-03", name: "Schrauben, Nieten, Schweissen", lekt: 10, tb: "TB7",
       explain: "Verbindungstechniken im Metallbau: Schraubenverbindungen (Festigkeitsklassen, Anzugsdrehmomente), Nietverbindungen (Blind-/Vollniete) und Schweissverfahren (MIG/MAG, WIG, Elektrode) inkl. Nahtarten und Prüfung.",
