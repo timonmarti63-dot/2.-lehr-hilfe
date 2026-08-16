@@ -658,6 +658,9 @@ textarea.notes:focus{ border-color:var(--structural); box-shadow:0 0 0 3px color
 .exam-result-warn{ background:var(--surface-3); color:var(--ink-muted); border:1px solid var(--line-strong); }
 .exam-banner{ display:flex; align-items:center; gap:9px; font-size:13.5px; font-weight:600; padding:13px 15px; border-radius:var(--radius); margin-bottom:13px; }
 .exam-pass{ background:linear-gradient(135deg, var(--success-soft), color-mix(in srgb, var(--success) 14%, var(--success-soft))); color:var(--success); border:1px solid var(--success); box-shadow:0 0 0 4px color-mix(in srgb, var(--success) 10%, transparent); }
+.exam-pass-actions{ display:flex; flex-wrap:wrap; gap:8px; }
+.btn-undo{ color:var(--ink-muted); border-style:dashed; }
+.btn-undo:hover{ border-color:var(--danger); color:var(--danger); }
 
 footer{ margin-top:30px; text-align:center; font-size:12px; color:var(--ink-faint); font-family:var(--font-mono); }
 

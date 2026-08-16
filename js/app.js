@@ -481,11 +481,7 @@
   function renderPruefung(container, content, passed, onPass, manual) {
     var hasAny = (content.exam && content.exam.length) || content.examOpen;
     if (passed) {
-      container.innerHTML =
-        '<div class="exam-banner exam-pass">Bestanden ✓ — dieser Teil ist abgeschlossen.</div>' +
-        (hasAny ? '<button class="btn" type="button" data-exam-retry>Nochmals üben</button>' : '');
-      var retryBtn = container.querySelector("[data-exam-retry]");
-      if (retryBtn) retryBtn.addEventListener("click", renderForm);
+      renderPassedBanner(container, hasAny, manual, renderForm);
       return;
     }
     renderForm();
@@ -497,8 +493,28 @@
         '<div class="empty-pane">Für dieses Thema ist noch keine Prüfung hinterlegt.</div>' +
         '<button class="btn" type="button" data-manual-complete>Als abgeschlossen markieren</button>';
       var btn = container.querySelector("[data-manual-complete]");
-      if (btn) btn.addEventListener("click", function () { manual(true); onPass(); });
+      if (btn) btn.addEventListener("click", function () { manual(true); onPass(); renderPassedBanner(container, false, manual, renderForm); });
     }
+  }
+
+  // Shown once a Prüfung is passed: confirms completion and — always —
+  // offers a way back out, so a topic marked done by mistake (fat-fingered
+  // score entry, wrong click) can be un-done without losing notes/progress
+  // elsewhere. Reused both on fresh page render and right after a pass.
+  function renderPassedBanner(container, hasAny, manual, onRetry, detail) {
+    container.innerHTML =
+      '<div class="exam-banner exam-pass">Bestanden ✓' + (detail ? " — " + escapeHtml(detail) : "") + ' — dieser Teil ist abgeschlossen.</div>' +
+      '<div class="exam-pass-actions">' +
+        (hasAny ? '<button class="btn" type="button" data-exam-retry>Nochmals üben</button>' : '') +
+        '<button class="btn btn-undo" type="button" data-exam-undo>Fälschlicherweise abgeschlossen? Rückgängig machen</button>' +
+      '</div>';
+    var retryBtn = container.querySelector("[data-exam-retry]");
+    if (retryBtn) retryBtn.addEventListener("click", onRetry);
+    container.querySelector("[data-exam-undo]").addEventListener("click", function () {
+      if (!confirm("Diesen Teil wirklich wieder als offen markieren? Der Abschluss wird zurückgesetzt, deine Notizen bleiben erhalten.")) return;
+      manual(false);
+      route();
+    });
   }
 
   function renderMcExamForm(container, exam, onPass, manual) {
@@ -534,10 +550,9 @@
       }
       var threshold = Math.floor(total / 2) + 1;
       if (correct >= threshold) {
-        resultEl.className = "exam-result exam-result-pass";
-        resultEl.textContent = "Bestanden! " + correct + " / " + total + " richtig.";
         manual(true);
         onPass();
+        renderPassedBanner(container, true, manual, function () { renderMcExamForm(container, exam, onPass, manual); }, correct + " / " + total + " richtig");
       } else {
         resultEl.className = "exam-result exam-result-fail";
         resultEl.textContent = "Noch nicht bestanden — " + correct + " / " + total + " richtig (nötig: " + threshold + "). Richtige/falsche Antworten sind markiert, versuch es nochmal.";
@@ -584,10 +599,9 @@
       }
       var score = Math.max(0, Math.min(examOpen.totalPoints, Math.round(Number(raw))));
       if (score >= examOpen.passPoints) {
-        resultEl.className = "exam-result exam-result-pass";
-        resultEl.textContent = "Bestanden! " + score + " / " + examOpen.totalPoints + " Punkte.";
         manual(true);
         onPass();
+        renderPassedBanner(container, true, manual, function () { renderOpenExamForm(container, examOpen, onPass, manual); }, score + " / " + examOpen.totalPoints + " Punkte");
       } else {
         resultEl.className = "exam-result exam-result-fail";
         resultEl.textContent = "Noch nicht bestanden — " + score + " / " + examOpen.totalPoints + " Punkte (nötig: " + examOpen.passPoints + "). Sieh dir die Musterlösungen nochmal an und versuch es erneut.";
