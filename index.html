@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Konstrukteurspult – Lernplattform Metallbaukonstrukteur/in</title>
   <meta name="description" content="Persönliche Lernplattform für die Zusatzlehre Metallbaukonstrukteur/in EFZ: alle 4 Semester mit Erklärungen, Lernmethoden, eigenen Notizen und Fortschrittsbalken.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232F5670'/%3E%3Cpath d='M10 22 L16 10 L22 22 M12.5 17 H19.5' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#2F5670" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14181B" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232F5670'/%3E%3Cpath d='M10 22 L16 10 L22 22 M12.5 17 H19.5' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,7 +19,13 @@
     <div class="titleblock-inner">
       <div>
         <div class="eyebrow">Zusatzlehre &middot; Metallbaukonstrukteur/in EFZ</div>
-        <h1><a href="#" id="homeLink">Konstrukteurspult</a></h1>
+        <h1><a href="#" id="homeLink">
+          <svg class="brand-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="30" height="30" rx="8" class="brand-mark-bg"/>
+            <path d="M8 22 L16 8 L24 22 M10.8 17 H21.2" stroke="currentColor" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Konstrukteurspult
+        </a></h1>
         <div class="subtitle">Deine persönliche Lernplattform für alle 4 Semester. Jedes Thema hat eine eigene Seite mit Theorie, Karteikarten, Aufgaben, Anwendung und Prüfung – alles bleibt lokal in diesem Browser gespeichert.</div>
       </div>
       <div class="overall-gauge">
@@ -64,14 +75,17 @@
       <div class="controls">
         <div class="controls-row">
           <div class="view-toggle" role="tablist" aria-label="Ansicht wählen">
-            <button class="view-btn" type="button" data-view="semester">Nach Semester</button>
-            <button class="view-btn" type="button" data-view="tb">Nach Themenbereich</button>
+            <button class="view-btn" type="button" data-view="semester"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>Nach Semester</button>
+            <button class="view-btn" type="button" data-view="tb"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Nach Themenbereich</button>
           </div>
           <div class="search">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
             <input type="text" id="searchInput" placeholder="Thema suchen … z.B. Festigkeitslehre">
           </div>
-          <button class="btn danger" id="resetProgress">Fortschritt zurücksetzen</button>
+          <button class="btn danger" id="resetProgress">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16Z"/></svg>
+            Fortschritt zurücksetzen
+          </button>
         </div>
         <div class="chipbar" id="tbChips"></div>
       </div>

@@ -229,7 +229,7 @@
       }
       var metaChip = groupMode === "tb"
         ? '<span class="tb-chip">Sem. ' + sem.sem + '</span>'
-        : '<span class="tb-chip">' + t.tb + '</span>';
+        : '<span class="tb-chip" data-tb="' + t.tb + '">' + t.tb + '</span>';
       row.className = "topic-row" + (done ? " done" : "");
       row.innerHTML =
         '<span class="row-status" aria-hidden="true">' + (done ? "&#10003;" : "") + '</span>' +
@@ -282,12 +282,15 @@
   // anwendung/prüfung").
   // ---------------------------------------------------------------------
   var MODES = [
-    { key: "theorie", label: "Theorie & Formeln" },
-    { key: "karten", label: "Karteikarten" },
-    { key: "aufgaben", label: "Aufgaben" },
-    { key: "anwendung", label: "Anwendung" },
-    { key: "pruefung", label: "Prüfung" }
+    { key: "theorie", label: "Theorie & Formeln", icon: '<path d="M4 5.5c2-1 4.8-1 7 0v13c-2.2-1-5-1-7 0V5.5ZM20 5.5c-2-1-4.8-1-7 0v13c2.2-1 5-1 7 0V5.5Z"/>' },
+    { key: "karten", label: "Karteikarten", icon: '<rect x="4" y="8.5" width="13" height="10" rx="2"/><rect x="7" y="5.5" width="13" height="10" rx="2"/>' },
+    { key: "aufgaben", label: "Aufgaben", icon: '<path d="M4 6h9M4 12h9M4 18h5"/><path d="M16 16l2.4 2.4L21 14"/>' },
+    { key: "anwendung", label: "Anwendung", icon: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76Z"/>' },
+    { key: "pruefung", label: "Prüfung", icon: '<circle cx="12" cy="8" r="6.2"/><path d="M8.3 13.6 7.2 22 12 19.3 16.8 22l-1.1-8.4"/>' }
   ];
+  function tabIconSvg(icon) {
+    return '<svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + icon + '</svg>';
+  }
 
   function exerciseListHtml(exercises) {
     var html = '<div class="exercise-list">';
@@ -617,7 +620,7 @@
     var content = opts.content;
     var html = '<div class="tabbar" role="tablist">';
     MODES.forEach(function (m) {
-      html += '<button class="tab' + (mode === m.key ? " active" : "") + '" type="button" data-mode="' + m.key + '">' + m.label + '</button>';
+      html += '<button class="tab' + (mode === m.key ? " active" : "") + '" type="button" data-mode="' + m.key + '">' + tabIconSvg(m.icon) + '<span>' + m.label + '</span></button>';
     });
     html += '</div><div class="pane" data-pane></div><div class="notes-section" data-notes-section></div>';
     container.innerHTML = html;
@@ -687,9 +690,9 @@
 
     var html =
       '<div class="breadcrumb"><a href="#/" data-nav>Übersicht</a></div>' +
-      '<div class="page-header">' +
+      '<div class="page-header" data-tb="' + t.tb + '">' +
         '<div class="page-header-top">' +
-          '<span class="tb-chip">' + t.tb + ' · ' + escapeHtml(TB_NAMES[t.tb] || "") + '</span>' +
+          '<span class="tb-chip" data-tb="' + t.tb + '">' + t.tb + ' · ' + escapeHtml(TB_NAMES[t.tb] || "") + '</span>' +
           '<span class="status-pill' + (done ? " status-done" : "") + '">' + (done ? "Abgeschlossen ✓" : "In Bearbeitung") + '</span>' +
         '</div>' +
         '<h2 class="page-title">' + escapeHtml(t.name) + '</h2>' +
@@ -751,7 +754,7 @@
 
     var html =
       '<div class="breadcrumb"><a href="#/" data-nav>Übersicht</a> <span class="crumb-sep">/</span> <a href="#/topic/' + t.id + '" data-nav>' + escapeHtml(t.name) + '</a></div>' +
-      '<div class="page-header">' +
+      '<div class="page-header" data-tb="' + t.tb + '">' +
         '<div class="page-header-top">' +
           '<span class="tb-chip">' + escapeHtml(sub.chapter) + '</span>' +
           '<span class="status-pill' + (done ? " status-done" : "") + '">' + (done ? "Bestanden ✓" : "Offen") + '</span>' +
