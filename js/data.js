@@ -24,7 +24,7 @@ window.CURRICULUM = [
       explain: "Grundsätze der Suva-Unfallverhütung im Metallbau: persönliche Schutzausrüstung, Absturzsicherung, sicherer Umgang mit Maschinen (Sägen, Schweissgeräte, Kran) sowie Verhalten bei Notfällen.",
       method: "Karteikarten mit „Gefahr → Schutzmassnahme“ erstellen und wöchentlich 5 Karten per Spaced Repetition abfragen." },
     { id: "s1-03", name: "Algebra", lekt: 33, tb: "TB3",
-      explain: "Grundlage des technischen Rechnens, komplett aufgebaut nach dem Lehrmittel „Algebra – Einführung in die Elemente der Algebra für Berufsschulen“. Unten in 18 Kapitel-Unterseiten gegliedert: von den Grundrechenarten über ganze Zahlen, Bruchrechnen und Gleichungen bis zu Textaufgaben, Proportionen und Gleichungssystemen – jede mit Erklärung, Beispielen und Übungsaufgaben inkl. Lösung.",
+      explain: "Grundlage des technischen Rechnens, komplett aufgebaut nach dem Lehrmittel „Algebra – Einführung in die Elemente der Algebra für Berufsschulen“. Unten in 8 Unterthemen gegliedert (eigener Lern-Fahrplan 3.1–3.8): von den Grundrechenarten über ganze Zahlen, Bruchrechnen und Gleichungen bis zu Textaufgaben, Proportionen und Gleichungssystemen – jede mit Theorie, Karteikarten, Aufgaben, Anwendung und Prüfung.",
       formulas: "Grundrechenarten: a+b=b+a  ·  a·b=b·a\nPotenzen: aᵏ · aⁿ = aᵏ⁺ⁿ   aᵏ : aⁿ = aᵏ⁻ⁿ\nKlammern: +(a−b) = a−b     −(a−b) = −a+b\nGleichung lösen: Waage-Prinzip — was links passiert, muss rechts auch passieren.",
       method: "Kapitel für Kapitel durcharbeiten: zuerst Erklärung + Beispiele lesen, dann die Aufgaben selbst rechnen und erst danach die Lösung aufdecken. Formelkarte für Potenz-, Klammer- und Gleichungsregeln griffbereit halten.",
       flashcards: [
@@ -42,188 +42,191 @@ window.CURRICULUM = [
         { q: "Wie kürzt man einen Bruch?", a: "Zähler und Nenner durch dieselbe Zahl dividieren – der Wert des Bruchs bleibt unverändert." }
       ],
       subtopics: [
-        { chapter: "I", title: "Grundlagen: Grössen & Grundrechenarten",
-          explain: "Physikalische Grössen werden als Zahlenwert × Einheit dargestellt (z.B. m = 4 kg). Bestimmte Zahlen schreibt man als Ziffern, unbestimmte als Buchstaben. Die Zahl vor einer Buchstabengrösse heisst Vorzahl (2a, 3a); die Vorzahl 1 wird nie geschrieben. Die vier Grundrechenarten haben feste Fachbegriffe für ihre Bestandteile.",
-          examples: [
-            { problem: "Fläche des Rechtecks mit a = 2 und b = 5", solution: "Fläche = a · b = 2 · 5 = 10" },
-            { problem: "Vorzahl korrekt schreiben: 1 · b", solution: "= b  (die Vorzahl 1 wird weggelassen)" }
+        {
+          chapter: "3.1", title: "Grundlagen & Rechnen mit natürlichen Zahlen",
+          theorySections: [
+            { type: "h", text: "1.1 Grössen, Zahlen und Buchstaben" },
+            { type: "list", items: ["Physikalische Grösse = Zahlenwert × Einheit. Beispiel: Masse m = 4 kg.", "Der Zahlenwert stammt aus einer Zählung, Messung, Schätzung oder Rechnung.", "Natürliche Zahlen: 0, 1, 2, 3, 4, … Die untere Grenze ist die Null, nach oben ist der Zahlenraum unbegrenzt (∞).", "Bestimmte Zahlen werden mit Ziffern geschrieben (5, 17, 240).", "Unbestimmte Zahlen werden mit Buchstaben geschrieben (a, b, x). Beispiel: Fläche des Rechtecks = a · b.", "Vorzahl (Koeffizient): die Zahl vor einer Buchstabengrösse → 2a, 3a. Die Vorzahl 1 wird nie geschrieben (a bedeutet 1a).", "Wichtigste Regel: Ein Buchstabe kann jede beliebige Zahl bedeuten – innerhalb derselben Rechnung hat er aber immer denselben Wert."] },
+            { type: "h", text: "1.2 Die vier Grundrechnungsarten – Fachbegriffe" },
+            { type: "table", headers: ["Rechnungsart", "Beispiel", "1. Zahl", "Zeichen", "2. Zahl", "Resultat"], rows: [["Addition", "8 + 5 = 13", "Summand", "plus", "Summand", "Summe"], ["Subtraktion", "8 − 5 = 3", "Minuend", "minus", "Subtrahend", "Differenz"], ["Multiplikation", "8 · 5 = 40", "Faktor", "mal", "Faktor", "Produkt"], ["Division", "15 : 5 = 3", "Dividend", "durch", "Divisor", "Quotient"]] },
+            { type: "h", text: "1.3 Addition" },
+            { type: "p", text: "a) Kommutatives Gesetz: Die Reihenfolge der Summanden darf beliebig verändert werden." },
+            { type: "code", text: "5 + 7 + 9 + 11 = 5 + 11 + 7 + 9\na + b + c + d  = a + d + b + c" },
+            { type: "p", text: "b) Nur Gleichartiges darf addiert werden. «Äpfel + Birnen» geht nicht." },
+            { type: "code", text: "3 kg + 5 kg = 8 kg\n5a + 3b + 6a + 9b = 11a + 12b" },
+            { type: "note", tone: "tip", text: "Merksatz: Gleiche Buchstaben = gleiche Sorte. Man addiert nur die Vorzahlen, der Buchstabe bleibt stehen." },
+            { type: "h", text: "1.4 Subtraktion" },
+            { type: "list", items: ["In den natürlichen Zahlen ist die Subtraktion nur möglich, wenn der Minuend grösser ist als der Subtrahend.", "Die Reihenfolge darf verändert werden – aber jede Zahl behält ihr Zeichen: Minuend bleibt Minuend, Subtrahend bleibt Subtrahend."] },
+            { type: "code", text: "135 − 68 + 238 − 75 = 135 + 238 − 68 − 75 = 373 − 143 = 230\na − b + c = a + c − b" },
+            { type: "h", text: "1.5 Multiplikation" },
+            { type: "p", text: "a) Kommutatives Gesetz: Die Reihenfolge der Faktoren ist beliebig." },
+            { type: "code", text: "15 · 13 · 20 = 20 · 15 · 13\na · b · c = c · b · a" },
+            { type: "p", text: "b) Ist ein einziger Faktor gleich null, so ist das ganze Produkt null." },
+            { type: "code", text: "3 · 2d · 6u · 0 = 0" },
+            { type: "note", tone: "tip", text: "Bei Buchstaben werden die Vorzahlen multipliziert und die Buchstaben aneinandergehängt: 7a · 5b · 3c = 105abc" },
+            { type: "h", text: "1.6 Division" },
+            { type: "p", text: "a) Die Division ist die Umkehrung der Multiplikation. Eine Vertauschung von Dividend und Divisor ist nicht erlaubt." },
+            { type: "code", text: "48 kg : 8 = 6 kg      Probe: 6 kg · 8 = 48 kg\n72ab : 12a = 6b      Probe: 12a · 6b = 72ab" },
+            { type: "p", text: "b) Bruchform: In technischen Lehrbüchern wird die Division meist als Bruch geschrieben." },
+            { type: "code", text: "45/5 = 9        Zähler / Nenner = Bruchwert" },
+            { type: "h", text: "1.7 Potenzen" },
+            { type: "p", text: "Ein Produkt aus lauter gleichen Faktoren wird als Potenz geschrieben." },
+            { type: "code", text: "5 · 5 · 5 · 5 = 5⁴          a · a · a · a = a⁴" },
+            { type: "list", items: ["Grundzahl / Basis = die Zahl, die multipliziert wird (5 bzw. a)", "Exponent = gibt an, wie oft die Basis als Faktor gesetzt ist (4)"] },
+            { type: "table", headers: ["Regel", "Formel", "Beispiel"], rows: [["Addieren/Subtrahieren", "nur bei gleicher Basis UND gleichem Exponent → nur Vorzahlen verrechnen", "3a² + 5b² + 6a² − 3b² = 9a² + 2b²"], ["Multiplizieren", "aᵐ · aⁿ = a^(m+n)", "a³ · a⁴ = a⁷"], ["Dividieren", "aᵐ : aⁿ = a^(m−n)", "6a⁵ : 2a³ = 3a²"]] },
+            { type: "note", tone: "warn", text: "Achtung Stolperfalle: a² + a³ lässt sich nicht zusammenfassen (verschiedene Exponenten). a² · a³ = a⁵ dagegen schon." },
+            { type: "code", text: "Zehnerpotenzen (Technik):\n1 000 000 = 10⁶\n7 000 000 = 7 · 10⁶\n25 000 000 000 = 25 · 10⁹" },
+            { type: "h", text: "1.8 Klammern" },
+            { type: "p", text: "Durch Klammern werden mehrere Grössen zu einer Grösse zusammengefasst." },
+            { type: "p", text: "a) Plus vor der Klammer → Klammer kann einfach weggelassen werden" },
+            { type: "code", text: "a + (b + c) = a + b + c\na + (b − c) = a + b − c" },
+            { type: "p", text: "b) Minus vor der Klammer → Klammer weglassen UND alle Zeichen in der Klammer umkehren" },
+            { type: "code", text: "a − (b + c) = a − b − c\na − (b − c) = a − b + c" },
+            { type: "p", text: "c) Multiplikation eines Klammerausdrucks → jedes Glied multiplizieren" },
+            { type: "code", text: "a(b + c) = ab + ac\n7(5a + 6b − 7c) = 35a + 42b − 49c" },
+            { type: "p", text: "d) Division eines Klammerausdrucks → jedes Glied dividieren" },
+            { type: "code", text: "(a + b) : c = a:c + b:c\n(125xyz + 75xz − 25x) : 25x = 5yz + 3z − 1" },
+            { type: "p", text: "e) Mehrfache Klammern: Zuerst die inneren Klammern ( ), erst nachher die äusseren [ ] auflösen." }
+          ],
+          flashcards: [
+            { q: "Woraus besteht eine physikalische Grösse?", a: "Aus dem Produkt «Zahlenwert × Einheit», z. B. m = 4 kg." },
+            { q: "Was ist eine Vorzahl und wann wird sie nicht geschrieben?", a: "Die Zahl vor einer Buchstabengrösse (z. B. die 2 in 2a). Die Vorzahl 1 wird nie geschrieben – a bedeutet 1a." },
+            { q: "Wie heissen die Glieder und das Resultat einer Subtraktion?", a: "Minuend − Subtrahend = Differenz." },
+            { q: "Wie heissen die Glieder und das Resultat einer Division?", a: "Dividend : Divisor = Quotient." },
+            { q: "Welche Grössen dürfen addiert werden?", a: "Nur gleichartige Grössen (gleiche Einheit bzw. gleicher Buchstabenteil). Addiert werden dabei nur die Vorzahlen: 5a + 6a = 11a." },
+            { q: "Wann ist ein Produkt gleich null?", a: "Sobald mindestens ein einziger Faktor null ist." },
+            { q: "Darf man bei der Subtraktion die Reihenfolge vertauschen?", a: "Ja, aber jedes Glied behält sein Zeichen: a − b + c = a + c − b." },
+            { q: "Darf man bei der Division Dividend und Divisor vertauschen?", a: "Nein. Die Division ist nicht kommutativ." },
+            { q: "Wie heissen die beiden Teile einer Potenz aⁿ?", a: "a = Grundzahl (Basis), n = Exponent (gibt an, wie oft a als Faktor gesetzt wird)." },
+            { q: "Regel für die Multiplikation von Potenzen mit gleicher Basis?", a: "Exponenten addieren, Basis beibehalten: aᵐ · aⁿ = a^(m+n)." },
+            { q: "Regel für die Division von Potenzen mit gleicher Basis?", a: "Exponenten subtrahieren, Basis beibehalten: aᵐ : aⁿ = a^(m−n)." },
+            { q: "Unter welcher Bedingung dürfen Potenzen addiert oder subtrahiert werden?", a: "Nur bei gleicher Grundzahl und gleichem Exponenten; verrechnet werden dann nur die Vorzahlen." },
+            { q: "Was passiert beim Auflösen einer Klammer, vor der ein Minuszeichen steht?", a: "Die Klammer fällt weg und alle Zeichen im Innern werden umgekehrt: a − (b − c) = a − b + c." },
+            { q: "Wie multipliziert man einen Klammerausdruck mit einer Zahl?", a: "Jedes einzelne Glied der Klammer wird multipliziert: a(b + c) = ab + ac." },
+            { q: "In welcher Reihenfolge löst man mehrfache Klammern auf?", a: "Zuerst die inneren runden Klammern ( ), danach die äusseren eckigen Klammern [ ]." },
+            { q: "Schreibe 25 000 000 000 als Zehnerpotenz.", a: "25 · 10⁹." }
           ],
           exercises: [
-            { task: "Wie heisst das Ergebnis einer Multiplikation?", answer: "Produkt" },
-            { task: "Wie heisst der zweite Wert bei einer Division (durch den geteilt wird)?", answer: "Divisor" },
-            { task: "Wie heisst das Ergebnis einer Subtraktion?", answer: "Differenz" }
+            { group: "Block A – Gleichartige Glieder zusammenfassen", task: "7a + 12b + 15a + 9b =", answer: "22a + 21b" },
+            { task: "45m − 18m + 27n − 12n =", answer: "27m + 15n" },
+            { task: "8x + 14y − 3x + 6y − 2x =", answer: "3x + 20y" },
+            { task: "24p − 9q − 15p + 21q − 5p =", answer: "4p + 12q" },
+            { task: "16c + 8d + 23c − 5d + 9c =", answer: "48c + 3d" },
+            { group: "Block B – Multiplikation und Division", task: "6a · 7b · 2c =", answer: "84abc" },
+            { task: "12x · 5y · 0 =", answer: "0" },
+            { task: "9r · 2s · 4t =", answer: "72rst" },
+            { task: "48ab : 6a =", answer: "8b" },
+            { task: "72xyz : 9xz =", answer: "8y" },
+            { task: "144rst / (12t) =", answer: "12rs" },
+            { group: "Block C – Potenzen", task: "Schreibe kürzer: 5 · 5 · 5 · 5 · 5 · 5 =", answer: "5⁶" },
+            { task: "4a³ · 5a² =", answer: "20a⁵" },
+            { task: "24b⁷ : 6b³ =", answer: "4b⁴" },
+            { task: "7c² + 12c² − 5c² =", answer: "14c²" },
+            { task: "3x² + 5x³ + 8x² − 2x³ =", answer: "11x² + 3x³" },
+            { task: "20s²t² : 4st =", answer: "5st" },
+            { task: "Schreibe als Zehnerpotenz: 4 000 000 =", answer: "4 · 10⁶" },
+            { group: "Block D – Klammern", task: "15a + (8a − 3b) =", answer: "23a − 3b" },
+            { task: "42m − (17m + 9n) =", answer: "25m − 9n" },
+            { task: "(25c + 14d) − (12c − 6d) =", answer: "13c + 20d" },
+            { task: "9(4x + 7y) =", answer: "36x + 63y" },
+            { task: "7a²b(9a² + 15ab + 8b²) =", answer: "63a⁴b + 105a³b² + 56a²b³" },
+            { task: "(36a² + 24ab) : 12a =", answer: "3a + 2b" },
+            { task: "(50xy + 15xz + 10x) : 5x =", answer: "10y + 3z + 2" },
+            { task: "8[5a − (2a + 3b)] =", answer: "24a − 24b" },
+            { task: "20a − [8a + (5a − 3b)] =", answer: "7a + 3b" },
+            { group: "Block E – Vereinfachen und einsetzen", task: "6a + 15b − 2a + 5b für a = 4; b = 3", answer: "vereinfacht: 4a + 20b → eingesetzt: 4·4 + 20·3 = 16 + 60 = 76" },
+            { task: "5(m + n) − 3(m − n) für m = 10; n = 4", answer: "vereinfacht: 2m + 8n → eingesetzt: 2·10 + 8·4 = 20 + 32 = 52" },
+            { task: "(h/3)·(R² + R·r + r²) für h = 9; R = 4; r = 2", answer: "R²+Rr+r² = 16+8+4 = 28 → 9/3=3 → 3·28 = 84" },
+            { task: "(28m² − 35mn + 70m) : 7m für m = 8; n = 4", answer: "vereinfacht: 4m − 5n + 10 → eingesetzt: 4·8 − 5·4 + 10 = 32 − 20 + 10 = 22" },
+            { group: "Block F – Anwendung Werkstatt", task: "Der Umfang eines Rechtecks ist U = 2a + 2b. Vereinfache die Formel durch Ausklammern und berechne U für a = 35 mm und b = 18 mm.", answer: "U = 2(a+b) → 2·(35+18) = 2·53 = 106 mm" },
+            { task: "Von einem Stab werden 8 Stücke von je 45 mm Länge abgeschnitten. Pro Schnitt gehen 1,5 mm Material verloren, das Reststück misst 32 mm. Stelle die Formel für die Gesamtlänge L auf und berechne sie.", answer: "L = n·s + n·v + r = 8·45 + 8·1,5 + 32 = 360 + 12 + 32 = 404 mm" }
           ],
           applications: [
-            { task: "Die Fläche eines rechteckigen Blechs mit den Seiten a und b soll berechnet werden. Schreibe die Formel auf und berechne die Fläche für a=1,8 m, b=0,75 m.", answer: "Formel: Fläche = a · b → 1,8 · 0,75 = 1,35 m²" }
+            { task: "Beispiel 1 – Gleichartige Glieder ordnen: 12a + 7b + 9a − 3b =", answer: "1) Gleiche Buchstaben gruppieren: (12a+9a) + (7b−3b)\n2) Nur Vorzahlen verrechnen\n3) Ergebnis: 21a + 4b" },
+            { task: "Beispiel 2 – Potenzen multiplizieren: 15a⁴b² · 4a²b³ =", answer: "1) Vorzahlen: 15·4=60\n2) Basen: a⁴·a²=a⁶ und b²·b³=b⁵\n3) Ergebnis: 60a⁶b⁵" },
+            { task: "Beispiel 3 – Potenzen dividieren: 90x⁵y³ : 15x²y =", answer: "1) Vorzahlen: 90:15=6\n2) Basen: x⁵:x²=x³ und y³:y¹=y²\n3) Ergebnis: 6x³y²\nProbe: 15x²y · 6x³y² = 90x⁵y³ ✔" },
+            { task: "Beispiel 4 – Minusklammer auflösen: 45x − (18x − 12y) + (7x − 5y) =", answer: "1) Minus-Klammer: Zeichen umkehren → 45x−18x+12y\n2) Plus-Klammer: weglassen → +7x−5y\n3) Zusammenfassen: 45x−18x+7x + 12y−5y = 34x + 7y" },
+            { task: "Beispiel 5 – Mehrfache Klammern: 20a − [8a + (5a − 3b)] =", answer: "1) Innere Klammer (Plus davor, weglassen): 20a − [8a+5a−3b]\n2) Zusammenfassen in [ ]: 20a − [13a−3b]\n3) Minus vor [ ]: Zeichen umkehren: 20a−13a+3b\n4) Ergebnis: 7a + 3b" },
+            { task: "Beispiel 6 – Klammerausdruck dividieren: (144e³f² + 108e²f² + 60ef) : 12ef =", answer: "144e³f²:12ef=12e²f ; 108e²f²:12ef=9ef ; 60ef:12ef=5\nErgebnis: 12e²f + 9ef + 5\nProbe: 12ef·(12e²f+9ef+5) = 144e³f²+108e²f²+60ef ✔" },
+            { task: "Beispiel 7 – Praxis Konstruktion: In einen Flacheisenstab von 860 mm Länge werden 10 Löcher gebohrt, Lochabstand (Teilung) 85 mm. Wie gross sind die beiden Endabstände?", answer: "1) 10 Löcher → 9 Zwischenräume (n−1)\n2) Lochstrecke: 9·85 = 765 mm\n3) Restlänge: 860−765 = 95 mm\n4) Auf beide Enden verteilen: 95:2 = 47,5 mm\nFormel: e = [L−(n−1)·t] / 2" }
           ],
-          exam: [
-            { q: "Wie wird die Vorzahl 1 vor einer Buchstabengrösse geschrieben (z.B. 1·a)?", options: ["1a", "a", "a1", "1·a immer ausschreiben"], correct: 1 },
-            { q: "Wie heisst das Ergebnis einer Division?", options: ["Summe", "Produkt", "Quotient", "Differenz"], correct: 2 },
-            { q: "Was ist die untere Grenze der natürlichen Zahlen in diesem Lehrmittel?", options: ["1", "0", "-1", "unbegrenzt"], correct: 1 }
-          ] },
-        { chapter: "II.1–2", title: "Natürliche Zahlen: Addition & Subtraktion",
-          explain: "Addition: Die Reihenfolge der Summanden darf vertauscht werden (kommutatives Gesetz), es können aber nur gleichartige Grössen addiert werden (3 kg + 5 kg = 8 kg, aber nicht kg + Stück). Subtraktion ist bei natürlichen Zahlen nur möglich, wenn der Minuend grösser ist als der Subtrahend; die Reihenfolge darf verändert werden, solange der Minuend Minuend bleibt.",
-          examples: [
-            { problem: "5 + 7 + 9 + 11", solution: "= 5 + 11 + 7 + 9 = 32 (Summanden beliebig vertauschbar)" },
-            { problem: "135 − 68 + 238 − 75", solution: "= 135 − 75 + 238 − 68 = 60 + 170 = 230" }
-          ],
-          exercises: [
-            { task: "95 + 37 + 15 + 24 + 13 + 26 =", answer: "210" },
-            { task: "6a + 9a + 16a + 27a + 42a =", answer: "100a" },
-            { task: "4a + 19a + 25a + 6a + 12a + 27a + 2a = für a = 15", answer: "Summe der Vorzahlen 95a, für a=15: 95 · 15 = 1425" },
-            { task: "30 − 9 − 13 =", answer: "8" },
-            { task: "37d − 15d + 18d =", answer: "40d" }
-          ],
-          applications: [
-            { task: "Für eine Bestellung werden Stahlrohre mit folgenden Längen zugeschnitten: 120 cm, 85 cm, 95 cm und 140 cm. Wie viel Meter Rohmaterial werden mindestens benötigt (ohne Verschnitt)?", answer: "120+85+95+140 = 440 cm = 4,4 m" }
-          ],
-          exam: [
-            { q: "Welches Gesetz erlaubt es, Summanden zu vertauschen?", options: ["Distributivgesetz", "Kommutatives Gesetz", "Assoziativgesetz", "Kein Gesetz nötig"], correct: 1 },
-            { q: "Wann ist eine Subtraktion mit natürlichen Zahlen möglich?", options: ["Immer", "Nur wenn der Minuend grösser als der Subtrahend ist", "Nur wenn beide Zahlen gerade sind", "Nie"], correct: 1 },
-            { q: "6a + 9a + 16a = ?", options: ["31a", "21a", "25a", "30a"], correct: 0 }
-          ] },
-        { chapter: "II.3–4", title: "Natürliche Zahlen: Multiplikation & Division",
-          explain: "Bei der Multiplikation darf die Reihenfolge der Faktoren vertauscht werden; ist ein Faktor 0, ist das Produkt 0. Division ist die Umkehrung der Multiplikation – Dividend und Divisor dürfen nicht vertauscht werden. In technischen Lehrmitteln wird die Division meist als Bruch geschrieben: Zähler/Nenner = Bruchwert.",
-          examples: [
-            { problem: "15 · 13 · 20", solution: "= 20 · 15 · 13 = 3900 (Reihenfolge vertauschbar)" },
-            { problem: "48 kg : 8", solution: "= 6 kg   Probe: 6 kg · 8 = 48 kg" }
-          ],
-          exercises: [
-            { task: "8 · 7 · 25 =", answer: "1400" },
-            { task: "4 · 6a =", answer: "24a" },
-            { task: "4 · 5g =", answer: "20g" },
-            { task: "25a : 5 =", answer: "5a" },
-            { task: "78ab : 13a =", answer: "6b" }
-          ],
-          applications: [
-            { task: "Ein Blechzuschnitt kostet CHF 4.50 pro Stück. Bestellt werden 6 Sorten zu je 13 Stück. Wie viel kostet die gesamte Bestellung?", answer: "4.50 · 6 · 13 = CHF 351.–" }
-          ],
-          exam: [
-            { q: "Was ergibt ein Produkt, wenn ein Faktor 0 ist?", options: ["Immer 1", "Der andere Faktor", "Immer 0", "Unmöglich zu berechnen"], correct: 2 },
-            { q: "78ab : 13a = ?", options: ["6b", "6ab", "65b", "91b"], correct: 0 },
-            { q: "Wie wird eine Division in technischen Lehrmitteln meist geschrieben?", options: ["Nur mit Doppelpunkt", "Als Bruch: Zähler/Nenner", "Als Prozent", "Mit römischen Zahlen"], correct: 1 }
-          ] },
-        { chapter: "II.5", title: "Potenzen",
-          explain: "Ein Produkt aus lauter gleichen Faktoren wird als Potenz geschrieben (5·5·5·5 = 5⁴). Die Basis (Grundzahl) ist der wiederholte Faktor, der Exponent zeigt, wie oft. Potenzen mit gleicher Basis und gleichem Exponenten dürfen addiert/subtrahiert werden (nur die Vorzahlen). Bei der Multiplikation gleicher Basen werden die Exponenten addiert, bei der Division subtrahiert.",
-          examples: [
-            { problem: "3a² + 5b² + 6a² − 3b²", solution: "= 9a² + 2b²  (gleiche Basis & Exponent: Vorzahlen addieren)" },
-            { problem: "a³ · a⁴", solution: "= a³⁺⁴ = a⁷" },
-            { problem: "6a⁵ : 2a³", solution: "= 3a⁵⁻³ = 3a²" }
-          ],
-          exercises: [
-            { task: "2² = ; 3² = ; 4² = ; 5² =", answer: "4 ; 9 ; 16 ; 25" },
-            { task: "3a² + 4a² + 7a² =", answer: "14a²" },
-            { task: "4a² · 5a³ =", answer: "20a⁵" },
-            { task: "36y⁵ : 9y³ =", answer: "4y²" }
-          ],
-          applications: [
-            { task: "Ein quadratisches Stahlblech hat die Seitenlänge a = 0,8 m. Wie gross ist seine Fläche, ausgedrückt mit einer Potenz, und als Zahl?", answer: "Fläche = a² = 0,8² = 0,64 m²" }
-          ],
-          exam: [
-            { q: "a³ · a⁴ = ?", options: ["a⁷", "a¹²", "2a⁷", "a⁷⁄a"], correct: 0 },
-            { q: "6a⁵ : 2a³ = ?", options: ["3a²", "3a⁸", "4a²", "3a"], correct: 0 },
-            { q: "Wie nennt man die Zahl, die angibt, wie oft die Basis als Faktor steht?", options: ["Basis", "Exponent", "Vorzahl", "Produkt"], correct: 1 }
-          ] },
-        { chapter: "II.6", title: "Klammern (natürliche Zahlen)",
-          explain: "Steht vor einer Klammer ein Pluszeichen, kann sie einfach weggelassen werden. Steht ein Minuszeichen davor, wird sie aufgelöst, indem man alle Vorzeichen darin umkehrt. Ein Klammerausdruck wird mit einer Zahl multipliziert, indem jedes Glied einzeln multipliziert wird; zwei Summen werden multipliziert, indem jedes Glied der einen mit jedem Glied der anderen multipliziert wird.",
-          examples: [
-            { problem: "25 − (12 + 8)", solution: "= 25 − 20 = 5   oder gleichwertig: 25 − 12 − 8 = 5" },
-            { problem: "7 · 32 = 7 · (30 + 2)", solution: "= 7·30 + 7·2 = 210 + 14 = 224" },
-            { problem: "(a + b)(c + d)", solution: "= ac + ad + bc + bd" }
-          ],
-          exercises: [
-            { task: "31 + (16 + 9) =", answer: "56" },
-            { task: "50 − (12 + 13) =", answer: "25" },
-            { task: "6(a + 3b) =", answer: "6a + 18b" },
-            { task: "(5a + 6b) + (12a − 3b) − (7a − 2b) = , dann einsetzen für a = 8, b = 7", answer: "vereinfacht: 10a + 5b → eingesetzt: 10·8 + 5·7 = 80 + 35 = 115" }
-          ],
-          applications: [
-            { task: "Ein Auftrag umfasst Material für CHF (25+18) und Lohn für CHF (30−4). Wie viel kostet der Auftrag insgesamt?", answer: "(25+18)+(30−4) = 43+26 = CHF 69.–" }
-          ],
-          exam: [
-            { q: "Wie löst man eine Klammer auf, vor der ein Minuszeichen steht?", options: ["Klammer einfach weglassen", "Alle Vorzeichen darin umkehren", "Nur das erste Vorzeichen ändern", "Klammer bleibt stehen"], correct: 1 },
-            { q: "6(a + 3b) = ?", options: ["6a+3b", "6a+18b", "a+18b", "6a+9b"], correct: 1 },
-            { q: "(a+b)(c+d) = ?", options: ["ac+bd", "ac+ad+bc+bd", "ab+cd", "a+b+c+d"], correct: 1 }
-          ] },
-        { chapter: "III.1–2", title: "Ganze Zahlen: Addition & Subtraktion",
-          explain: "Der Zahlenraum wird um die negativen Zahlen erweitert. Zwei ganze Zahlen mit gleichem Vorzeichen werden addiert, indem man ihre Beträge addiert und das gemeinsame Vorzeichen übernimmt. Bei ungleichem Vorzeichen wird der kleinere Betrag vom grösseren subtrahiert; das Ergebnis erhält das Vorzeichen des grösseren Betrags. Subtraktion = Addition mit umgekehrtem Vorzeichen des Subtrahenden.",
+          examOpen: { timeMin: 30, totalPoints: 20, passPoints: 12, parts: [
+            { title: "Teil 1 – Theorie (5 Punkte)", questions: [
+                { q: "Wie heissen die drei Glieder einer Division?", points: 1, answer: "Dividend : Divisor = Quotient" },
+                { q: "Nenne die Bedingung, unter der zwei Potenzen addiert werden dürfen.", points: 1, answer: "Gleiche Basis UND gleicher Exponent (dann werden nur die Vorzahlen addiert)" },
+                { q: "Formuliere die Regel für das Auflösen einer Klammer, vor der ein Minuszeichen steht.", points: 1, answer: "Klammer weglassen und alle Vorzeichen im Innern umkehren" },
+                { q: "Was passiert mit einem Produkt, wenn ein Faktor null ist?", points: 1, answer: "Das ganze Produkt wird null" },
+                { q: "Was bedeutet die Vorzahl in 7x, und welche Vorzahl steht unsichtbar bei y?", points: 1, answer: "7 ist die Vorzahl (Koeffizient) von x; bei y steht unsichtbar die Vorzahl 1" }
+              ] },
+            { title: "Teil 2 – Rechnen (9 Punkte)", questions: [
+                { q: "18a + 25b − 7a + 14b =", points: 1, answer: "11a + 39b" },
+                { q: "8r · 3s · 5t =", points: 1, answer: "120rst" },
+                { q: "96a³b² : 12ab =", points: 1, answer: "8a²b" },
+                { q: "9m² + 14m³ − 4m² + 6m³ =", points: 1, answer: "5m² + 20m³" },
+                { q: "(42c + 28d) − (15c − 12d) =", points: 1, answer: "27c + 40d" },
+                { q: "6x(4x + 9y − 3) =", points: 1, answer: "24x² + 54xy − 18x" },
+                { q: "(75p²q + 45pq² − 15pq) : 15pq =", points: 1, answer: "5p + 3q − 1" },
+                { q: "30k − [12k + (8k − 5l)] =", points: 2, answer: "innere Klammer (Plus davor, stehen lassen): 12k+8k−5l=20k−5l → 30k−[20k−5l] = 30k−20k+5l = 10k + 5l" }
+              ] },
+            { title: "Teil 3 – Einsetzen und Anwenden (6 Punkte)", questions: [
+                { q: "Vereinfache 4(2a + 3b) − 2(3a − b) und berechne den Wert für a = 6 und b = 5.", points: 2, answer: "vereinfacht: 8a+12b−6a+2b = 2a+14b → eingesetzt: 2·6+14·5 = 12+70 = 82" },
+                { q: "Berechne (a + b)/2 · h für a = 18; b = 14; h = 8.", points: 2, answer: "(18+14)/2 · 8 = 32/2 · 8 = 16·8 = 128" },
+                { q: "Ein Flacheisen von 1200 mm Länge erhält 6 Löcher mit einer Teilung von 180 mm. Berechne die beiden gleich grossen Endabstände.", points: 2, answer: "5 Zwischenräume (n−1) · 180 = 900 mm Lochstrecke → Restlänge 1200−900=300 mm → je Ende 300:2 = 150 mm" }
+              ] }
+            ] }
+        },
+        {
+          chapter: "3.2", title: "Rechnen mit ganzen Zahlen (Vorzeichen)",
+          explain: "Der Zahlenraum wird um die negativen Zahlen erweitert. Zwei ganze Zahlen mit gleichem Vorzeichen werden addiert, indem man ihre Beträge addiert und das gemeinsame Vorzeichen übernimmt. Bei ungleichem Vorzeichen wird der kleinere Betrag vom grösseren subtrahiert; das Ergebnis erhält das Vorzeichen des grösseren Betrags. Subtraktion = Addition mit umgekehrtem Vorzeichen des Subtrahenden.\n\nEine algebraische Summe ist eine Vereinigung positiver und negativer Glieder. Additionszeichen und Klammern mit + davor können weggelassen werden. Steht vor einer Klammer ein Minuszeichen, werden beim Weglassen alle Vorzeichen darin umgekehrt. Bei mehrfachen Klammern löst man zuerst die inneren ( ), dann die äusseren [ ] auf.\n\nZwei ganze Zahlen mit gleichem Vorzeichen ergeben ein positives, mit verschiedenem Vorzeichen ein negatives Produkt. Für häufig wiederkehrende Klammerprodukte gibt es die binomischen Formeln – sie lohnen sich auswendig, weil sie im Metallbau bei Flächen- und Kraftberechnungen ständig vorkommen.\n\nZwei ganze Zahlen mit gleichem Vorzeichen ergeben einen positiven, mit verschiedenem Vorzeichen einen negativen Quotienten. Ein Klammerausdruck wird durch eine Zahl dividiert, indem jedes Glied einzeln dividiert wird. Lässt sich der Dividend faktorisieren (z.B. als binomische Formel), kann oft direkt gekürzt werden.",
           examples: [
             { problem: "(+2) + (−6)", solution: "= −4  (ungleiche Vorzeichen: 6−2=4, Vorzeichen des grösseren Betrags −)" },
-            { problem: "(−7) − (−10)", solution: "= −7 + 10 = +3" }
+            { problem: "(−7) − (−10)", solution: "= −7 + 10 = +3" },
+            { problem: "(+16) + (−13) + (+15) + (−27) + (+14)", solution: "= 16 − 13 + 15 − 27 + 14 = 5" },
+            { problem: "15a + [13a − (20a + 9a)]", solution: "innere Klammer: 20a+9a=29a → 13a−29a=−16a → 15a + (−16a) = −a" },
+            { problem: "(a + b)²", solution: "= a² + 2ab + b²" },
+            { problem: "(a − b)(a + b)", solution: "= a² − b²  (Differenz der Quadrate)" },
+            { problem: "(24a − 16b) : 8", solution: "= 3a − 2b   Probe: 8 · (3a − 2b) = 24a − 16b" }
           ],
           exercises: [
             { task: "(+14) + (+18) =", answer: "+32" },
             { task: "(−15) + (−25) =", answer: "−40" },
             { task: "(+18) − (+25) =", answer: "−7" },
             { task: "(−25) − (+13) =", answer: "−38" },
-            { task: "(+40b) − (−50b) =", answer: "90b" }
-          ],
-          applications: [
-            { task: "Die Temperatur in der Werkstatt beträgt morgens −3°C. Bis Mittag steigt sie um 11°C. Welche Temperatur herrscht dann?", answer: "−3 + 11 = 8°C" }
-          ],
-          exam: [
-            { q: "(+2) + (−6) = ?", options: ["+8", "-4", "+4", "-8"], correct: 1 },
-            { q: "Wie addiert man zwei ganze Zahlen mit ungleichem Vorzeichen?", options: ["Beträge addieren, kleineres Vorzeichen nehmen", "Kleineren Betrag vom grösseren abziehen, Vorzeichen des grösseren übernehmen", "Beide Beträge multiplizieren", "Ist nicht möglich"], correct: 1 },
-            { q: "(−7) − (−10) = ?", options: ["-17", "+3", "-3", "+17"], correct: 1 }
-          ] },
-        { chapter: "III.3–4", title: "Algebraische Summe & Klammern (ganze Zahlen)",
-          explain: "Eine algebraische Summe ist eine Vereinigung positiver und negativer Glieder. Additionszeichen und Klammern mit + davor können weggelassen werden. Steht vor einer Klammer ein Minuszeichen, werden beim Weglassen alle Vorzeichen darin umgekehrt. Bei mehrfachen Klammern löst man zuerst die inneren ( ), dann die äusseren [ ] auf.",
-          examples: [
-            { problem: "(+16) + (−13) + (+15) + (−27) + (+14)", solution: "= 16 − 13 + 15 − 27 + 14 = 5" },
-            { problem: "15a + [13a − (20a + 9a)]", solution: "innere Klammer: 20a+9a=29a → 13a−29a=−16a → 15a + (−16a) = −a" }
-          ],
-          exercises: [
+            { task: "(+40b) − (−50b) =", answer: "90b" },
             { task: "(5x − 3y) + (6x + 2y) =", answer: "11x − y" },
             { task: "(+5a) + (+7a) − (+12a) − (+13a) + (−9a) =", answer: "−22a" },
-            { task: "15a + [13a − (20a + 9a)] =", answer: "−a" }
-          ],
-          applications: [
-            { task: "Ein Kontostand beginnt bei 0. Es gibt Einnahmen von +450, Ausgaben von −180 und −95 sowie eine Einnahme von +60. Wie hoch ist der Kontostand als algebraische Summe?", answer: "450−180−95+60 = 235" }
-          ],
-          exam: [
-            { q: "Was versteht man unter einer algebraischen Summe?", options: ["Nur positive Zahlen", "Eine Vereinigung positiver und negativer Glieder", "Nur Multiplikationen", "Eine Bruchrechnung"], correct: 1 },
-            { q: "15a + [13a − (20a + 9a)] = ?", options: ["-a", "37a", "17a", "-17a"], correct: 0 },
-            { q: "Bei mehrfachen Klammern löst man zuerst auf:", options: ["Die äusseren [ ]", "Die inneren ( )", "Beide gleichzeitig", "Egal welche zuerst"], correct: 1 }
-          ] },
-        { chapter: "III.5–6", title: "Multiplikation & binomische Formeln",
-          explain: "Zwei ganze Zahlen mit gleichem Vorzeichen ergeben ein positives, mit verschiedenem Vorzeichen ein negatives Produkt. Für häufig wiederkehrende Klammerprodukte gibt es die binomischen Formeln – sie lohnen sich auswendig, weil sie im Metallbau bei Flächen- und Kraftberechnungen ständig vorkommen.",
-          examples: [
-            { problem: "(a + b)²", solution: "= a² + 2ab + b²" },
-            { problem: "(a − b)(a + b)", solution: "= a² − b²  (Differenz der Quadrate)" }
-          ],
-          exercises: [
+            { task: "15a + [13a − (20a + 9a)] =", answer: "−a" },
             { task: "(a + 2)² =", answer: "a² + 4a + 4" },
             { task: "(5c − 6)² =", answer: "25c² − 60c + 36" },
             { task: "48 · 32 = , löse mit dem Kunstgriff (40+8)(40−8)", answer: "40² − 8² = 1600 − 64 = 1536" },
-            { task: "x² − y² als Produkt schreiben", answer: "= (x + y)(x − y)" }
-          ],
-          applications: [
-            { task: "Ein Blech mit Seitenlänge (a+3) cm soll quadratisch zugeschnitten werden. Wie gross ist die Fläche als ausmultiplizierter Ausdruck?", answer: "(a+3)² = a² + 6a + 9" }
-          ],
-          exam: [
-            { q: "(a+b)² = ?", options: ["a²+b²", "a²+2ab+b²", "a²-2ab+b²", "2a+2b"], correct: 1 },
-            { q: "(a−b)(a+b) = ?", options: ["a²-b²", "a²+b²", "a²-2ab-b²", "2ab"], correct: 0 },
-            { q: "48 · 32 lässt sich elegant lösen als:", options: ["(40+8)(40-8)", "(50-2)(30+2)", "48+32", "48²-32²"], correct: 0 }
-          ] },
-        { chapter: "III.7", title: "Division algebraischer Ausdrücke",
-          explain: "Zwei ganze Zahlen mit gleichem Vorzeichen ergeben einen positiven, mit verschiedenem Vorzeichen einen negativen Quotienten. Ein Klammerausdruck wird durch eine Zahl dividiert, indem jedes Glied einzeln dividiert wird. Lässt sich der Dividend faktorisieren (z.B. als binomische Formel), kann oft direkt gekürzt werden.",
-          examples: [
-            { problem: "(24a − 16b) : 8", solution: "= 3a − 2b   Probe: 8 · (3a − 2b) = 24a − 16b" }
-          ],
-          exercises: [
+            { task: "x² − y² als Produkt schreiben", answer: "= (x + y)(x − y)" },
             { task: "6ab : (−2a) =", answer: "−3b" },
             { task: "a³ : a² =", answer: "a" },
             { task: "(a² − b²) : (a + b) =", answer: "a² − b² = (a+b)(a−b) → gekürzt bleibt: a − b" }
           ],
           applications: [
+            { task: "Die Temperatur in der Werkstatt beträgt morgens −3°C. Bis Mittag steigt sie um 11°C. Welche Temperatur herrscht dann?", answer: "−3 + 11 = 8°C" },
+            { task: "Ein Kontostand beginnt bei 0. Es gibt Einnahmen von +450, Ausgaben von −180 und −95 sowie eine Einnahme von +60. Wie hoch ist der Kontostand als algebraische Summe?", answer: "450−180−95+60 = 235" },
+            { task: "Ein Blech mit Seitenlänge (a+3) cm soll quadratisch zugeschnitten werden. Wie gross ist die Fläche als ausmultiplizierter Ausdruck?", answer: "(a+3)² = a² + 6a + 9" },
             { task: "Ein Gesamtgewicht von (24a−16b) kg soll auf 8 gleiche Kisten verteilt werden. Wie viel kg enthält jede Kiste?", answer: "(24a−16b) : 8 = 3a − 2b kg" }
           ],
           exam: [
+            { q: "(+2) + (−6) = ?", options: ["+8", "-4", "+4", "-8"], correct: 1 },
+            { q: "Wie addiert man zwei ganze Zahlen mit ungleichem Vorzeichen?", options: ["Beträge addieren, kleineres Vorzeichen nehmen", "Kleineren Betrag vom grösseren abziehen, Vorzeichen des grösseren übernehmen", "Beide Beträge multiplizieren", "Ist nicht möglich"], correct: 1 },
+            { q: "(−7) − (−10) = ?", options: ["-17", "+3", "-3", "+17"], correct: 1 },
+            { q: "Was versteht man unter einer algebraischen Summe?", options: ["Nur positive Zahlen", "Eine Vereinigung positiver und negativer Glieder", "Nur Multiplikationen", "Eine Bruchrechnung"], correct: 1 },
+            { q: "15a + [13a − (20a + 9a)] = ?", options: ["-a", "37a", "17a", "-17a"], correct: 0 },
+            { q: "Bei mehrfachen Klammern löst man zuerst auf:", options: ["Die äusseren [ ]", "Die inneren ( )", "Beide gleichzeitig", "Egal welche zuerst"], correct: 1 },
+            { q: "(a+b)² = ?", options: ["a²+b²", "a²+2ab+b²", "a²-2ab+b²", "2a+2b"], correct: 1 },
+            { q: "(a−b)(a+b) = ?", options: ["a²-b²", "a²+b²", "a²-2ab-b²", "2ab"], correct: 0 },
+            { q: "48 · 32 lässt sich elegant lösen als:", options: ["(40+8)(40-8)", "(50-2)(30+2)", "48+32", "48²-32²"], correct: 0 },
             { q: "(a²−b²) : (a+b) = ?", options: ["a-b", "a+b", "a²-b", "ab"], correct: 0 },
             { q: "Zwei Zahlen mit verschiedenem Vorzeichen ergeben bei der Division:", options: ["immer positiv", "immer negativ", "0", "unmöglich"], correct: 1 },
             { q: "a³ : a² = ?", options: ["a", "a⁵", "a⁶", "1"], correct: 0 }
-          ] },
-        { chapter: "IV", title: "Gemeinsame Teiler & gemeinsames Vielfaches",
+          ]
+        },
+        {
+          chapter: "3.3", title: "Gemeinsame Teiler, Vielfache, Ausklammern",
           explain: "Primzahlen sind nur durch 1 und sich selbst teilbar. Der grösste gemeinsame Teiler (ggT) zweier Zahlen ist die grösste Zahl, durch die beide ohne Rest teilbar sind – man zerlegt beide in Primfaktoren und nimmt die gemeinsamen Faktoren in kleinster Anzahl. Das kleinste gemeinsame Vielfache (kgV) bildet man analog, aber mit den Faktoren in grösster vorkommender Anzahl.",
           examples: [
             { problem: "ggT von 8a²b und 12a²b²c", solution: "8a²b = 2·2·2·a·a·b ; 12a²b²c = 2·2·3·a·a·b·b·c → gemeinsam: 2·2·a·a·b = 4a²b" },
@@ -242,105 +245,81 @@ window.CURRICULUM = [
             { q: "Der ggT von 125 und 75 ist:", options: ["15", "25", "5", "50"], correct: 1 },
             { q: "Das kgV von 12, 18 und 24 ist:", options: ["36", "48", "72", "144"], correct: 2 },
             { q: "Primzahlen sind teilbar durch:", options: ["Jede Zahl", "Nur 1 und sich selbst", "Nur gerade Zahlen", "Nur 2 und 3"], correct: 1 }
-          ] },
-        { chapter: "V.1–3", title: "Brüche: Arten, Erweitern & Kürzen",
-          explain: "Bei echten Brüchen ist der Zähler kleiner als der Nenner, bei unechten grösser. Erweitern heisst: Zähler und Nenner mit derselben Zahl multiplizieren – der Wert bleibt gleich. Kürzen heisst: beide durch dieselbe Zahl dividieren. Ein Bruch ist positiv, wenn Zähler und Nenner gleiches Vorzeichen haben, sonst negativ; der Nenner wird immer positiv geschrieben.",
+          ]
+        },
+        {
+          chapter: "3.4", title: "Rechnen mit Brüchen (rationale Zahlen)",
+          explain: "Bei echten Brüchen ist der Zähler kleiner als der Nenner, bei unechten grösser. Erweitern heisst: Zähler und Nenner mit derselben Zahl multiplizieren – der Wert bleibt gleich. Kürzen heisst: beide durch dieselbe Zahl dividieren. Ein Bruch ist positiv, wenn Zähler und Nenner gleiches Vorzeichen haben, sonst negativ; der Nenner wird immer positiv geschrieben.\n\nGleichnamige Brüche werden addiert/subtrahiert, indem man die Zähler addiert/subtrahiert und den Nenner beibehält; ungleichnamige werden zuerst gleichnamig gemacht (Hauptnenner). Brüche werden multipliziert, indem Zähler mit Zähler und Nenner mit Nenner multipliziert werden. Durch einen Bruch dividiert man, indem man mit dem umgekehrten (reziproken) Bruch multipliziert.",
           examples: [
             { problem: "1/2 mit 3 erweitern", solution: "= 3/6" },
-            { problem: "8/12 kürzen", solution: "durch 4: = 2/3" }
-          ],
-          exercises: [
-            { task: "Kürze: 8/24", answer: "1/3" },
-            { task: "Kürze: 24/(−80)", answer: "−3/10" },
-            { task: "Erweitere 2/5 auf den Nenner 20", answer: "8/20" }
-          ],
-          applications: [
-            { task: "Von einer Materialrolle mit 24 m Länge werden 8/24 verbraucht. Wie viel Meter wurden verbraucht, wenn du den Bruch zuerst kürzt?", answer: "8/24 = 1/3 → 1/3 von 24 m = 8 m" }
-          ],
-          exam: [
-            { q: "Bei einem echten Bruch ist der Zähler:", options: ["grösser als der Nenner", "kleiner als der Nenner", "gleich dem Nenner", "immer 1"], correct: 1 },
-            { q: "24/(−80) gekürzt ergibt:", options: ["3/10", "-3/10", "-4/15", "3/8"], correct: 1 },
-            { q: "Erweitern bedeutet:", options: ["Zähler und Nenner durch dieselbe Zahl dividieren", "Zähler und Nenner mit derselben Zahl multiplizieren", "Nur den Zähler verändern", "Den Bruch umdrehen"], correct: 1 }
-          ] },
-        { chapter: "V.4–6", title: "Brüche: Addition, Multiplikation & Division",
-          explain: "Gleichnamige Brüche werden addiert/subtrahiert, indem man die Zähler addiert/subtrahiert und den Nenner beibehält; ungleichnamige werden zuerst gleichnamig gemacht (Hauptnenner). Brüche werden multipliziert, indem Zähler mit Zähler und Nenner mit Nenner multipliziert werden. Durch einen Bruch dividiert man, indem man mit dem umgekehrten (reziproken) Bruch multipliziert.",
-          examples: [
+            { problem: "8/12 kürzen", solution: "durch 4: = 2/3" },
             { problem: "5/x + 3/y", solution: "= (5y + 3x) / xy" },
             { problem: "3/4 : 7/10", solution: "= 3/4 · 10/7 = 30/28 = 15/14" }
           ],
           exercises: [
+            { task: "Kürze: 8/24", answer: "1/3" },
+            { task: "Kürze: 24/(−80)", answer: "−3/10" },
+            { task: "Erweitere 2/5 auf den Nenner 20", answer: "8/20" },
             { task: "1/2 + 1/3 + 1/4 =", answer: "13/12 (= 1 1/12)" },
             { task: "3/15 · 4/25 · 5/24 =", answer: "1/150" },
             { task: "252/121 : 12 =", answer: "21/121" },
             { task: "15a² : (2/a) =", answer: "15a³/2" }
           ],
           applications: [
+            { task: "Von einer Materialrolle mit 24 m Länge werden 8/24 verbraucht. Wie viel Meter wurden verbraucht, wenn du den Bruch zuerst kürzt?", answer: "8/24 = 1/3 → 1/3 von 24 m = 8 m" },
             { task: "Drei Teilbestellungen benötigen je 1/2, 1/3 und 1/4 einer Materialrolle. Wie viele ganze Rollen müssen mindestens bestellt werden?", answer: "1/2+1/3+1/4 = 13/12 = 1 1/12 Rollen → 2 Rollen bestellen" }
           ],
           exam: [
+            { q: "Bei einem echten Bruch ist der Zähler:", options: ["grösser als der Nenner", "kleiner als der Nenner", "gleich dem Nenner", "immer 1"], correct: 1 },
+            { q: "24/(−80) gekürzt ergibt:", options: ["3/10", "-3/10", "-4/15", "3/8"], correct: 1 },
+            { q: "Erweitern bedeutet:", options: ["Zähler und Nenner durch dieselbe Zahl dividieren", "Zähler und Nenner mit derselben Zahl multiplizieren", "Nur den Zähler verändern", "Den Bruch umdrehen"], correct: 1 },
             { q: "Brüche werden multipliziert, indem man:", options: ["Zähler und Nenner addiert", "Zähler mit Zähler, Nenner mit Nenner multipliziert", "Nur die Zähler multipliziert", "Über Kreuz addiert"], correct: 1 },
             { q: "Eine Division durch einen Bruch macht man durch:", options: ["Multiplikation mit dem gleichen Bruch", "Multiplikation mit dem reziproken (umgekehrten) Bruch", "Addition des Kehrwerts", "Division der Nenner"], correct: 1 },
             { q: "1/2 + 1/3 + 1/4 = ?", options: ["3/9", "13/12", "1/9", "6/12"], correct: 1 }
-          ] },
-        { chapter: "VI.1–2", title: "Gleichungen 1. Grades: Grundlagen & Umformung",
-          explain: "Eine Gleichung verbindet zwei Ausdrücke mit dem Gleichheitszeichen. Sie darf umgeformt werden, ohne die Gleichheit zu stören: 1) auf beiden Seiten darf dieselbe Zahl addiert oder subtrahiert werden, 2) beide Seiten dürfen mit derselben Zahl (≠0) multipliziert oder dividiert werden. Ziel ist, die Unbekannte allein auf einer Seite zu isolieren – zum Schluss immer die Probe machen.",
+          ]
+        },
+        {
+          chapter: "3.5", title: "Gleichungen 1. Grades, eine Unbekannte",
+          explain: "Eine Gleichung verbindet zwei Ausdrücke mit dem Gleichheitszeichen. Sie darf umgeformt werden, ohne die Gleichheit zu stören: 1) auf beiden Seiten darf dieselbe Zahl addiert oder subtrahiert werden, 2) beide Seiten dürfen mit derselben Zahl (≠0) multipliziert oder dividiert werden. Ziel ist, die Unbekannte allein auf einer Seite zu isolieren – zum Schluss immer die Probe machen.\n\nBei zusammengesetzten Gleichungen wird zuerst jede Klammer aufgelöst, dann werden gleichartige Glieder auf jeder Seite zusammengefasst, bevor die Unbekannte isoliert wird. Bei Bruchgleichungen bringt man zuerst alle Glieder auf den gemeinsamen Nenner (Hauptnenner) und multipliziert die ganze Gleichung damit – danach ist sie bruchfrei und wird wie gewohnt gelöst.\n\nNeben der Unbekannten (meist x) kommen weitere Buchstaben als bekannte Grössen vor. Es gelten dieselben Umformungsregeln wie bei Zahlengleichungen; das Ergebnis ist ein Term in den übrigen Buchstaben statt einer einzelnen Zahl.",
           examples: [
             { problem: "x + 7 = 10", solution: "x = 10 − 7 = 3   Probe: 3 + 7 = 10" },
-            { problem: "5x − 8 = 12", solution: "5x = 20 → x = 4   Probe: 5·4−8=12" }
+            { problem: "5x − 8 = 12", solution: "5x = 20 → x = 4   Probe: 5·4−8=12" },
+            { problem: "(x − 3)(x + 5) = x² + 25", solution: "x²+2x−15 = x²+25 → das x² fällt weg → 2x = 40 → x = 20" },
+            { problem: "x/5 + x/3 + 2 = 10", solution: "3x/15 + 5x/15 = 8 → 8x/15 = 8 → 8x = 120 → x = 15" },
+            { problem: "x + a = b", solution: "x = b − a" },
+            { problem: "ax − b = cx + d", solution: "ax − cx = b + d → x(a−c) = b+d → x = (b+d)/(a−c)" }
           ],
           exercises: [
             { task: "x + 5 = 14", answer: "x = 9" },
             { task: "15g = 75", answer: "g = 5" },
             { task: "4a + a = 20", answer: "a = 4" },
-            { task: "(5x + 1) + (2x + 3) = 18", answer: "7x + 4 = 18 → 7x = 14 → x = 2" }
-          ],
-          applications: [
-            { task: "Ein Materialrest von x kg plus 5,5 kg neu gelieferter Ware ergibt total 20 kg auf Lager. Wie viel kg Rest waren vorhanden?", answer: "x + 5,5 = 20 → x = 14,5 kg" }
-          ],
-          exam: [
-            { q: "Welche Umformung ist bei Gleichungen erlaubt?", options: ["Nur Addition", "Addition/Subtraktion und Multiplikation/Division derselben Zahl auf beiden Seiten", "Nur Multiplikation", "Beliebige einseitige Änderung"], correct: 1 },
-            { q: "x + 5 = 14 → x = ?", options: ["19", "9", "-9", "5"], correct: 1 },
-            { q: "15g = 75 → g = ?", options: ["5", "15", "60", "90"], correct: 0 }
-          ] },
-        { chapter: "VI.3–4", title: "Zusammengesetzte Gleichungen & Bruchgleichungen",
-          explain: "Bei zusammengesetzten Gleichungen wird zuerst jede Klammer aufgelöst, dann werden gleichartige Glieder auf jeder Seite zusammengefasst, bevor die Unbekannte isoliert wird. Bei Bruchgleichungen bringt man zuerst alle Glieder auf den gemeinsamen Nenner (Hauptnenner) und multipliziert die ganze Gleichung damit – danach ist sie bruchfrei und wird wie gewohnt gelöst.",
-          examples: [
-            { problem: "(x − 3)(x + 5) = x² + 25", solution: "x²+2x−15 = x²+25 → das x² fällt weg → 2x = 40 → x = 20" },
-            { problem: "x/5 + x/3 + 2 = 10", solution: "3x/15 + 5x/15 = 8 → 8x/15 = 8 → 8x = 120 → x = 15" }
-          ],
-          exercises: [
+            { task: "(5x + 1) + (2x + 3) = 18", answer: "7x + 4 = 18 → 7x = 14 → x = 2" },
             { task: "(a + 3)² + (a + 2)² = (a + 5)² + (a + 1)²", answer: "2a²+10a+13 = 2a²+12a+26 → −13 = 2a → a = −6,5" },
             { task: "x/3 + x/4 = 42", answer: "7x/12 = 42 → 7x = 504 → x = 72" },
-            { task: "1/g + 1/(2g) = 3", answer: "3/(2g) = 3 → 3 = 6g → g = 0,5" }
-          ],
-          applications: [
-            { task: "Zwei Materiallängen x/3 m und x/4 m ergeben zusammen 42 m Bedarf für ein Projekt. Wie lang ist x?", answer: "x/3 + x/4 = 42 → 7x/12 = 42 → x = 72 m" }
-          ],
-          exam: [
-            { q: "Bei Bruchgleichungen bringt man zuerst alle Glieder auf:", options: ["Null", "Den gemeinsamen Nenner (Hauptnenner)", "Eine Potenz", "Den kleinsten Zähler"], correct: 1 },
-            { q: "x/3 + x/4 = 42 → x = ?", options: ["12", "42", "72", "126"], correct: 2 },
-            { q: "(x−3)(x+5) = x² + 25 → x = ?", options: ["8", "15", "20", "25"], correct: 2 }
-          ] },
-        { chapter: "VI.5", title: "Buchstabengleichungen",
-          explain: "Neben der Unbekannten (meist x) kommen weitere Buchstaben als bekannte Grössen vor. Es gelten dieselben Umformungsregeln wie bei Zahlengleichungen; das Ergebnis ist ein Term in den übrigen Buchstaben statt einer einzelnen Zahl.",
-          examples: [
-            { problem: "x + a = b", solution: "x = b − a" },
-            { problem: "ax − b = cx + d", solution: "ax − cx = b + d → x(a−c) = b+d → x = (b+d)/(a−c)" }
-          ],
-          exercises: [
+            { task: "1/g + 1/(2g) = 3", answer: "3/(2g) = 3 → 3 = 6g → g = 0,5" },
             { task: "x + r = s", answer: "x = s − r" },
             { task: "ax + bx = c", answer: "x(a+b) = c → x = c/(a+b)" },
             { task: "x/a = 1", answer: "x = a" }
           ],
           applications: [
+            { task: "Ein Materialrest von x kg plus 5,5 kg neu gelieferter Ware ergibt total 20 kg auf Lager. Wie viel kg Rest waren vorhanden?", answer: "x + 5,5 = 20 → x = 14,5 kg" },
+            { task: "Zwei Materiallängen x/3 m und x/4 m ergeben zusammen 42 m Bedarf für ein Projekt. Wie lang ist x?", answer: "x/3 + x/4 = 42 → 7x/12 = 42 → x = 72 m" },
             { task: "Die Formel für die Fläche eines Rechtecks lautet A = a · b. Löse nach b auf, um bei bekannter Fläche A und Länge a die Breite zu berechnen.", answer: "b = A / a" }
           ],
           exam: [
+            { q: "Welche Umformung ist bei Gleichungen erlaubt?", options: ["Nur Addition", "Addition/Subtraktion und Multiplikation/Division derselben Zahl auf beiden Seiten", "Nur Multiplikation", "Beliebige einseitige Änderung"], correct: 1 },
+            { q: "x + 5 = 14 → x = ?", options: ["19", "9", "-9", "5"], correct: 1 },
+            { q: "15g = 75 → g = ?", options: ["5", "15", "60", "90"], correct: 0 },
+            { q: "Bei Bruchgleichungen bringt man zuerst alle Glieder auf:", options: ["Null", "Den gemeinsamen Nenner (Hauptnenner)", "Eine Potenz", "Den kleinsten Zähler"], correct: 1 },
+            { q: "x/3 + x/4 = 42 → x = ?", options: ["12", "42", "72", "126"], correct: 2 },
+            { q: "(x−3)(x+5) = x² + 25 → x = ?", options: ["8", "15", "20", "25"], correct: 2 },
             { q: "x + a = b, aufgelöst nach x:", options: ["x=a-b", "x=b-a", "x=a+b", "x=b/a"], correct: 1 },
             { q: "ax + bx = c, aufgelöst nach x:", options: ["x=c-a-b", "x=c/(a+b)", "x=c·(a+b)", "x=(a+b)/c"], correct: 1 },
             { q: "x/a = 1, aufgelöst nach x:", options: ["x=1", "x=a", "x=1/a", "x=0"], correct: 1 }
-          ] },
-        { chapter: "VII", title: "Angewandte Aufgaben (Textaufgaben)",
+          ]
+        },
+        {
+          chapter: "3.6", title: "Angewandte Aufgaben (Textaufgaben)",
           explain: "Vorgehen in 4 Schritten: 1) Wahl der Unbekannten – welche gesuchte Grösse wird x genannt? 2) Aufstellung der Gleichung aus dem Text. 3) Auflösung der Gleichung. 4) Probe – erfüllt das Ergebnis die Bedingungen der Aufgabe?",
           examples: [
             { problem: "Ich denke mir eine Zahl, zähle 6 dazu und verdopple die Summe. Das ergibt gleich viel, wie wenn ich vom Dreifachen der Zahl 10 subtrahiere. Wie heisst die Zahl?", solution: "Gleichung: (x+6)·2 = 3x−10 → 2x+12 = 3x−10 → x = 22   Probe: (22+6)·2=56 ; 3·22−10=56" }
@@ -357,8 +336,10 @@ window.CURRICULUM = [
             { q: "Die 4 Schritte einer Textaufgabe sind (in Reihenfolge):", options: ["Probe, Gleichung, Lösung, Unbekannte", "Wahl der Unbekannten, Gleichung aufstellen, Auflösen, Probe", "Auflösen, Probe, Gleichung, Unbekannte", "Nur Gleichung und Lösung"], correct: 1 },
             { q: "Das Dreifache und Fünffache einer Zahl ergeben zusammen 56. Die Zahl ist:", options: ["6", "7", "8", "9"], correct: 1 },
             { q: "Wofür dient die Probe am Schluss?", options: ["Um die Aufgabe zu verlängern", "Um zu prüfen, ob das Ergebnis die Bedingungen erfüllt", "Sie ist optional und nutzlos", "Um eine neue Gleichung zu bilden"], correct: 1 }
-          ] },
-        { chapter: "VIII", title: "Die Proportion",
+          ]
+        },
+        {
+          chapter: "3.7", title: "Verhältnis und Proportion",
           explain: "Zwei Grössen gleicher Art werden im Verhältnis a:b verglichen. Sind zwei Verhältnisse gleich (a:b = c:d), spricht man von einer Proportion. Es gilt die Produktengleichung: das Produkt der äusseren Glieder ist gleich dem Produkt der inneren Glieder (a·d = b·c). Damit lässt sich in einer Proportion die vierte, unbekannte Grösse (die vierte Proportionale) berechnen.",
           examples: [
             { problem: "Prüfe: 5:8 = 15:24", solution: "Produktengleichung: 5·24 = 8·15 → 120 = 120 ✓ Proportion stimmt" }
@@ -375,8 +356,10 @@ window.CURRICULUM = [
             { q: "In einer Proportion a:b=c:d gilt:", options: ["a+d=b+c", "a·d=b·c", "a·b=c·d", "a-c=b-d"], correct: 1 },
             { q: "5:8 = 10:x → x = ?", options: ["12", "16", "20", "6.4"], correct: 1 },
             { q: "Ein Verhältnis von Fr. 5400.– zu Fr. 1200.– gekürzt ergibt:", options: ["4:1", "9:2", "5:1", "3:1"], correct: 1 }
-          ] },
-        { chapter: "IX", title: "Gleichungen mit zwei und drei Unbekannten",
+          ]
+        },
+        {
+          chapter: "3.8", title: "Gleichungen mit zwei/drei Unbekannten",
           explain: "Bei zwei Gleichungen mit zwei Unbekannten gibt es drei Lösungswege: Einsetzungsmethode (eine Gleichung nach einer Unbekannten auflösen und einsetzen), Additions-/Subtraktionsmethode (Gleichungen so multiplizieren, dass eine Unbekannte beim Addieren/Subtrahieren wegfällt) und Gleichungsmethode (beide nach derselben Unbekannten auflösen und gleichsetzen). Bei drei Unbekannten eliminiert man zuerst eine, bis zwei Gleichungen mit zwei Unbekannten übrig bleiben.",
           examples: [
             { problem: "3x + 4y = 64 ; 2x − y = 6  (Einsetzungsmethode)", solution: "aus 2): y = 2x−6, eingesetzt in 1): 3x+4(2x−6)=64 → 11x=88 → x=8, y=10" },
@@ -393,7 +376,8 @@ window.CURRICULUM = [
             { q: "Bei der Einsetzungsmethode geht man vor, indem man:", options: ["Beide Gleichungen addiert", "Eine Gleichung nach einer Unbekannten auflöst und einsetzt", "Beide Gleichungen subtrahiert", "Nur eine Gleichung verwendet"], correct: 1 },
             { q: "x+y=17, x−y=9 → x=?, y=?", options: ["x=13,y=4", "x=4,y=13", "x=8,y=9", "x=17,y=9"], correct: 0 },
             { q: "Bei drei Unbekannten eliminiert man zuerst:", options: ["Alle drei gleichzeitig", "Eine, bis zwei Gleichungen mit zwei Unbekannten bleiben", "Keine, man rät die Lösung", "Nur die grösste Zahl"], correct: 1 }
-          ] }
+          ]
+        }
       ] },
     { id: "s1-04", name: "Physikalische Grundlagen", lekt: 22, tb: "TB3",
       explain: "Physikalische Grössen als Zahlenwert × Einheit: Kraft, Masse, Dichte, Arbeit, Leistung, elektrische Grundgrössen. Basis für reale Berechnungen wie Stahlgewicht, Hebelkräfte oder Widerstände in Anlagen.",

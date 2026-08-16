@@ -354,9 +354,44 @@ details.toolbox[open] summary .arrow{ transform:rotate(90deg); display:inline-bl
 .exercise-task{ font-size:13px; color:var(--ink); margin-bottom:8px; }
 .exercise-num{ font-family:var(--font-mono); color:var(--structural); font-weight:700; }
 .exercise-toggle{ font-size:12px; padding:5px 10px; }
-.exercise-solution{ margin-top:8px; padding:8px 10px; background:var(--success-soft); border-left:3px solid var(--success); border-radius:0 6px 6px 0; font-size:13px; color:var(--ink); font-family:var(--font-mono); }
+.exercise-solution{ margin-top:8px; padding:8px 10px; background:var(--success-soft); border-left:3px solid var(--success); border-radius:0 6px 6px 0; font-size:13px; color:var(--ink); font-family:var(--font-mono); white-space:pre-wrap; line-height:1.6; }
 .app-item{ border-color:var(--accent); }
 .app-num{ color:var(--accent); }
+.exercise-group{
+  font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--structural); margin:14px 0 2px; padding-top:10px; border-top:1px dashed var(--line);
+}
+.exercise-group:first-child{ margin-top:0; padding-top:0; border-top:none; }
+
+/* ---------- Structured theory blocks ---------- */
+.theory-h{ font-family:var(--font-display); font-weight:700; font-size:15px; color:var(--structural); margin:20px 0 8px; }
+.theory-h:first-child{ margin-top:0; }
+.theory-list{ margin:0 0 12px; padding-left:20px; font-size:13.5px; color:var(--ink); line-height:1.6; }
+.theory-list li{ margin-bottom:4px; }
+.theory-table-wrap{ overflow-x:auto; margin:0 0 14px; border:1px solid var(--line); border-radius:8px; }
+table.theory-table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+table.theory-table th, table.theory-table td{ padding:7px 10px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+table.theory-table thead th{ font-family:var(--font-mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-faint); background:var(--surface-2); }
+table.theory-table tbody tr:last-child td{ border-bottom:none; }
+.method-box.method-warn{ background:var(--accent-soft); border-left-color:#b23a3a; }
+.method-box.method-warn .method-label{ color:#b23a3a; }
+
+/* ---------- Open/graded exam ---------- */
+.exam-part-title{ font-family:var(--font-display); font-weight:700; font-size:13.5px; color:var(--structural); margin:18px 0 8px; }
+.exam-part-title:first-of-type{ margin-top:0; }
+.point-badge{
+  display:inline-block; font-family:var(--font-mono); font-size:10px; font-weight:700;
+  background:var(--structural-soft); color:var(--structural); border:1px solid var(--structural);
+  border-radius:4px; padding:1px 6px; margin-right:6px; white-space:nowrap;
+}
+.score-entry{ margin-top:16px; padding:14px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; }
+.score-entry label{ font-size:13px; font-weight:600; display:block; margin-bottom:8px; }
+.score-entry-row{ display:flex; gap:8px; }
+.score-entry-row input{
+  width:90px; font-family:var(--font-mono); font-size:14px; padding:7px 9px;
+  border:1px solid var(--line-strong); border-radius:6px; background:var(--surface); color:var(--ink);
+}
+.score-entry-hint{ font-size:12px; color:var(--ink-faint); margin-top:8px; }
 
 .empty-pane{ font-size:13px; color:var(--ink-muted); background:var(--surface-2); border:1px dashed var(--line-strong); border-radius:8px; padding:16px; text-align:center; }
 

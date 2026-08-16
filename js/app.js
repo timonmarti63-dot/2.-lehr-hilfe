@@ -175,7 +175,7 @@
       if (t.subtopics && t.subtopics.length) {
         var n = 0;
         for (var i = 0; i < t.subtopics.length; i++) if (isSubDone(ts, i)) n++;
-        subLabel = '<span class="lekt-chip">' + n + '/' + t.subtopics.length + ' Kapitel</span>';
+        subLabel = '<span class="lekt-chip">' + n + '/' + t.subtopics.length + ' Unterthemen</span>';
       }
       row.className = "topic-row" + (done ? " done" : "");
       row.innerHTML =
@@ -236,6 +236,7 @@
   function exerciseListHtml(exercises) {
     var html = '<div class="exercise-list">';
     exercises.forEach(function (ex, i) {
+      if (ex.group) html += '<div class="exercise-group">' + escapeHtml(ex.group) + '</div>';
       html +=
         '<div class="exercise-item">' +
           '<div class="exercise-task"><span class="exercise-num">' + (i + 1) + '.</span> ' + escapeHtml(ex.task) + '</div>' +
@@ -258,9 +259,33 @@
     });
   }
 
+  // Structured theory content used by richly-authored Unterthemen: a flat
+  // list of typed blocks (heading / paragraph / bullet list / formula code
+  // / callout note / table), rendered in order.
+  function theorySectionHtml(sec) {
+    switch (sec.type) {
+      case "h": return '<div class="theory-h">' + escapeHtml(sec.text) + '</div>';
+      case "p": return '<p class="explain">' + escapeHtml(sec.text) + '</p>';
+      case "code": return '<div class="formula-box">' + escapeHtml(sec.text) + '</div>';
+      case "note": return '<div class="method-box' + (sec.tone === "warn" ? " method-warn" : "") + '"><span class="method-label">' + (sec.tone === "warn" ? "Achtung" : "Merksatz") + '</span><span class="method-text">' + escapeHtml(sec.text) + '</span></div>';
+      case "list":
+        return '<ul class="theory-list">' + sec.items.map(function (it) { return "<li>" + escapeHtml(it) + "</li>"; }).join("") + '</ul>';
+      case "table":
+        var thead = "<tr>" + sec.headers.map(function (h) { return "<th>" + escapeHtml(h) + "</th>"; }).join("") + "</tr>";
+        var tbody = sec.rows.map(function (row) { return "<tr>" + row.map(function (c) { return "<td>" + escapeHtml(c) + "</td>"; }).join("") + "</tr>"; }).join("");
+        return '<div class="theory-table-wrap"><table class="theory-table"><thead>' + thead + '</thead><tbody>' + tbody + '</tbody></table></div>';
+      default: return "";
+    }
+  }
+
   function renderTheorie(container, content) {
-    var html = '<p class="explain">' + escapeHtml(content.explain || "Für dieses Thema ist noch keine Theorie hinterlegt. Du kannst unten in den Notizen eigenen Unterrichtsstoff einfügen.") + '</p>';
-    if (content.formulas) html += '<div class="formula-box">' + escapeHtml(content.formulas) + '</div>';
+    var html = "";
+    if (content.theorySections && content.theorySections.length) {
+      html += content.theorySections.map(theorySectionHtml).join("");
+    } else {
+      html += '<p class="explain">' + escapeHtml(content.explain || "Für dieses Thema ist noch keine Theorie hinterlegt. Du kannst unten in den Notizen eigenen Unterrichtsstoff einfügen.") + '</p>';
+      if (content.formulas) html += '<div class="formula-box">' + escapeHtml(content.formulas) + '</div>';
+    }
     if (content.method) html += '<div class="method-box"><span class="method-label">Lernmethode</span><span class="method-text">' + escapeHtml(content.method) + '</span></div>';
     if (content.examples && content.examples.length) {
       html += '<div class="examples-head">Beispiele</div><div class="examples">';
@@ -386,71 +411,129 @@
     wireExerciseToggles(container);
   }
 
-  // Multiple-choice exam. Pass threshold = strict majority correct.
-  // onPass() is called once when the attempt passes; completion persists
+  // Two exam formats:
+  //  - `exam`: multiple-choice, auto-graded, pass = strict majority correct.
+  //  - `examOpen`: open/graded questions with point values (as authored in
+  //    the coursebook-style Prüfungen) — answers are shown for self-check
+  //    and the learner enters their own achieved score against a printed
+  //    pass threshold, since free-text answers can't be auto-graded.
+  // onPass() is called once an attempt passes; completion persists
   // regardless of later retakes.
   function renderPruefung(container, content, passed, onPass, manual) {
+    var hasAny = (content.exam && content.exam.length) || content.examOpen;
     if (passed) {
       container.innerHTML =
         '<div class="exam-banner exam-pass">Bestanden ✓ — dieser Teil ist abgeschlossen.</div>' +
-        (content.exam && content.exam.length ? '<button class="btn" type="button" data-exam-retry>Nochmals üben</button>' : '');
+        (hasAny ? '<button class="btn" type="button" data-exam-retry>Nochmals üben</button>' : '');
       var retryBtn = container.querySelector("[data-exam-retry]");
-      if (retryBtn) retryBtn.addEventListener("click", function () { renderExamForm(); });
+      if (retryBtn) retryBtn.addEventListener("click", renderForm);
       return;
     }
-    renderExamForm();
+    renderForm();
 
-    function renderExamForm() {
-      if (!content.exam || !content.exam.length) {
-        container.innerHTML =
-          '<div class="empty-pane">Für dieses Thema ist noch keine Prüfung hinterlegt.</div>' +
-          '<button class="btn" type="button" data-manual-complete>Als abgeschlossen markieren</button>';
-        var btn = container.querySelector("[data-manual-complete]");
-        if (btn) btn.addEventListener("click", function () { manual(true); onPass(); });
+    function renderForm() {
+      if (content.examOpen) { renderOpenExamForm(container, content.examOpen, onPass, manual); return; }
+      if (content.exam && content.exam.length) { renderMcExamForm(container, content.exam, onPass, manual); return; }
+      container.innerHTML =
+        '<div class="empty-pane">Für dieses Thema ist noch keine Prüfung hinterlegt.</div>' +
+        '<button class="btn" type="button" data-manual-complete>Als abgeschlossen markieren</button>';
+      var btn = container.querySelector("[data-manual-complete]");
+      if (btn) btn.addEventListener("click", function () { manual(true); onPass(); });
+    }
+  }
+
+  function renderMcExamForm(container, exam, onPass, manual) {
+    var html = '<div class="exam-intro">' + exam.length + ' Fragen · bestanden ab mehr als der Hälfte richtig.</div>';
+    exam.forEach(function (q, qi) {
+      html += '<div class="exam-question" data-exam-q="' + qi + '"><div class="exam-q-text">' + (qi + 1) + '. ' + escapeHtml(q.q) + '</div><div class="exam-options">';
+      q.options.forEach(function (opt, oi) {
+        html += '<label class="exam-option"><input type="radio" name="exq' + qi + '" value="' + oi + '"><span>' + escapeHtml(opt) + '</span></label>';
+      });
+      html += '</div></div>';
+    });
+    html += '<button class="btn" type="button" data-exam-submit>Prüfung auswerten</button><div class="exam-result" data-exam-result hidden></div>';
+    container.innerHTML = html;
+
+    container.querySelector("[data-exam-submit]").addEventListener("click", function () {
+      var total = exam.length;
+      var correct = 0;
+      var unanswered = false;
+      exam.forEach(function (q, qi) {
+        var qEl = container.querySelector('[data-exam-q="' + qi + '"]');
+        var picked = qEl.querySelector('input[name="exq' + qi + '"]:checked');
+        qEl.classList.remove("is-correct", "is-wrong");
+        if (!picked) { unanswered = true; return; }
+        if (parseInt(picked.value, 10) === q.correct) { correct++; qEl.classList.add("is-correct"); }
+        else { qEl.classList.add("is-wrong"); }
+      });
+      var resultEl = container.querySelector("[data-exam-result]");
+      resultEl.hidden = false;
+      if (unanswered) {
+        resultEl.className = "exam-result exam-result-warn";
+        resultEl.textContent = "Bitte beantworte alle Fragen, bevor du auswertest.";
         return;
       }
-      var html = '<div class="exam-intro">' + content.exam.length + ' Fragen · bestanden ab mehr als der Hälfte richtig.</div>';
-      content.exam.forEach(function (q, qi) {
-        html += '<div class="exam-question" data-exam-q="' + qi + '"><div class="exam-q-text">' + (qi + 1) + '. ' + escapeHtml(q.q) + '</div><div class="exam-options">';
-        q.options.forEach(function (opt, oi) {
-          html += '<label class="exam-option"><input type="radio" name="exq' + qi + '" value="' + oi + '"><span>' + escapeHtml(opt) + '</span></label>';
-        });
-        html += '</div></div>';
-      });
-      html += '<button class="btn" type="button" data-exam-submit>Prüfung auswerten</button><div class="exam-result" data-exam-result hidden></div>';
-      container.innerHTML = html;
+      var threshold = Math.floor(total / 2) + 1;
+      if (correct >= threshold) {
+        resultEl.className = "exam-result exam-result-pass";
+        resultEl.textContent = "Bestanden! " + correct + " / " + total + " richtig.";
+        manual(true);
+        onPass();
+      } else {
+        resultEl.className = "exam-result exam-result-fail";
+        resultEl.textContent = "Noch nicht bestanden — " + correct + " / " + total + " richtig (nötig: " + threshold + "). Richtige/falsche Antworten sind markiert, versuch es nochmal.";
+      }
+    });
+  }
 
-      container.querySelector("[data-exam-submit]").addEventListener("click", function () {
-        var total = content.exam.length;
-        var correct = 0;
-        var unanswered = false;
-        content.exam.forEach(function (q, qi) {
-          var qEl = container.querySelector('[data-exam-q="' + qi + '"]');
-          var picked = qEl.querySelector('input[name="exq' + qi + '"]:checked');
-          qEl.classList.remove("is-correct", "is-wrong");
-          if (!picked) { unanswered = true; return; }
-          if (parseInt(picked.value, 10) === q.correct) { correct++; qEl.classList.add("is-correct"); }
-          else { qEl.classList.add("is-wrong"); }
-        });
-        var resultEl = container.querySelector("[data-exam-result]");
-        resultEl.hidden = false;
-        if (unanswered) {
-          resultEl.className = "exam-result exam-result-warn";
-          resultEl.textContent = "Bitte beantworte alle Fragen, bevor du auswertest.";
-          return;
-        }
-        var threshold = Math.floor(total / 2) + 1;
-        if (correct >= threshold) {
-          resultEl.className = "exam-result exam-result-pass";
-          resultEl.textContent = "Bestanden! " + correct + " / " + total + " richtig.";
-          manual(true);
-          onPass();
-        } else {
-          resultEl.className = "exam-result exam-result-fail";
-          resultEl.textContent = "Noch nicht bestanden — " + correct + " / " + total + " richtig (nötig: " + threshold + "). Richtige/falsche Antworten sind markiert, versuch es nochmal.";
-        }
+  function renderOpenExamForm(container, examOpen, onPass, manual) {
+    var html = '<div class="exam-intro">' + examOpen.timeMin + ' Min · ' + examOpen.totalPoints + ' Punkte total · bestanden ab ' + examOpen.passPoints + ' Punkten (' + Math.round(examOpen.passPoints / examOpen.totalPoints * 100) + '%).</div>';
+    examOpen.parts.forEach(function (part, pi) {
+      html += '<div class="exam-part-title">' + escapeHtml(part.title) + '</div><div class="exercise-list">';
+      part.questions.forEach(function (q, qi) {
+        html +=
+          '<div class="exercise-item">' +
+            '<div class="exercise-task"><span class="point-badge">' + q.points + (q.points === 1 ? " Punkt" : " Punkte") + '</span> ' + escapeHtml(q.q) + '</div>' +
+            '<button class="btn exercise-toggle" type="button" data-ex-toggle>Lösung anzeigen</button>' +
+            '<div class="exercise-solution" data-ex-solution hidden>' + escapeHtml(q.answer) + '</div>' +
+          '</div>';
       });
-    }
+      html += '</div>';
+    });
+    html +=
+      '<div class="score-entry">' +
+        '<label for="examScoreInput">Deine erreichte Punktzahl (0–' + examOpen.totalPoints + ')</label>' +
+        '<div class="score-entry-row">' +
+          '<input type="number" id="examScoreInput" min="0" max="' + examOpen.totalPoints + '" step="1">' +
+          '<button class="btn" type="button" data-exam-submit>Auswerten</button>' +
+        '</div>' +
+        '<div class="score-entry-hint">Selbsteinschätzung anhand der Musterlösungen oben — vergib die Punkte ehrlich, so bringt dir die Prüfung am meisten.</div>' +
+      '</div>' +
+      '<div class="exam-result" data-exam-result hidden></div>';
+    container.innerHTML = html;
+    wireExerciseToggles(container);
+
+    container.querySelector("[data-exam-submit]").addEventListener("click", function () {
+      var input = container.querySelector("#examScoreInput");
+      var raw = input.value.trim();
+      var resultEl = container.querySelector("[data-exam-result]");
+      resultEl.hidden = false;
+      if (raw === "" || isNaN(raw)) {
+        resultEl.className = "exam-result exam-result-warn";
+        resultEl.textContent = "Bitte trage deine erreichte Punktzahl ein.";
+        return;
+      }
+      var score = Math.max(0, Math.min(examOpen.totalPoints, Math.round(Number(raw))));
+      if (score >= examOpen.passPoints) {
+        resultEl.className = "exam-result exam-result-pass";
+        resultEl.textContent = "Bestanden! " + score + " / " + examOpen.totalPoints + " Punkte.";
+        manual(true);
+        onPass();
+      } else {
+        resultEl.className = "exam-result exam-result-fail";
+        resultEl.textContent = "Noch nicht bestanden — " + score + " / " + examOpen.totalPoints + " Punkte (nötig: " + examOpen.passPoints + "). Sieh dir die Musterlösungen nochmal an und versuch es erneut.";
+      }
+    });
   }
 
   function renderNotes(container, value, onChange) {
@@ -505,13 +588,13 @@
   }
 
   function renderGovernedNotice(pane, opts, label) {
-    pane.innerHTML = '<div class="empty-pane">' + label + ' sind pro Kapitel organisiert. Wähle unten ein Kapitel aus, um dort Theorie, Karteikarten, Aufgaben, Anwendung und Prüfung zu sehen.</div>';
+    pane.innerHTML = '<div class="empty-pane">' + label + ' sind pro Unterthema organisiert. Wähle unten ein Unterthema aus, um dort Theorie, Karteikarten, Aufgaben, Anwendung und Prüfung zu sehen.</div>';
   }
 
   function renderChapterChecklist(pane, opts) {
     var t = opts.topic, ts = opts.ts;
     var done = 0;
-    var html = '<div class="exam-intro">Dieses Thema besteht aus ' + t.subtopics.length + ' Kapiteln. Bestehe die Prüfung jedes Kapitels, um „' + escapeHtml(t.name) + '“ komplett abzuschliessen.</div><div class="chapters">';
+    var html = '<div class="exam-intro">Dieses Thema besteht aus ' + t.subtopics.length + ' Unterthemen. Bestehe die Prüfung jedes Unterthemas, um „' + escapeHtml(t.name) + '“ komplett abzuschliessen.</div><div class="chapters">';
     t.subtopics.forEach(function (sub, i) {
       var d = isSubDone(ts, i);
       if (d) done++;
@@ -522,7 +605,7 @@
           '<span class="chapter-status">' + (d ? "Bestanden ✓" : "Offen") + '</span>' +
         '</div></div>';
     });
-    html += '</div><div class="chapter-summary">' + done + ' / ' + t.subtopics.length + ' Kapitel abgeschlossen</div>';
+    html += '</div><div class="chapter-summary">' + done + ' / ' + t.subtopics.length + ' Unterthemen abgeschlossen</div>';
     pane.innerHTML = html;
     Array.prototype.forEach.call(pane.querySelectorAll("[data-goto-chapter]"), function (row) {
       row.addEventListener("click", function () { navigate("#/topic/" + t.id + "/chapter/" + row.dataset.gotoChapter); });
@@ -558,7 +641,7 @@
       '</div>';
 
     if (hasSubtopics) {
-      html += '<div class="chapters-head">Kapitel-Unterseiten (' + t.subtopics.length + ')</div><div class="chapters" data-chapter-toc></div>';
+      html += '<div class="chapters-head">Unterthemen (' + t.subtopics.length + ')</div><div class="chapters" data-chapter-toc></div>';
     }
     html += '<div class="topic-body-inner" data-mode-root></div>';
     topicView.innerHTML = html;
@@ -618,7 +701,7 @@
           '<span class="status-pill' + (done ? " status-done" : "") + '">' + (done ? "Bestanden ✓" : "Offen") + '</span>' +
         '</div>' +
         '<h2 class="page-title">' + escapeHtml(sub.title) + '</h2>' +
-        '<div class="page-sub">Kapitel aus „' + escapeHtml(t.name) + '“</div>' +
+        '<div class="page-sub">Unterthema aus „' + escapeHtml(t.name) + '“</div>' +
       '</div>' +
       '<div class="topic-body-inner" data-mode-root></div>';
     topicView.innerHTML = html;
