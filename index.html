@@ -14,8 +14,8 @@
     <div class="titleblock-inner">
       <div>
         <div class="eyebrow">Zusatzlehre &middot; Metallbaukonstrukteur/in EFZ</div>
-        <h1>Konstrukteurspult</h1>
-        <div class="subtitle">Deine persönliche Lernplattform für alle 4 Semester. Themenbereiche einzeln anwählen, mit eigenem Stoff füttern und Fortschritt tracken – alles bleibt lokal in diesem Browser gespeichert.</div>
+        <h1><a href="#" id="homeLink">Konstrukteurspult</a></h1>
+        <div class="subtitle">Deine persönliche Lernplattform für alle 4 Semester. Jedes Thema hat eine eigene Seite mit Theorie, Karteikarten, Aufgaben, Anwendung und Prüfung – alles bleibt lokal in diesem Browser gespeichert.</div>
       </div>
       <div class="overall-gauge">
         <div class="overall-gauge-top">
@@ -30,52 +30,54 @@
 
   <div class="wrap">
 
-    <details class="toolbox" id="toolbox">
-      <summary>Lernmethoden-Werkzeugkasten <span class="arrow">&rsaquo;</span></summary>
-      <div class="toolbox-grid">
-        <div class="toolbox-item">
-          <h4>Karteikarten &amp; Active Recall</h4>
-          <p>Formeln, Vorschriften und Begriffe auf Karten schreiben; Antwort verdecken und aktiv abrufen statt nur nochmals lesen.</p>
+    <div id="boardView">
+      <details class="toolbox" id="toolbox">
+        <summary>Lernmethoden-Werkzeugkasten <span class="arrow">&rsaquo;</span></summary>
+        <div class="toolbox-grid">
+          <div class="toolbox-item">
+            <h4>Karteikarten &amp; Active Recall</h4>
+            <p>Formeln, Vorschriften und Begriffe auf Karten schreiben; Antwort verdecken und aktiv abrufen statt nur nochmals lesen.</p>
+          </div>
+          <div class="toolbox-item">
+            <h4>Spaced Repetition</h4>
+            <p>Schwierige Karten häufiger wiederholen (nach 1, 3, 7, 14 Tagen), gut sitzende Themen seltener – so bleibt Wissen langfristig hängen.</p>
+          </div>
+          <div class="toolbox-item">
+            <h4>Rechenschema-Methode</h4>
+            <p>Für Statik-, Bauphysik- und Algebra-Aufgaben immer denselben Ablauf einüben (z.&nbsp;B. Freikörperbild &rarr; Gleichgewicht &rarr; Auflösen &rarr; Probe), bis er automatisch sitzt.</p>
+          </div>
+          <div class="toolbox-item">
+            <h4>Skizzier-Drill</h4>
+            <p>Bauteile dreistufig üben: Vorlage abzeichnen &rarr; aus dem Gedächtnis skizzieren &rarr; mit korrekter Bemassung beschriften.</p>
+          </div>
+          <div class="toolbox-item">
+            <h4>Feynman-Technik</h4>
+            <p>Ein Thema so erklären, als würdest du es einem Lehrling im 1. Lehrjahr beibringen. Lücken in der eigenen Erklärung zeigen, was noch fehlt.</p>
+          </div>
+          <div class="toolbox-item">
+            <h4>Praxis-Transfer</h4>
+            <p>Zu jedem Thema ein reales Bauteil oder Beispiel aus dem eigenen Betrieb suchen – Theorie ohne Bezug bleibt abstrakt und wird schneller vergessen.</p>
+          </div>
         </div>
-        <div class="toolbox-item">
-          <h4>Spaced Repetition</h4>
-          <p>Schwierige Karten häufiger wiederholen (nach 1, 3, 7, 14 Tagen), gut sitzende Themen seltener – so bleibt Wissen langfristig hängen.</p>
-        </div>
-        <div class="toolbox-item">
-          <h4>Rechenschema-Methode</h4>
-          <p>Für Statik-, Bauphysik- und Algebra-Aufgaben immer denselben Ablauf einüben (z.&nbsp;B. Freikörperbild &rarr; Gleichgewicht &rarr; Auflösen &rarr; Probe), bis er automatisch sitzt.</p>
-        </div>
-        <div class="toolbox-item">
-          <h4>Skizzier-Drill</h4>
-          <p>Bauteile dreistufig üben: Vorlage abzeichnen &rarr; aus dem Gedächtnis skizzieren &rarr; mit korrekter Bemassung beschriften.</p>
-        </div>
-        <div class="toolbox-item">
-          <h4>Feynman-Technik</h4>
-          <p>Ein Thema so erklären, als würdest du es einem Lehrling im 1. Lehrjahr beibringen. Lücken in der eigenen Erklärung zeigen, was noch fehlt.</p>
-        </div>
-        <div class="toolbox-item">
-          <h4>Praxis-Transfer</h4>
-          <p>Zu jedem Thema ein reales Bauteil oder Beispiel aus dem eigenen Betrieb suchen – Theorie ohne Bezug bleibt abstrakt und wird schneller vergessen.</p>
-        </div>
-      </div>
-    </details>
+      </details>
 
-    <div class="controls">
-      <div class="search">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <input type="text" id="searchInput" placeholder="Thema suchen … z.B. Festigkeitslehre">
+      <div class="controls">
+        <div class="search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="text" id="searchInput" placeholder="Thema suchen … z.B. Festigkeitslehre">
+        </div>
+        <div class="chipbar" id="tbChips"></div>
+        <div class="btnrow">
+          <button class="btn danger" id="resetProgress">Fortschritt zurücksetzen</button>
+        </div>
       </div>
-      <div class="chipbar" id="tbChips"></div>
-      <div class="btnrow">
-        <button class="btn" id="expandAll">Alle aufklappen</button>
-        <button class="btn" id="collapseAll">Alle zuklappen</button>
-        <button class="btn danger" id="resetProgress">Fortschritt zurücksetzen</button>
-      </div>
+
+      <div class="semtabs" id="semTabs"></div>
+
+      <div class="board" id="board"></div>
     </div>
 
-    <div class="semtabs" id="semTabs"></div>
-
-    <div class="board" id="board"></div>
+    <div id="topicView" class="topic-page" hidden></div>
 
     <footer>Fortschritt &amp; Notizen werden ausschliesslich lokal im Browser gespeichert (localStorage) — kein Server, kein Sync.</footer>
   </div>

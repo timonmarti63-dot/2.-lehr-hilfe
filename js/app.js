@@ -2,88 +2,36 @@
   var TB_NAMES = window.TB_NAMES;
   var DATA = window.CURRICULUM;
 
-  var STORAGE_KEY = "metallbau-lernplattform-v1";
+  var STORAGE_KEY = "metallbau-lernplattform-v2";
   var state = {};
   try {
     state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
   } catch (e) {
     state = {};
   }
+  // migrate from the v1 flat-topic store if present, so nobody loses progress
+  if (!Object.keys(state).length) {
+    try {
+      var old = JSON.parse(localStorage.getItem("metallbau-lernplattform-v1"));
+      if (old) state = old;
+    } catch (e) { /* ignore */ }
+  }
 
   function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
   function getTopicState(id) {
-    if (!state[id]) state[id] = { done: false, notes: "" };
-    return state[id];
+    if (!state[id]) state[id] = { done: false, notes: "", flashKnown: {}, subDone: {}, subNotes: {} };
+    var ts = state[id];
+    if (!ts.flashKnown) ts.flashKnown = {};
+    if (!ts.subDone) ts.subDone = {};
+    if (!ts.subNotes) ts.subNotes = {};
+    return ts;
   }
-
-  var board = document.getElementById("board");
-  var semTabs = document.getElementById("semTabs");
-  var tbChips = document.getElementById("tbChips");
-  var activeTB = null;
-  var searchTerm = "";
-
-  // Build TB filter chips
-  var usedTB = [];
-  DATA.forEach(function (s) {
-    s.topics.forEach(function (t) {
-      if (usedTB.indexOf(t.tb) === -1) usedTB.push(t.tb);
-    });
-  });
-  usedTB.sort(function (a, b) {
-    return parseInt(a.replace("TB", ""), 10) - parseInt(b.replace("TB", ""), 10);
-  });
-  var allChip = document.createElement("span");
-  allChip.className = "chip active";
-  allChip.textContent = "Alle Bereiche";
-  allChip.onclick = function () {
-    activeTB = null;
-    renderFilters();
-    applyFilters();
-  };
-  tbChips.appendChild(allChip);
-  usedTB.forEach(function (tb) {
-    var c = document.createElement("span");
-    c.className = "chip";
-    c.textContent = tb + " · " + TB_NAMES[tb];
-    c.dataset.tb = tb;
-    c.onclick = function () {
-      activeTB = activeTB === tb ? null : tb;
-      renderFilters();
-      applyFilters();
-    };
-    tbChips.appendChild(c);
-  });
-  function renderFilters() {
-    allChip.className = "chip" + (activeTB === null ? " active" : "");
-    Array.prototype.forEach.call(tbChips.querySelectorAll(".chip[data-tb]"), function (c) {
-      c.className = "chip" + (c.dataset.tb === activeTB ? " active" : "");
-    });
-  }
-
-  // Build semester tabs (narrow layout)
-  var activeSem = 1;
-  DATA.forEach(function (s) {
-    var b = document.createElement("button");
-    b.textContent = "Sem. " + s.sem;
-    b.className = s.sem === activeSem ? "active" : "";
-    b.onclick = function () {
-      activeSem = s.sem;
-      Array.prototype.forEach.call(semTabs.children, function (btn, i) {
-        btn.className = i === s.sem - 1 ? "active" : "";
-      });
-      Array.prototype.forEach.call(board.children, function (col, i) {
-        col.className = "col" + (i === s.sem - 1 ? " active" : "");
-      });
-    };
-    semTabs.appendChild(b);
-  });
 
   function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
-
   function shuffle(arr) {
     var a = arr.slice();
     for (var i = a.length - 1; i > 0; i--) {
@@ -93,11 +41,243 @@
     return a;
   }
 
-  // Interactive flashcard deck for a topic: click-to-reveal, "weiss ich" /
-  // "nochmal" sorts cards out of / back into the current round, and known
-  // cards are remembered per topic in localStorage.
-  function buildFlashcards(container, t, ts) {
-    if (!ts.flashKnown) ts.flashKnown = {};
+  // ---------------------------------------------------------------------
+  // Completion model: a topic with subtopics ("Kapitel") is done once every
+  // subtopic is done; a subtopic (or a topic without subtopics) is done
+  // once its Prüfung is passed, or — if it has no Prüfung yet — once it is
+  // marked complete manually.
+  // ---------------------------------------------------------------------
+  function isSubDone(ts, idx) { return !!ts.subDone[idx]; }
+  function isTopicDone(t, ts) {
+    if (t.subtopics && t.subtopics.length) {
+      for (var i = 0; i < t.subtopics.length; i++) if (!isSubDone(ts, i)) return false;
+      return true;
+    }
+    return !!ts.done;
+  }
+  function setSubDone(t, ts, idx, val) {
+    ts.subDone[idx] = !!val;
+    ts.done = isTopicDone(t, ts);
+    saveState();
+  }
+  function setTopicDone(t, ts, val) {
+    ts.done = !!val;
+    saveState();
+  }
+
+  var byId = {};
+  DATA.forEach(function (s) { s.topics.forEach(function (t) { byId[t.id] = { t: t, sem: s }; }); });
+
+  // ---------------------------------------------------------------------
+  // Board (semester overview)
+  // ---------------------------------------------------------------------
+  var boardView = document.getElementById("boardView");
+  var topicView = document.getElementById("topicView");
+  var board = document.getElementById("board");
+  var semTabs = document.getElementById("semTabs");
+  var tbChips = document.getElementById("tbChips");
+  var activeTB = null;
+  var searchTerm = "";
+  var boardBuilt = false;
+
+  function buildBoardOnce() {
+    if (boardBuilt) return;
+    boardBuilt = true;
+
+    var usedTB = [];
+    DATA.forEach(function (s) { s.topics.forEach(function (t) { if (usedTB.indexOf(t.tb) === -1) usedTB.push(t.tb); }); });
+    usedTB.sort(function (a, b) { return parseInt(a.replace("TB", ""), 10) - parseInt(b.replace("TB", ""), 10); });
+    var allChip = document.createElement("span");
+    allChip.className = "chip active";
+    allChip.textContent = "Alle Bereiche";
+    allChip.onclick = function () { activeTB = null; renderFilters(); applyFilters(); };
+    tbChips.appendChild(allChip);
+    usedTB.forEach(function (tb) {
+      var c = document.createElement("span");
+      c.className = "chip";
+      c.textContent = tb + " · " + TB_NAMES[tb];
+      c.dataset.tb = tb;
+      c.onclick = function () { activeTB = activeTB === tb ? null : tb; renderFilters(); applyFilters(); };
+      tbChips.appendChild(c);
+    });
+    function renderFilters() {
+      allChip.className = "chip" + (activeTB === null ? " active" : "");
+      Array.prototype.forEach.call(tbChips.querySelectorAll(".chip[data-tb]"), function (c) {
+        c.className = "chip" + (c.dataset.tb === activeTB ? " active" : "");
+      });
+    }
+
+    var activeSem = 1;
+    DATA.forEach(function (s) {
+      var b = document.createElement("button");
+      b.textContent = "Sem. " + s.sem;
+      b.className = s.sem === activeSem ? "active" : "";
+      b.onclick = function () {
+        activeSem = s.sem;
+        Array.prototype.forEach.call(semTabs.children, function (btn, i) { btn.className = i === s.sem - 1 ? "active" : ""; });
+        Array.prototype.forEach.call(board.children, function (col, i) { col.className = "col" + (i === s.sem - 1 ? " active" : ""); });
+      };
+      semTabs.appendChild(b);
+    });
+
+    DATA.forEach(function (s, idx) {
+      var col = document.createElement("div");
+      col.className = "col" + (idx === 0 ? " active" : "");
+      col.dataset.sem = s.sem;
+
+      var totalLekt = s.topics.reduce(function (a, t) { return a + t.lekt; }, 0);
+      var head = document.createElement("div");
+      head.className = "col-head";
+      head.innerHTML =
+        '<div class="col-head-top"><span class="col-title">' + s.title + '</span><span class="col-lekt">' + totalLekt + ' Lekt.</span></div>' +
+        '<div class="bar tick"><div class="bar-fill" data-semfill></div></div>' +
+        '<div class="col-progress-num"><span data-semdone>0 Lekt. erledigt</span><span data-sempct>0%</span></div>';
+      col.appendChild(head);
+
+      var body = document.createElement("div");
+      body.className = "col-body";
+
+      s.topics.forEach(function (t) {
+        var row = document.createElement("button");
+        row.type = "button";
+        row.className = "topic-row";
+        row.dataset.id = t.id;
+        row.dataset.name = t.name.toLowerCase();
+        row.dataset.tb = t.tb;
+        row.addEventListener("click", function () { navigate("#/topic/" + t.id); });
+        body.appendChild(row);
+      });
+
+      col.appendChild(body);
+      board.appendChild(col);
+    });
+
+    document.getElementById("searchInput").addEventListener("input", function (e) {
+      searchTerm = e.target.value;
+      applyFilters();
+    });
+    document.getElementById("resetProgress").addEventListener("click", function () {
+      if (!confirm("Wirklich den gesamten Fortschritt und alle Notizen zurücksetzen? Dies kann nicht rückgängig gemacht werden.")) return;
+      state = {};
+      saveState();
+      renderBoardRows();
+      updateProgress();
+    });
+  }
+
+  function renderBoardRows() {
+    Array.prototype.forEach.call(board.querySelectorAll(".topic-row"), function (row) {
+      var info = byId[row.dataset.id];
+      var t = info.t;
+      var ts = getTopicState(t.id);
+      var done = isTopicDone(t, ts);
+      var subLabel = "";
+      if (t.subtopics && t.subtopics.length) {
+        var n = 0;
+        for (var i = 0; i < t.subtopics.length; i++) if (isSubDone(ts, i)) n++;
+        subLabel = '<span class="lekt-chip">' + n + '/' + t.subtopics.length + ' Kapitel</span>';
+      }
+      row.className = "topic-row" + (done ? " done" : "");
+      row.innerHTML =
+        '<span class="row-status" aria-hidden="true">' + (done ? "&#10003;" : "") + '</span>' +
+        '<span class="topic-titles">' +
+          '<span class="topic-name">' + escapeHtml(t.name) + '</span>' +
+          '<span class="topic-meta"><span class="tb-chip">' + t.tb + '</span><span class="lekt-chip">' + t.lekt + ' Lekt.</span>' + subLabel + '</span>' +
+        '</span>' +
+        '<span class="chev">&rsaquo;</span>';
+    });
+    applyFilters();
+  }
+
+  function applyFilters() {
+    var term = searchTerm.trim().toLowerCase();
+    Array.prototype.forEach.call(board.querySelectorAll(".topic-row"), function (row) {
+      var matchesTB = !activeTB || row.dataset.tb === activeTB;
+      var matchesTerm = !term || row.dataset.name.indexOf(term) !== -1;
+      row.classList.toggle("hidden", !(matchesTB && matchesTerm));
+    });
+  }
+
+  function updateProgress() {
+    var grandTotal = 0, grandDone = 0;
+    Array.prototype.forEach.call(board.children, function (col) {
+      var semIdx = parseInt(col.dataset.sem, 10) - 1;
+      var s = DATA[semIdx];
+      var total = 0, done = 0;
+      s.topics.forEach(function (t) {
+        total += t.lekt;
+        if (isTopicDone(t, getTopicState(t.id))) done += t.lekt;
+      });
+      grandTotal += total; grandDone += done;
+      var pct = total ? Math.round((done / total) * 100) : 0;
+      col.querySelector("[data-semfill]").style.width = pct + "%";
+      col.querySelector("[data-semdone]").textContent = done + " / " + total + " Lekt. erledigt";
+      col.querySelector("[data-sempct]").textContent = pct + "%";
+    });
+    var overallPct = grandTotal ? Math.round((grandDone / grandTotal) * 100) : 0;
+    document.getElementById("overallFill").style.width = overallPct + "%";
+    document.getElementById("overallPct").textContent = overallPct + "%";
+    document.getElementById("overallSub").textContent = grandDone + " / " + grandTotal + " Lekt. erledigt";
+  }
+
+  // ---------------------------------------------------------------------
+  // Shared content-mode renderers (used by both topic pages and chapter
+  // pages, since both are just "a thing with theory/cards/aufgaben/
+  // anwendung/prüfung").
+  // ---------------------------------------------------------------------
+  var MODES = [
+    { key: "theorie", label: "Theorie & Formeln" },
+    { key: "karten", label: "Karteikarten" },
+    { key: "aufgaben", label: "Aufgaben" },
+    { key: "anwendung", label: "Anwendung" },
+    { key: "pruefung", label: "Prüfung" }
+  ];
+
+  function exerciseListHtml(exercises) {
+    var html = '<div class="exercise-list">';
+    exercises.forEach(function (ex, i) {
+      html +=
+        '<div class="exercise-item">' +
+          '<div class="exercise-task"><span class="exercise-num">' + (i + 1) + '.</span> ' + escapeHtml(ex.task) + '</div>' +
+          '<button class="btn exercise-toggle" type="button" data-ex-toggle>Lösung anzeigen</button>' +
+          '<div class="exercise-solution" data-ex-solution hidden>' + escapeHtml(ex.answer) + '</div>' +
+        '</div>';
+    });
+    html += '</div>';
+    return html;
+  }
+  function wireExerciseToggles(container) {
+    Array.prototype.forEach.call(container.querySelectorAll(".exercise-item"), function (item) {
+      var btn = item.querySelector("[data-ex-toggle]");
+      var sol = item.querySelector("[data-ex-solution]");
+      btn.addEventListener("click", function () {
+        var show = sol.hidden;
+        sol.hidden = !show;
+        btn.textContent = show ? "Lösung verstecken" : "Lösung anzeigen";
+      });
+    });
+  }
+
+  function renderTheorie(container, content) {
+    var html = '<p class="explain">' + escapeHtml(content.explain || "Für dieses Thema ist noch keine Theorie hinterlegt. Du kannst unten in den Notizen eigenen Unterrichtsstoff einfügen.") + '</p>';
+    if (content.formulas) html += '<div class="formula-box">' + escapeHtml(content.formulas) + '</div>';
+    if (content.method) html += '<div class="method-box"><span class="method-label">Lernmethode</span><span class="method-text">' + escapeHtml(content.method) + '</span></div>';
+    if (content.examples && content.examples.length) {
+      html += '<div class="examples-head">Beispiele</div><div class="examples">';
+      content.examples.forEach(function (ex) {
+        html += '<div class="example-item"><div class="example-problem">' + escapeHtml(ex.problem) + '</div><div class="example-solution">' + escapeHtml(ex.solution) + '</div></div>';
+      });
+      html += '</div>';
+    }
+    container.innerHTML = html;
+  }
+
+  function renderKarten(container, content, knownStore) {
+    if (!content.flashcards || !content.flashcards.length) {
+      container.innerHTML = '<div class="empty-pane">Für dieses Thema gibt es noch keine Karteikarten. Sobald du Lernstoff dazu einfügst (Notizen unten), lohnt es sich, ein paar Frage/Antwort-Karten zu ergänzen.</div>';
+      return;
+    }
+    var cards = content.flashcards;
     var order = [];
     var pos = 0;
     var revealed = false;
@@ -124,320 +304,394 @@
     var knowBtn = container.querySelector("[data-flash-know]");
     var dontknowBtn = container.querySelector("[data-flash-dontknow]");
 
-    function knownCount() {
-      var n = 0;
-      for (var i = 0; i < t.flashcards.length; i++) if (ts.flashKnown[i]) n++;
-      return n;
-    }
-
+    function knownCount() { var n = 0; for (var i = 0; i < cards.length; i++) if (knownStore[i]) n++; return n; }
     function buildOrder() {
       var open = [];
-      for (var i = 0; i < t.flashcards.length; i++) if (!ts.flashKnown[i]) open.push(i);
+      for (var i = 0; i < cards.length; i++) if (!knownStore[i]) open.push(i);
       order = shuffle(open);
       pos = 0;
     }
-
     function render() {
-      var total = t.flashcards.length;
-      progressEl.textContent = knownCount() + " / " + total + " gewusst";
-
+      progressEl.textContent = knownCount() + " / " + cards.length + " gewusst";
       if (!order.length) {
         cardEl.classList.remove("is-flipped");
         labelEl.textContent = "Runde geschafft";
-        textEl.textContent = knownCount() === total
-          ? "Alle Karten dieses Themas sind als „gewusst“ markiert. Mit Zurücksetzen kannst du die Runde erneut starten."
-          : "Alle offenen Karten dieser Runde wurden gezeigt. Klicke auf Mischen, um verbleibende Karten erneut zu üben.";
-        revealBtn.hidden = true;
-        knowBtn.hidden = true;
-        dontknowBtn.hidden = true;
+        textEl.textContent = knownCount() === cards.length
+          ? "Alle Karten dieses Themas sind als „gewusst“ markiert. Mit Zurücksetzen kannst du erneut starten."
+          : "Alle offenen Karten dieser Runde wurden gezeigt. Mischen startet eine neue Runde mit den verbleibenden Karten.";
+        revealBtn.hidden = true; knowBtn.hidden = true; dontknowBtn.hidden = true;
         return;
       }
-
       revealBtn.hidden = false;
-      var card = t.flashcards[order[pos]];
+      var card = cards[order[pos]];
       revealed = false;
       labelEl.textContent = "Frage " + (pos + 1) + " / " + order.length;
       textEl.textContent = card.q;
       cardEl.classList.remove("is-flipped");
-      knowBtn.hidden = true;
-      dontknowBtn.hidden = true;
+      knowBtn.hidden = true; dontknowBtn.hidden = true;
     }
-
     function reveal() {
       if (!order.length || revealed) return;
       revealed = true;
-      var card = t.flashcards[order[pos]];
+      var card = cards[order[pos]];
       labelEl.textContent = "Antwort";
       textEl.textContent = card.a;
       cardEl.classList.add("is-flipped");
-      revealBtn.hidden = true;
-      knowBtn.hidden = false;
-      dontknowBtn.hidden = false;
+      revealBtn.hidden = true; knowBtn.hidden = false; dontknowBtn.hidden = false;
     }
-
     function next(markKnown) {
       var idx = order[pos];
-      if (markKnown) {
-        ts.flashKnown[idx] = true;
-        order.splice(pos, 1);
-      } else {
-        pos++;
-      }
+      if (markKnown) { knownStore[idx] = true; order.splice(pos, 1); } else { pos++; }
       if (pos >= order.length) pos = 0;
       saveState();
       render();
     }
-
     revealBtn.addEventListener("click", reveal);
     knowBtn.addEventListener("click", function () { next(true); });
     dontknowBtn.addEventListener("click", function () { next(false); });
-    container.querySelector("[data-flash-shuffle]").addEventListener("click", function () {
-      buildOrder();
-      render();
-    });
+    container.querySelector("[data-flash-shuffle]").addEventListener("click", function () { buildOrder(); render(); });
     container.querySelector("[data-flash-reset]").addEventListener("click", function () {
-      ts.flashKnown = {};
-      saveState();
-      buildOrder();
-      render();
+      Object.keys(knownStore).forEach(function (k) { delete knownStore[k]; });
+      saveState(); buildOrder(); render();
     });
-
     buildOrder();
     render();
   }
 
-  function exerciseListHtml(exercises) {
-    var html = '<div class="exercise-list">';
-    exercises.forEach(function (ex, i) {
+  function renderAufgaben(container, content) {
+    if (!content.exercises || !content.exercises.length) {
+      container.innerHTML = '<div class="empty-pane">Für dieses Thema sind noch keine Übungsaufgaben hinterlegt.</div>';
+      return;
+    }
+    container.innerHTML = '<div class="exercise-head">Aufgaben zum Lösen</div>' + exerciseListHtml(content.exercises);
+    wireExerciseToggles(container);
+  }
+
+  function renderAnwendung(container, content) {
+    if (!content.applications || !content.applications.length) {
+      container.innerHTML = '<div class="empty-pane">Für dieses Thema sind noch keine Praxis-Anwendungen hinterlegt.</div>';
+      return;
+    }
+    var html = '<div class="exercise-head">Formel &amp; Theorie anwenden</div><div class="exercise-list">';
+    content.applications.forEach(function (ex, i) {
       html +=
-        '<div class="exercise-item">' +
-          '<div class="exercise-task"><span class="exercise-num">' + (i + 1) + '.</span> ' + escapeHtml(ex.task) + '</div>' +
+        '<div class="exercise-item app-item">' +
+          '<div class="exercise-task"><span class="exercise-num app-num">' + (i + 1) + '.</span> ' + escapeHtml(ex.task) + '</div>' +
           '<button class="btn exercise-toggle" type="button" data-ex-toggle>Lösung anzeigen</button>' +
           '<div class="exercise-solution" data-ex-solution hidden>' + escapeHtml(ex.answer) + '</div>' +
         '</div>';
     });
     html += '</div>';
-    return html;
-  }
-
-  function wireExerciseToggles(container) {
-    Array.prototype.forEach.call(container.querySelectorAll(".exercise-item"), function (item) {
-      var btn = item.querySelector("[data-ex-toggle]");
-      var sol = item.querySelector("[data-ex-solution]");
-      btn.addEventListener("click", function () {
-        var show = sol.hidden;
-        sol.hidden = !show;
-        btn.textContent = show ? "Lösung verstecken" : "Lösung anzeigen";
-      });
-    });
-  }
-
-  function buildExercises(container, t) {
-    container.innerHTML = '<div class="exercise-head">Lernaufgaben</div>' + exerciseListHtml(t.exercises);
+    container.innerHTML = html;
     wireExerciseToggles(container);
   }
 
-  // Nested chapter/"Unterseiten" accordion for topics that are broken down
-  // into a full chapter-by-chapter walkthrough (currently: Algebra).
-  function buildSubtopics(container, t) {
-    var html = '<div class="chapters-head">Kapitel-Unterseiten (' + t.subtopics.length + ')</div><div class="chapters">';
-    t.subtopics.forEach(function (sub, i) {
-      html += '<div class="chapter">' +
-        '<div class="chapter-head" data-chapter-toggle>' +
-          '<span class="chapter-tag">' + escapeHtml(sub.chapter) + '</span>' +
-          '<span class="chapter-title">' + escapeHtml(sub.title) + '</span>' +
-          '<span class="chev">&rsaquo;</span>' +
-        '</div>' +
-        '<div class="chapter-body">' +
-          '<p class="explain">' + escapeHtml(sub.explain) + '</p>';
-      if (sub.examples && sub.examples.length) {
-        html += '<div class="examples-head">Beispiele</div><div class="examples">';
-        sub.examples.forEach(function (ex) {
-          html += '<div class="example-item">' +
-            '<div class="example-problem">' + escapeHtml(ex.problem) + '</div>' +
-            '<div class="example-solution">' + escapeHtml(ex.solution) + '</div>' +
-          '</div>';
+  // Multiple-choice exam. Pass threshold = strict majority correct.
+  // onPass() is called once when the attempt passes; completion persists
+  // regardless of later retakes.
+  function renderPruefung(container, content, passed, onPass, manual) {
+    if (passed) {
+      container.innerHTML =
+        '<div class="exam-banner exam-pass">Bestanden ✓ — dieser Teil ist abgeschlossen.</div>' +
+        (content.exam && content.exam.length ? '<button class="btn" type="button" data-exam-retry>Nochmals üben</button>' : '');
+      var retryBtn = container.querySelector("[data-exam-retry]");
+      if (retryBtn) retryBtn.addEventListener("click", function () { renderExamForm(); });
+      return;
+    }
+    renderExamForm();
+
+    function renderExamForm() {
+      if (!content.exam || !content.exam.length) {
+        container.innerHTML =
+          '<div class="empty-pane">Für dieses Thema ist noch keine Prüfung hinterlegt.</div>' +
+          '<button class="btn" type="button" data-manual-complete>Als abgeschlossen markieren</button>';
+        var btn = container.querySelector("[data-manual-complete]");
+        if (btn) btn.addEventListener("click", function () { manual(true); onPass(); });
+        return;
+      }
+      var html = '<div class="exam-intro">' + content.exam.length + ' Fragen · bestanden ab mehr als der Hälfte richtig.</div>';
+      content.exam.forEach(function (q, qi) {
+        html += '<div class="exam-question" data-exam-q="' + qi + '"><div class="exam-q-text">' + (qi + 1) + '. ' + escapeHtml(q.q) + '</div><div class="exam-options">';
+        q.options.forEach(function (opt, oi) {
+          html += '<label class="exam-option"><input type="radio" name="exq' + qi + '" value="' + oi + '"><span>' + escapeHtml(opt) + '</span></label>';
         });
-        html += '</div>';
-      }
-      if (sub.exercises && sub.exercises.length) {
-        html += '<div class="exercise-head">Aufgaben</div>' + exerciseListHtml(sub.exercises);
-      }
-      html += '</div></div>';
+        html += '</div></div>';
+      });
+      html += '<button class="btn" type="button" data-exam-submit>Prüfung auswerten</button><div class="exam-result" data-exam-result hidden></div>';
+      container.innerHTML = html;
+
+      container.querySelector("[data-exam-submit]").addEventListener("click", function () {
+        var total = content.exam.length;
+        var correct = 0;
+        var unanswered = false;
+        content.exam.forEach(function (q, qi) {
+          var qEl = container.querySelector('[data-exam-q="' + qi + '"]');
+          var picked = qEl.querySelector('input[name="exq' + qi + '"]:checked');
+          qEl.classList.remove("is-correct", "is-wrong");
+          if (!picked) { unanswered = true; return; }
+          if (parseInt(picked.value, 10) === q.correct) { correct++; qEl.classList.add("is-correct"); }
+          else { qEl.classList.add("is-wrong"); }
+        });
+        var resultEl = container.querySelector("[data-exam-result]");
+        resultEl.hidden = false;
+        if (unanswered) {
+          resultEl.className = "exam-result exam-result-warn";
+          resultEl.textContent = "Bitte beantworte alle Fragen, bevor du auswertest.";
+          return;
+        }
+        var threshold = Math.floor(total / 2) + 1;
+        if (correct >= threshold) {
+          resultEl.className = "exam-result exam-result-pass";
+          resultEl.textContent = "Bestanden! " + correct + " / " + total + " richtig.";
+          manual(true);
+          onPass();
+        } else {
+          resultEl.className = "exam-result exam-result-fail";
+          resultEl.textContent = "Noch nicht bestanden — " + correct + " / " + total + " richtig (nötig: " + threshold + "). Richtige/falsche Antworten sind markiert, versuch es nochmal.";
+        }
+      });
+    }
+  }
+
+  function renderNotes(container, value, onChange) {
+    container.innerHTML =
+      '<div class="notes-label"><span>Eigene Notizen &amp; Unterrichtsstoff</span><span class="savehint" data-savehint>gespeichert</span></div>' +
+      '<textarea class="notes" placeholder="Füge hier eigenen Unterrichtsstoff, Merksätze, Links oder Beispiele ein …" data-notes>' + escapeHtml(value || "") + '</textarea>';
+    var notesEl = container.querySelector("[data-notes]");
+    var saveHint = container.querySelector("[data-savehint]");
+    var debounceTimer;
+    notesEl.addEventListener("input", function () {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        onChange(notesEl.value);
+        saveHint.classList.add("show");
+        setTimeout(function () { saveHint.classList.remove("show"); }, 1400);
+      }, 400);
     });
-    html += '</div>';
+  }
+
+  // Renders the mode tab bar + active pane into `container` for a given
+  // `content` object ({explain, formulas, method, examples, flashcards,
+  // exercises, applications, exam}), plus a persistent notes box.
+  function renderModePage(container, opts) {
+    var mode = opts.mode;
+    var content = opts.content;
+    var html = '<div class="tabbar" role="tablist">';
+    MODES.forEach(function (m) {
+      html += '<button class="tab' + (mode === m.key ? " active" : "") + '" type="button" data-mode="' + m.key + '">' + m.label + '</button>';
+    });
+    html += '</div><div class="pane" data-pane></div><div class="notes-section" data-notes-section></div>';
     container.innerHTML = html;
 
-    Array.prototype.forEach.call(container.querySelectorAll(".chapter"), function (chapterEl) {
-      chapterEl.querySelector("[data-chapter-toggle]").addEventListener("click", function () {
-        chapterEl.classList.toggle("open");
-      });
+    Array.prototype.forEach.call(container.querySelectorAll("[data-mode]"), function (btn) {
+      btn.addEventListener("click", function () { opts.onModeChange(btn.dataset.mode); });
     });
-    wireExerciseToggles(container);
+
+    var pane = container.querySelector("[data-pane]");
+    if (mode === "theorie") renderTheorie(pane, content);
+    else if (mode === "karten") renderKarten(pane, content, opts.flashKnownStore);
+    else if (mode === "aufgaben") {
+      if (opts.governedBySubtopics) renderGovernedNotice(pane, opts, "Aufgaben");
+      else renderAufgaben(pane, content);
+    } else if (mode === "anwendung") {
+      if (opts.governedBySubtopics) renderGovernedNotice(pane, opts, "Anwendungen");
+      else renderAnwendung(pane, content);
+    } else if (mode === "pruefung") {
+      if (opts.governedBySubtopics) renderChapterChecklist(pane, opts);
+      else renderPruefung(pane, content, opts.isDone, opts.onPass, opts.onManualToggle);
+    }
+
+    renderNotes(container.querySelector("[data-notes-section]"), opts.notesValue, opts.onNotesChange);
   }
 
-  // Render board
-  DATA.forEach(function (s, idx) {
-    var col = document.createElement("div");
-    col.className = "col" + (idx === 0 ? " active" : "");
-    col.dataset.sem = s.sem;
-
-    var totalLekt = s.topics.reduce(function (a, t) {
-      return a + t.lekt;
-    }, 0);
-
-    var head = document.createElement("div");
-    head.className = "col-head";
-    head.innerHTML =
-      '<div class="col-head-top"><span class="col-title">' + s.title + '</span><span class="col-lekt">' + totalLekt + ' Lekt.</span></div>' +
-      '<div class="bar tick"><div class="bar-fill" data-semfill></div></div>' +
-      '<div class="col-progress-num"><span data-semdone>0 Lekt. erledigt</span><span data-sempct>0%</span></div>';
-    col.appendChild(head);
-
-    var body = document.createElement("div");
-    body.className = "col-body";
-
-    s.topics.forEach(function (t) {
-      var ts = getTopicState(t.id);
-      var topicEl = document.createElement("div");
-      topicEl.className = "topic" + (ts.done ? " done" : "");
-      topicEl.dataset.id = t.id;
-      topicEl.dataset.name = t.name.toLowerCase();
-      topicEl.dataset.tb = t.tb;
-
-      var headEl = document.createElement("div");
-      headEl.className = "topic-head";
-      headEl.innerHTML =
-        '<span class="check' + (ts.done ? " checked" : "") + '" data-check>&#10003;</span>' +
-        '<span class="topic-titles">' +
-          '<span class="topic-name">' + escapeHtml(t.name) + '</span>' +
-          '<span class="topic-meta"><span class="tb-chip">' + t.tb + '</span><span class="lekt-chip">' + t.lekt + ' Lekt.</span></span>' +
-        '</span>' +
-        '<span class="chev">&rsaquo;</span>';
-      topicEl.appendChild(headEl);
-
-      var bodyEl = document.createElement("div");
-      bodyEl.className = "topic-body";
-      var html = '<p class="explain">' + escapeHtml(t.explain) + '</p>';
-      if (t.formulas) {
-        html += '<div class="formula-box">' + escapeHtml(t.formulas) + '</div>';
-      }
-      html += '<div class="method-box"><span class="method-label">Lernmethode</span><span class="method-text">' + escapeHtml(t.method) + '</span></div>';
-      if (t.flashcards && t.flashcards.length) {
-        html += '<div class="flash-section" data-flash-section></div>';
-      }
-      if (t.subtopics && t.subtopics.length) {
-        html += '<div class="subtopics-section" data-subtopics-section></div>';
-      }
-      if (t.exercises && t.exercises.length) {
-        html += '<div class="exercise-section" data-exercise-section></div>';
-      }
-      html += '<div class="notes-label"><span>Eigene Notizen &amp; Unterrichtsstoff</span><span class="savehint" data-savehint>gespeichert</span></div>';
-      html += '<textarea class="notes" placeholder="Füge hier eigenen Unterrichtsstoff, Merksätze, Links oder Beispiele ein …" data-notes>' + escapeHtml(ts.notes || "") + '</textarea>';
-      bodyEl.innerHTML = html;
-      topicEl.appendChild(bodyEl);
-
-      if (t.flashcards && t.flashcards.length) {
-        buildFlashcards(bodyEl.querySelector("[data-flash-section]"), t, ts);
-      }
-      if (t.subtopics && t.subtopics.length) {
-        buildSubtopics(bodyEl.querySelector("[data-subtopics-section]"), t);
-      }
-      if (t.exercises && t.exercises.length) {
-        buildExercises(bodyEl.querySelector("[data-exercise-section]"), t);
-      }
-
-      // interactions
-      headEl.addEventListener("click", function (e) {
-        if (e.target.hasAttribute("data-check")) return;
-        topicEl.classList.toggle("open");
-      });
-      var checkEl = headEl.querySelector("[data-check]");
-      checkEl.addEventListener("click", function (e) {
-        e.stopPropagation();
-        ts.done = !ts.done;
-        checkEl.classList.toggle("checked", ts.done);
-        topicEl.classList.toggle("done", ts.done);
-        saveState();
-        updateProgress();
-      });
-      var notesEl = bodyEl.querySelector("[data-notes]");
-      var saveHint = bodyEl.querySelector("[data-savehint]");
-      var debounceTimer;
-      notesEl.addEventListener("input", function () {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(function () {
-          ts.notes = notesEl.value;
-          saveState();
-          saveHint.classList.add("show");
-          setTimeout(function () {
-            saveHint.classList.remove("show");
-          }, 1400);
-        }, 400);
-      });
-
-      body.appendChild(topicEl);
-    });
-
-    col.appendChild(body);
-    board.appendChild(col);
-  });
-
-  function updateProgress() {
-    var grandTotal = 0,
-      grandDone = 0;
-    Array.prototype.forEach.call(board.children, function (col) {
-      var semIdx = parseInt(col.dataset.sem, 10) - 1;
-      var s = DATA[semIdx];
-      var total = 0,
-        done = 0;
-      s.topics.forEach(function (t) {
-        total += t.lekt;
-        if (getTopicState(t.id).done) done += t.lekt;
-      });
-      grandTotal += total;
-      grandDone += done;
-      var pct = total ? Math.round((done / total) * 100) : 0;
-      col.querySelector("[data-semfill]").style.width = pct + "%";
-      col.querySelector("[data-semdone]").textContent = done + " / " + total + " Lekt. erledigt";
-      col.querySelector("[data-sempct]").textContent = pct + "%";
-    });
-    var overallPct = grandTotal ? Math.round((grandDone / grandTotal) * 100) : 0;
-    document.getElementById("overallFill").style.width = overallPct + "%";
-    document.getElementById("overallPct").textContent = overallPct + "%";
-    document.getElementById("overallSub").textContent = grandDone + " / " + grandTotal + " Lekt. erledigt";
+  function renderGovernedNotice(pane, opts, label) {
+    pane.innerHTML = '<div class="empty-pane">' + label + ' sind pro Kapitel organisiert. Wähle unten ein Kapitel aus, um dort Theorie, Karteikarten, Aufgaben, Anwendung und Prüfung zu sehen.</div>';
   }
 
-  function applyFilters() {
-    var term = searchTerm.trim().toLowerCase();
-    Array.prototype.forEach.call(board.querySelectorAll(".topic"), function (topicEl) {
-      var matchesTB = !activeTB || topicEl.dataset.tb === activeTB;
-      var matchesTerm = !term || topicEl.dataset.name.indexOf(term) !== -1;
-      topicEl.classList.toggle("hidden", !(matchesTB && matchesTerm));
+  function renderChapterChecklist(pane, opts) {
+    var t = opts.topic, ts = opts.ts;
+    var done = 0;
+    var html = '<div class="exam-intro">Dieses Thema besteht aus ' + t.subtopics.length + ' Kapiteln. Bestehe die Prüfung jedes Kapitels, um „' + escapeHtml(t.name) + '“ komplett abzuschliessen.</div><div class="chapters">';
+    t.subtopics.forEach(function (sub, i) {
+      var d = isSubDone(ts, i);
+      if (d) done++;
+      html += '<div class="chapter chapter-flat' + (d ? " is-done" : "") + '" data-goto-chapter="' + i + '">' +
+        '<div class="chapter-head">' +
+          '<span class="chapter-tag">' + escapeHtml(sub.chapter) + '</span>' +
+          '<span class="chapter-title">' + escapeHtml(sub.title) + '</span>' +
+          '<span class="chapter-status">' + (d ? "Bestanden ✓" : "Offen") + '</span>' +
+        '</div></div>';
+    });
+    html += '</div><div class="chapter-summary">' + done + ' / ' + t.subtopics.length + ' Kapitel abgeschlossen</div>';
+    pane.innerHTML = html;
+    Array.prototype.forEach.call(pane.querySelectorAll("[data-goto-chapter]"), function (row) {
+      row.addEventListener("click", function () { navigate("#/topic/" + t.id + "/chapter/" + row.dataset.gotoChapter); });
     });
   }
 
-  document.getElementById("searchInput").addEventListener("input", function (e) {
-    searchTerm = e.target.value;
-    applyFilters();
-  });
-  document.getElementById("expandAll").addEventListener("click", function () {
-    Array.prototype.forEach.call(board.querySelectorAll(".topic:not(.hidden)"), function (t) {
-      t.classList.add("open");
-    });
-  });
-  document.getElementById("collapseAll").addEventListener("click", function () {
-    Array.prototype.forEach.call(board.querySelectorAll(".topic"), function (t) {
-      t.classList.remove("open");
-    });
-  });
-  document.getElementById("resetProgress").addEventListener("click", function () {
-    if (!confirm("Wirklich den gesamten Fortschritt und alle Notizen zurücksetzen? Dies kann nicht rückgängig gemacht werden.")) return;
-    state = {};
-    saveState();
-    location.reload();
-  });
+  // ---------------------------------------------------------------------
+  // Topic detail page
+  // ---------------------------------------------------------------------
+  function renderTopicPage(topicId, chapterIdx, mode) {
+    var info = byId[topicId];
+    if (!info) { navigate("#/"); return; }
+    var t = info.t, sem = info.sem;
+    var ts = getTopicState(t.id);
 
-  updateProgress();
-  renderFilters();
+    if (chapterIdx != null && t.subtopics && t.subtopics[chapterIdx]) {
+      renderChapterPage(t, sem, ts, chapterIdx, mode);
+      return;
+    }
+
+    var hasSubtopics = !!(t.subtopics && t.subtopics.length);
+    var done = isTopicDone(t, ts);
+
+    var html =
+      '<div class="breadcrumb"><a href="#/" data-nav>Übersicht</a></div>' +
+      '<div class="page-header">' +
+        '<div class="page-header-top">' +
+          '<span class="tb-chip">' + t.tb + ' · ' + escapeHtml(TB_NAMES[t.tb] || "") + '</span>' +
+          '<span class="status-pill' + (done ? " status-done" : "") + '">' + (done ? "Abgeschlossen ✓" : "In Bearbeitung") + '</span>' +
+        '</div>' +
+        '<h2 class="page-title">' + escapeHtml(t.name) + '</h2>' +
+        '<div class="page-sub">' + escapeHtml(sem.title) + ' · ' + t.lekt + ' Lektionen' + '</div>' +
+      '</div>';
+
+    if (hasSubtopics) {
+      html += '<div class="chapters-head">Kapitel-Unterseiten (' + t.subtopics.length + ')</div><div class="chapters" data-chapter-toc></div>';
+    }
+    html += '<div class="topic-body-inner" data-mode-root></div>';
+    topicView.innerHTML = html;
+
+    if (hasSubtopics) {
+      var tocEl = topicView.querySelector("[data-chapter-toc]");
+      var tocHtml = "";
+      t.subtopics.forEach(function (sub, i) {
+        var d = isSubDone(ts, i);
+        tocHtml += '<div class="chapter chapter-flat' + (d ? " is-done" : "") + '" data-goto-chapter="' + i + '">' +
+          '<div class="chapter-head">' +
+            '<span class="chapter-tag">' + escapeHtml(sub.chapter) + '</span>' +
+            '<span class="chapter-title">' + escapeHtml(sub.title) + '</span>' +
+            '<span class="chapter-status">' + (d ? "Bestanden ✓" : "Offen") + '</span>' +
+          '</div></div>';
+      });
+      tocEl.innerHTML = tocHtml;
+      Array.prototype.forEach.call(tocEl.querySelectorAll("[data-goto-chapter]"), function (row) {
+        row.addEventListener("click", function () { navigate("#/topic/" + t.id + "/chapter/" + row.dataset.gotoChapter); });
+      });
+    }
+
+    renderModePage(topicView.querySelector("[data-mode-root]"), {
+      mode: mode || "theorie",
+      content: t,
+      topic: t,
+      ts: ts,
+      governedBySubtopics: hasSubtopics,
+      isDone: done,
+      flashKnownStore: ts.flashKnown,
+      notesValue: ts.notes,
+      onNotesChange: function (v) { ts.notes = v; saveState(); },
+      onModeChange: function (m) { navigate("#/topic/" + t.id + "?mode=" + m); },
+      onManualToggle: function (v) { setTopicDone(t, ts, v); },
+      onPass: function () { setTopicDone(t, ts, true); refreshHeader(t, ts); }
+    });
+
+    wireBreadcrumb();
+
+    function refreshHeader(topic, topicState) {
+      var pill = topicView.querySelector(".status-pill");
+      var isDone = isTopicDone(topic, topicState);
+      pill.className = "status-pill" + (isDone ? " status-done" : "");
+      pill.textContent = isDone ? "Abgeschlossen ✓" : "In Bearbeitung";
+    }
+  }
+
+  function renderChapterPage(t, sem, ts, chapterIdx, mode) {
+    var sub = t.subtopics[chapterIdx];
+    var done = isSubDone(ts, chapterIdx);
+
+    var html =
+      '<div class="breadcrumb"><a href="#/" data-nav>Übersicht</a> <span class="crumb-sep">/</span> <a href="#/topic/' + t.id + '" data-nav>' + escapeHtml(t.name) + '</a></div>' +
+      '<div class="page-header">' +
+        '<div class="page-header-top">' +
+          '<span class="tb-chip">' + escapeHtml(sub.chapter) + '</span>' +
+          '<span class="status-pill' + (done ? " status-done" : "") + '">' + (done ? "Bestanden ✓" : "Offen") + '</span>' +
+        '</div>' +
+        '<h2 class="page-title">' + escapeHtml(sub.title) + '</h2>' +
+        '<div class="page-sub">Kapitel aus „' + escapeHtml(t.name) + '“</div>' +
+      '</div>' +
+      '<div class="topic-body-inner" data-mode-root></div>';
+    topicView.innerHTML = html;
+
+    renderModePage(topicView.querySelector("[data-mode-root]"), {
+      mode: mode || "theorie",
+      content: sub,
+      topic: t,
+      ts: ts,
+      governedBySubtopics: false,
+      isDone: done,
+      flashKnownStore: {},
+      notesValue: ts.subNotes[chapterIdx],
+      onNotesChange: function (v) { ts.subNotes[chapterIdx] = v; saveState(); },
+      onModeChange: function (m) { navigate("#/topic/" + t.id + "/chapter/" + chapterIdx + "?mode=" + m); },
+      onManualToggle: function (v) { setSubDone(t, ts, chapterIdx, v); },
+      onPass: function () { setSubDone(t, ts, chapterIdx, true); refreshHeader(); }
+    });
+
+    wireBreadcrumb();
+
+    function refreshHeader() {
+      var pill = topicView.querySelector(".status-pill");
+      var isDone = isSubDone(ts, chapterIdx);
+      pill.className = "status-pill" + (isDone ? " status-done" : "");
+      pill.textContent = isDone ? "Bestanden ✓" : "Offen";
+    }
+  }
+
+  function wireBreadcrumb() {
+    Array.prototype.forEach.call(topicView.querySelectorAll("[data-nav]"), function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        navigate(a.getAttribute("href"));
+      });
+    });
+  }
+
+  // ---------------------------------------------------------------------
+  // Router
+  // ---------------------------------------------------------------------
+  function navigate(hash) { location.hash = hash; }
+
+  function route() {
+    var raw = location.hash.replace(/^#\/?/, "");
+    var parts = raw.split("?");
+    var path = parts[0];
+    var query = {};
+    if (parts[1]) {
+      parts[1].split("&").forEach(function (kv) {
+        var pair = kv.split("=");
+        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+      });
+    }
+    var segs = path.split("/").filter(Boolean);
+
+    if (segs[0] === "topic" && segs[1]) {
+      var chapterIdx = null;
+      if (segs[2] === "chapter" && segs[3] != null) chapterIdx = parseInt(segs[3], 10);
+      boardView.hidden = true;
+      topicView.hidden = false;
+      renderTopicPage(segs[1], chapterIdx, query.mode || "theorie");
+      window.scrollTo(0, 0);
+    } else {
+      boardView.hidden = false;
+      topicView.hidden = true;
+      buildBoardOnce();
+      renderBoardRows();
+      updateProgress();
+    }
+  }
+
+  document.getElementById("homeLink").addEventListener("click", function (e) { e.preventDefault(); navigate("#/"); });
+  window.addEventListener("hashchange", route);
+  route();
 })();
