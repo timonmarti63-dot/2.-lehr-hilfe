@@ -62,14 +62,18 @@
       </details>
 
       <div class="controls">
-        <div class="search">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input type="text" id="searchInput" placeholder="Thema suchen … z.B. Festigkeitslehre">
-        </div>
-        <div class="chipbar" id="tbChips"></div>
-        <div class="btnrow">
+        <div class="controls-row">
+          <div class="view-toggle" role="tablist" aria-label="Ansicht wählen">
+            <button class="view-btn" type="button" data-view="semester">Nach Semester</button>
+            <button class="view-btn" type="button" data-view="tb">Nach Themenbereich</button>
+          </div>
+          <div class="search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" placeholder="Thema suchen … z.B. Festigkeitslehre">
+          </div>
           <button class="btn danger" id="resetProgress">Fortschritt zurücksetzen</button>
         </div>
+        <div class="chipbar" id="tbChips"></div>
       </div>
 
       <div class="semtabs" id="semTabs"></div>

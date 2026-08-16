@@ -69,7 +69,8 @@
   DATA.forEach(function (s) { s.topics.forEach(function (t) { byId[t.id] = { t: t, sem: s }; }); });
 
   // ---------------------------------------------------------------------
-  // Board (semester overview)
+  // Board (overview) — groupable either by semester (curriculum order) or
+  // by Themenbereich (TB1–TB12), same underlying data either way.
   // ---------------------------------------------------------------------
   var boardView = document.getElementById("boardView");
   var topicView = document.getElementById("topicView");
@@ -78,80 +79,74 @@
   var tbChips = document.getElementById("tbChips");
   var activeTB = null;
   var searchTerm = "";
+  var activeColIdx = 0;
   var boardBuilt = false;
 
-  function buildBoardOnce() {
-    if (boardBuilt) return;
-    boardBuilt = true;
+  var VIEW_KEY = "metallbau-lernplattform-view";
+  var groupMode = "semester";
+  try { groupMode = localStorage.getItem(VIEW_KEY) === "tb" ? "tb" : "semester"; } catch (e) { /* ignore */ }
 
+  function semesterGroups() {
+    return DATA.map(function (s) {
+      return {
+        key: "sem" + s.sem, tabLabel: "Sem. " + s.sem, title: s.title, sub: null,
+        items: s.topics.map(function (t) { return { t: t, sem: s }; })
+      };
+    });
+  }
+  function tbGroups() {
+    var map = {}, order = [];
+    DATA.forEach(function (s) {
+      s.topics.forEach(function (t) {
+        if (!map[t.tb]) { map[t.tb] = { key: t.tb, tabLabel: t.tb, title: t.tb, sub: TB_NAMES[t.tb], items: [] }; order.push(t.tb); }
+        map[t.tb].items.push({ t: t, sem: s });
+      });
+    });
+    order.sort(function (a, b) { return parseInt(a.replace("TB", ""), 10) - parseInt(b.replace("TB", ""), 10); });
+    return order.map(function (k) { return map[k]; });
+  }
+  function currentGroups() { return groupMode === "tb" ? tbGroups() : semesterGroups(); }
+
+  function setGroupMode(mode) {
+    groupMode = mode;
+    try { localStorage.setItem(VIEW_KEY, mode); } catch (e) { /* ignore */ }
+    Array.prototype.forEach.call(document.querySelectorAll(".view-btn"), function (b) {
+      b.classList.toggle("active", b.dataset.view === mode);
+    });
+    activeColIdx = 0;
+    buildBoard();
+  }
+
+  function buildTBChipsOnce() {
     var usedTB = [];
     DATA.forEach(function (s) { s.topics.forEach(function (t) { if (usedTB.indexOf(t.tb) === -1) usedTB.push(t.tb); }); });
     usedTB.sort(function (a, b) { return parseInt(a.replace("TB", ""), 10) - parseInt(b.replace("TB", ""), 10); });
     var allChip = document.createElement("span");
     allChip.className = "chip active";
     allChip.textContent = "Alle Bereiche";
-    allChip.onclick = function () { activeTB = null; renderFilters(); applyFilters(); };
+    allChip.onclick = function () { activeTB = null; renderTBFilterState(); applyFilters(); };
     tbChips.appendChild(allChip);
     usedTB.forEach(function (tb) {
       var c = document.createElement("span");
       c.className = "chip";
       c.textContent = tb + " · " + TB_NAMES[tb];
       c.dataset.tb = tb;
-      c.onclick = function () { activeTB = activeTB === tb ? null : tb; renderFilters(); applyFilters(); };
+      c.onclick = function () { activeTB = activeTB === tb ? null : tb; renderTBFilterState(); applyFilters(); };
       tbChips.appendChild(c);
     });
-    function renderFilters() {
-      allChip.className = "chip" + (activeTB === null ? " active" : "");
-      Array.prototype.forEach.call(tbChips.querySelectorAll(".chip[data-tb]"), function (c) {
-        c.className = "chip" + (c.dataset.tb === activeTB ? " active" : "");
-      });
-    }
-
-    var activeSem = 1;
-    DATA.forEach(function (s) {
-      var b = document.createElement("button");
-      b.textContent = "Sem. " + s.sem;
-      b.className = s.sem === activeSem ? "active" : "";
-      b.onclick = function () {
-        activeSem = s.sem;
-        Array.prototype.forEach.call(semTabs.children, function (btn, i) { btn.className = i === s.sem - 1 ? "active" : ""; });
-        Array.prototype.forEach.call(board.children, function (col, i) { col.className = "col" + (i === s.sem - 1 ? " active" : ""); });
-      };
-      semTabs.appendChild(b);
+  }
+  function renderTBFilterState() {
+    Array.prototype.forEach.call(tbChips.children, function (c) {
+      c.className = "chip" + ((c.dataset.tb || null) === activeTB ? " active" : "");
     });
+  }
 
-    DATA.forEach(function (s, idx) {
-      var col = document.createElement("div");
-      col.className = "col" + (idx === 0 ? " active" : "");
-      col.dataset.sem = s.sem;
-
-      var totalLekt = s.topics.reduce(function (a, t) { return a + t.lekt; }, 0);
-      var head = document.createElement("div");
-      head.className = "col-head";
-      head.innerHTML =
-        '<div class="col-head-top"><span class="col-title">' + s.title + '</span><span class="col-lekt">' + totalLekt + ' Lekt.</span></div>' +
-        '<div class="bar tick"><div class="bar-fill" data-semfill></div></div>' +
-        '<div class="col-progress-num"><span data-semdone>0 Lekt. erledigt</span><span data-sempct>0%</span></div>';
-      col.appendChild(head);
-
-      var body = document.createElement("div");
-      body.className = "col-body";
-
-      s.topics.forEach(function (t) {
-        var row = document.createElement("button");
-        row.type = "button";
-        row.className = "topic-row";
-        row.dataset.id = t.id;
-        row.dataset.name = t.name.toLowerCase();
-        row.dataset.tb = t.tb;
-        row.addEventListener("click", function () { navigate("#/topic/" + t.id); });
-        body.appendChild(row);
-      });
-
-      col.appendChild(body);
-      board.appendChild(col);
+  function buildControlsOnce() {
+    buildTBChipsOnce();
+    Array.prototype.forEach.call(document.querySelectorAll(".view-btn"), function (b) {
+      b.classList.toggle("active", b.dataset.view === groupMode);
+      b.addEventListener("click", function () { setGroupMode(b.dataset.view); });
     });
-
     document.getElementById("searchInput").addEventListener("input", function (e) {
       searchTerm = e.target.value;
       applyFilters();
@@ -165,10 +160,65 @@
     });
   }
 
+  function buildBoard() {
+    board.innerHTML = "";
+    semTabs.innerHTML = "";
+    var groups = currentGroups();
+
+    groups.forEach(function (g, idx) {
+      var tabBtn = document.createElement("button");
+      tabBtn.textContent = g.tabLabel;
+      tabBtn.title = g.sub || "";
+      tabBtn.className = idx === activeColIdx ? "active" : "";
+      tabBtn.onclick = function () {
+        activeColIdx = idx;
+        Array.prototype.forEach.call(semTabs.children, function (btn, i) { btn.className = i === idx ? "active" : ""; });
+        Array.prototype.forEach.call(board.children, function (col, i) { col.classList.toggle("active", i === idx); });
+      };
+      semTabs.appendChild(tabBtn);
+
+      var col = document.createElement("div");
+      col.className = "col" + (idx === activeColIdx ? " active" : "");
+      col.dataset.groupKey = g.key;
+
+      var totalLekt = g.items.reduce(function (a, x) { return a + x.t.lekt; }, 0);
+      var titleHtml = g.sub
+        ? escapeHtml(g.title) + ' <span class="col-title-sub">· ' + escapeHtml(g.sub) + '</span>'
+        : escapeHtml(g.title);
+      var head = document.createElement("div");
+      head.className = "col-head";
+      head.innerHTML =
+        '<div class="col-head-top"><span class="col-title">' + titleHtml + '</span><span class="col-lekt">' + totalLekt + ' Lekt.</span></div>' +
+        '<div class="bar tick"><div class="bar-fill" data-fill></div></div>' +
+        '<div class="col-progress-num"><span data-done>0 Lekt. erledigt</span><span data-pct>0%</span></div>';
+      col.appendChild(head);
+
+      var body = document.createElement("div");
+      body.className = "col-body";
+      g.items.forEach(function (x) {
+        var row = document.createElement("button");
+        row.type = "button";
+        row.className = "topic-row";
+        row.dataset.id = x.t.id;
+        row.dataset.name = x.t.name.toLowerCase();
+        row.dataset.tb = x.t.tb;
+        row.dataset.sem = x.sem.sem;
+        row.addEventListener("click", function () { navigate("#/topic/" + x.t.id); });
+        body.appendChild(row);
+      });
+      col.appendChild(body);
+
+      board.appendChild(col);
+    });
+
+    renderBoardRows();
+    updateProgress();
+  }
+
   function renderBoardRows() {
     Array.prototype.forEach.call(board.querySelectorAll(".topic-row"), function (row) {
       var info = byId[row.dataset.id];
-      var t = info.t;
+      var t = info.t, sem = info.sem;
       var ts = getTopicState(t.id);
       var done = isTopicDone(t, ts);
       var subLabel = "";
@@ -177,12 +227,15 @@
         for (var i = 0; i < t.subtopics.length; i++) if (isSubDone(ts, i)) n++;
         subLabel = '<span class="lekt-chip">' + n + '/' + t.subtopics.length + ' Unterthemen</span>';
       }
+      var metaChip = groupMode === "tb"
+        ? '<span class="tb-chip">Sem. ' + sem.sem + '</span>'
+        : '<span class="tb-chip">' + t.tb + '</span>';
       row.className = "topic-row" + (done ? " done" : "");
       row.innerHTML =
         '<span class="row-status" aria-hidden="true">' + (done ? "&#10003;" : "") + '</span>' +
         '<span class="topic-titles">' +
           '<span class="topic-name">' + escapeHtml(t.name) + '</span>' +
-          '<span class="topic-meta"><span class="tb-chip">' + t.tb + '</span><span class="lekt-chip">' + t.lekt + ' Lekt.</span>' + subLabel + '</span>' +
+          '<span class="topic-meta">' + metaChip + '<span class="lekt-chip">' + t.lekt + ' Lekt.</span>' + subLabel + '</span>' +
         '</span>' +
         '<span class="chev">&rsaquo;</span>';
     });
@@ -196,23 +249,26 @@
       var matchesTerm = !term || row.dataset.name.indexOf(term) !== -1;
       row.classList.toggle("hidden", !(matchesTB && matchesTerm));
     });
+    Array.prototype.forEach.call(board.children, function (col) {
+      var anyVisible = col.querySelector(".topic-row:not(.hidden)");
+      col.classList.toggle("col-empty", !anyVisible);
+    });
   }
 
   function updateProgress() {
     var grandTotal = 0, grandDone = 0;
     Array.prototype.forEach.call(board.children, function (col) {
-      var semIdx = parseInt(col.dataset.sem, 10) - 1;
-      var s = DATA[semIdx];
       var total = 0, done = 0;
-      s.topics.forEach(function (t) {
+      Array.prototype.forEach.call(col.querySelectorAll(".topic-row"), function (row) {
+        var t = byId[row.dataset.id].t;
         total += t.lekt;
         if (isTopicDone(t, getTopicState(t.id))) done += t.lekt;
       });
       grandTotal += total; grandDone += done;
       var pct = total ? Math.round((done / total) * 100) : 0;
-      col.querySelector("[data-semfill]").style.width = pct + "%";
-      col.querySelector("[data-semdone]").textContent = done + " / " + total + " Lekt. erledigt";
-      col.querySelector("[data-sempct]").textContent = pct + "%";
+      col.querySelector("[data-fill]").style.width = pct + "%";
+      col.querySelector("[data-done]").textContent = done + " / " + total + " Lekt. erledigt";
+      col.querySelector("[data-pct]").textContent = pct + "%";
     });
     var overallPct = grandTotal ? Math.round((grandDone / grandTotal) * 100) : 0;
     document.getElementById("overallFill").style.width = overallPct + "%";
@@ -768,9 +824,14 @@
     } else {
       boardView.hidden = false;
       topicView.hidden = true;
-      buildBoardOnce();
-      renderBoardRows();
-      updateProgress();
+      if (!boardBuilt) {
+        boardBuilt = true;
+        buildControlsOnce();
+        buildBoard();
+      } else {
+        renderBoardRows();
+        updateProgress();
+      }
     }
   }
 
