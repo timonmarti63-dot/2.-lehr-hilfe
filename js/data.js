@@ -1261,18 +1261,298 @@ window.CURRICULUM = [
       explain: "Für den Metallbau relevante SIA-Normen (z.B. SIA 263 Stahlbau, SIA 261 Einwirkungen auf Tragwerke) regeln Bemessung, Ausführung und Verantwortlichkeiten.",
       method: "Übersichtstabelle führen: Normnummer → Thema → Relevanz für die eigene Praxis." },
     { id: "s1-09", name: "Bauphysik Wärme", lekt: 7, tb: "TB5",
-      explain: "Wärmetransport durch Bauteile via Leitung, Konvektion und Strahlung. Metall leitet Wärme sehr gut, deshalb sind Wärmebrücken bei Fenstern und Fassaden ein zentrales Thema.",
-      method: "Eine Schnittzeichnung eines Fensterprofils anfertigen und den Wärmefluss mit Pfeilen einzeichnen." },
+        explain: "Grundbegriffe der Wärmelehre: Wärme, Temperatur, die drei Wärmeübertragungsarten und die Wärmeausdehnung von Bauteilen – Basis für alle weiteren Bauphysik- und U-Wert-Berechnungen.",
+        theorySections: [
+          { type: "h", text: "Wärme" },
+          { type: "p", text: "Die Wärme ist eine Energieform, die durch Umwandlung anderer Energieformen entsteht: Reibung erzeugt Wärme, der elektrische Strom produziert Wärme, chemische Reaktionen setzen Wärme frei. Die Wärmemenge Q eines Stoffes hängt von der Schwingungsstärke seiner Materialbausteine ab – wird Energie zugeführt, schwingen die Teilchen stärker und die Wärmemenge nimmt zu." },
+          { type: "code", text: "Einheit der Wärme: [J] (Joule)\nabgeleitet: 1 kJ = 1000 J      1 MJ = 1000 kJ = 1 000 000 J" },
+          { type: "h", text: "Temperatur" },
+          { type: "p", text: "Die Temperatur ist das Mass für den Wärmezustand eines Körpers. Je höher die Temperatur, desto grösser die mittlere Bewegungsenergie der Atome/Moleküle. Beim absoluten Nullpunkt (-273°C = 0 K) sind alle Atome im Ruhezustand." },
+          { type: "code", text: "Absolute Temperatur T [K]     ϑ (theta) in Grad Celsius [°C]\nT[K] = ϑ[°C] + 273\nDifferenz ΔT wird immer in Kelvin angegeben." },
+          { type: "note", tone: "tip", text: "Beispiel: ϑ1=40°C, ϑ2=10°C → ΔT = ϑ1 − ϑ2 = 40 − 10 = 30 K. Weil 1°C-Schritt = 1K-Schritt ist, ist eine Temperaturdifferenz in °C und in K zahlenmässig gleich – nur die absolute Temperatur selbst unterscheidet sich um 273." },
+          { type: "h", text: "Wärmeübertragungsarten" },
+          { type: "p", text: "Treten Temperaturunterschiede auf, bewegt sich Wärme immer in Richtung der tieferen Temperatur. Man unterscheidet drei Übertragungsarten:" },
+          { type: "list", items: ["Wärmeleitung (Transmission): Wärme wird innerhalb eines Stoffes von Teilchen zu Teilchen weitergeleitet, ohne dass die Teilchen selbst wandern. Findet in allen drei Aggregatzuständen statt.", "Wärmeströmung (Konvektion): durch Temperatur- und Dichteunterschiede verursachte Strömung, nur in Flüssigkeiten und Gasen möglich.", "Wärmestrahlung: Wärmeaustausch auch ohne stoffliche Verbindung zwischen den Körpern. Jeder Körper strahlt, und zwar umso stärker, je höher seine Temperatur ist."] },
+          { type: "h", text: "Wärmeausdehnung" },
+          { type: "p", text: "Wird einem Körper Wärme zugeführt, steigt seine Temperatur, die Materialbausteine schwingen stärker und beanspruchen mehr Raum: der Körper dehnt sich aus. Beim Abkühlen zieht er sich wieder zusammen. Die Masse bleibt dabei unverändert." },
+          { type: "code", text: "Δl = l0 · αl · ΔT\n\nΔl  = Längenausdehnung [m]\nl0  = Werkstücklänge [m]\nαl  = Längenausdehnungskoeffizient des Werkstoffs [1/K]\nΔT  = Temperaturdifferenz [K]" },
+          { type: "table", headers: ["Werkstoff", "αl [1/K] (Richtwert)"], rows: [["Stahl", "12 · 10⁻⁶"], ["Aluminium", "23 · 10⁻⁶"]] },
+          { type: "note", tone: "warn", text: "αl-Werte sind Richtwerte aus dem Tabellenbuch und für die Aufgaben unten vorgegeben – im Fachrechnungsbuch nachschlagen, wenn ein anderer Werkstoff gefragt ist." },
+          { type: "h", text: "Oberflächentemperaturen je Baustoff" },
+          { type: "p", text: "Je nach Baustoff entstehen unterschiedliche Oberflächentemperaturen, die in Berechnungen zu berücksichtigen sind:" },
+          { type: "table", headers: ["Baustoff", "Temperaturbereich", "ΔT"], rows: [["Mauerwerk / Beton", "-20°C bis +60°C", "80 K"], ["Keramik / Metall", "-25°C bis +70°C", "95 K"], ["Fensterglas", "-25°C bis +80°C", "105 K"], ["Wärmeschutzglas", "-25°C bis +150°C", "175 K"], ["PVC", "-25°C bis +75°C", "100 K"], ["Holz", "-25°C bis +60°C", "85 K"]] }
+        ],
+        method: "Zu jeder Übertragungsart ein reales Beispiel aus dem eigenen Betrieb suchen; die Ausdehnungsformel an einem eigenen Bauteil (z.B. Geländerstange) mit den Sommer-/Wintertemperaturen aus deiner Region durchrechnen.",
+        flashcards: [
+          { q: "Was ist Wärme (Definition)?", a: "Eine Energieform, die durch Umwandlung anderer Energieformen entsteht (z.B. Reibung, elektrischer Strom, chemische Reaktionen)." },
+          { q: "Einheit der Wärme(-menge) Q?", a: "Joule [J], abgeleitet Kilojoule [kJ] und Megajoule [MJ]" },
+          { q: "Was ist die Temperatur (Definition)?", a: "Das Mass für den Wärmezustand eines Körpers" },
+          { q: "Wie gross ist der absolute Nullpunkt in °C und K?", a: "-273°C = 0 K (dort sind alle Atome im Ruhezustand)" },
+          { q: "Formel: Celsius in Kelvin umrechnen?", a: "T [K] = ϑ [°C] + 273" },
+          { q: "In welcher Einheit wird eine Temperaturdifferenz ΔT immer angegeben?", a: "In Kelvin [K]" },
+          { q: "Nenne die drei Wärmeübertragungsarten.", a: "Wärmeleitung (Transmission), Wärmeströmung (Konvektion), Wärmestrahlung" },
+          { q: "Was ist Wärmeleitung?", a: "Wärme wird innerhalb eines Stoffes von Teilchen zu Teilchen weitergegeben, ohne dass die Teilchen selbst transportiert werden." },
+          { q: "Was ist Konvektion und wo tritt sie auf?", a: "Wärmeströmung durch Temperatur- und Dichteunterschiede, nur in Flüssigkeiten und Gasen möglich" },
+          { q: "Was ist Wärmestrahlung?", a: "Wärmeaustausch auch ohne stoffliche Verbindung; jeder Körper strahlt, umso stärker je höher seine Temperatur" },
+          { q: "Formel für die Längenausdehnung Δl?", a: "Δl = l0 · αl · ΔT" },
+          { q: "Wofür steht αl in der Ausdehnungsformel?", a: "Längenausdehnungskoeffizient des Werkstoffs [1/K]" }
+        ],
+        exercises: [
+          { group: "Einheiten umrechnen", task: "4380 J = ? kJ", answer: "4,38 kJ" },
+          { group: "Einheiten umrechnen", task: "250 kJ = ? MJ", answer: "0,25 MJ" },
+          { group: "Einheiten umrechnen", task: "0,0480 MJ = ? kJ", answer: "48 kJ" },
+          { group: "Einheiten umrechnen", task: "36718 J = ? MJ", answer: "0,036718 MJ ≈ 0,0367 MJ" },
+          { group: "Temperatur umrechnen (Kelvin → Celsius)", task: "200 K = ? °C", answer: "200 − 273 = -73 °C" },
+          { group: "Temperatur umrechnen (Kelvin → Celsius)", task: "293 K = ? °C", answer: "293 − 273 = 20 °C" },
+          { group: "Temperatur umrechnen (Kelvin → Celsius)", task: "945 K = ? °C", answer: "945 − 273 = 672 °C" },
+          { group: "Temperatur umrechnen (Celsius → Kelvin)", task: "28 °C = ? K", answer: "28 + 273 = 301 K" },
+          { group: "Temperatur umrechnen (Celsius → Kelvin)", task: "-270 °C = ? K", answer: "-270 + 273 = 3 K" },
+          { group: "Temperatur umrechnen (Celsius → Kelvin)", task: "255 °C = ? K", answer: "255 + 273 = 528 K" },
+          { group: "Temperaturdifferenz berechnen", task: "ϑ1 = 85°C, ϑ2 = 23°C. Berechne ΔT.", answer: "ΔT = 85 − 23 = 62 K" },
+          { group: "Temperaturdifferenz berechnen", task: "ϑ1 = 39°C, ϑ2 = -17°C. Berechne ΔT.", answer: "ΔT = 39 − (-17) = 56 K" },
+          { group: "Temperaturdifferenz berechnen", task: "ϑ1 = -5°C, ϑ2 = -23°C. Berechne ΔT.", answer: "ΔT = -5 − (-23) = 18 K" },
+          { group: "Wärmeausdehnung berechnen (αl Stahl = 12·10⁻⁶ /K)", task: "Eine Stahlbrücke hat eine Länge von l0 = 12,5 m und wurde bei 20°C montiert. Im Sommer erwärmt sie sich auf 70°C, im Winter kühlt sie auf -20°C ab. Berechne die Längenausdehnung im Sommer, die Kontraktion im Winter und die totale Bewegung.", answer: "Sommer: ΔT=70−20=50K → Δl=12,5·12·10⁻⁶·50=0,0075m=7,5mm (Ausdehnung)\nWinter: ΔT=20−(-20)=40K → Δl=12,5·12·10⁻⁶·40=0,006m=6mm (Kontraktion)\nTotale Bewegung = 7,5+6 = 13,5 mm" }
+        ],
+        applications: [
+          { task: "Ein Alu-Fensterrahmen (l0 = 2,4 m) wird bei 15°C montiert. Im Sommer erwärmt er sich auf 55°C. αl Aluminium = 23·10⁻⁶/K. Berechne die Längenausdehnung.", answer: "ΔT=55−15=40K → Δl=2,4·23·10⁻⁶·40=0,002208m ≈ 2,21 mm" },
+          { task: "Eine Stahl-Geländerstange (l0 = 3 m) wird bei -10°C montiert. Im Sommer erwärmt sie sich auf 45°C. αl Stahl = 12·10⁻⁶/K. Berechne die Längenausdehnung.", answer: "ΔT=45−(-10)=55K → Δl=3·12·10⁻⁶·55=0,00198m ≈ 1,98 mm" },
+          { task: "Aus der Oberflächentemperatur-Tabelle: Welche Temperaturdifferenz muss mindestens bei einem Fensterglas-Profil berücksichtigt werden (Bereich -25°C bis +80°C)?", answer: "ΔT = 80 − (-25) = 105 K" }
+        ],
+        examOpen: { timeMin: 30, totalPoints: 18, passPoints: 11, parts: [
+          { title: "Theorie (4 Punkte)", questions: [
+              { q: "Nenne die drei Wärmeübertragungsarten.", points: 1, answer: "Wärmeleitung, Wärmeströmung (Konvektion), Wärmestrahlung" },
+              { q: "Wie lautet die Formel für die Längenausdehnung?", points: 1, answer: "Δl = l0 · αl · ΔT" },
+              { q: "In welcher Einheit wird ΔT immer angegeben?", points: 1, answer: "Kelvin [K]" },
+              { q: "Was passiert bei der Wärmeleitung mit den Teilchen selbst?", points: 1, answer: "Sie werden nicht transportiert, nur die Schwingung/Energie wird von Teilchen zu Teilchen weitergegeben" }
+            ] },
+          { title: "Rechnen (10 Punkte)", questions: [
+              { q: "15200 J = ? kJ", points: 2, answer: "15,2 kJ" },
+              { q: "92°C = ? K", points: 2, answer: "92 + 273 = 365 K" },
+              { q: "ϑ1 = 64°C, ϑ2 = -8°C. Berechne ΔT.", points: 2, answer: "ΔT = 64 − (-8) = 72 K" },
+              { q: "Ein Stahlstab (l0=4 m) erwärmt sich um ΔT=35K (αl=12·10⁻⁶/K). Berechne Δl.", points: 2, answer: "Δl = 4·12·10⁻⁶·35 = 0,00168 m = 1,68 mm" },
+              { q: "Ein Alu-Profil (l0=1,8 m) erwärmt sich um ΔT=60K (αl=23·10⁻⁶/K). Berechne Δl.", points: 2, answer: "Δl = 1,8·23·10⁻⁶·60 = 0,002484 m ≈ 2,48 mm" }
+            ] },
+          { title: "Anwenden (4 Punkte)", questions: [
+              { q: "Eine Stahlbrücke (l0=20 m) wird bei 10°C montiert, im Sommer 65°C, im Winter -15°C (αl Stahl=12·10⁻⁶/K). Berechne die Ausdehnung im Sommer, die Kontraktion im Winter und die totale Bewegung.", points: 4, answer: "Sommer: ΔT=55K → Δl=20·12·10⁻⁶·55=0,0132m=13,2mm\nWinter: ΔT=25K → Δl=20·12·10⁻⁶·25=0,006m=6mm\nTotal = 13,2+6 = 19,2 mm" }
+            ] }
+          ] } },
     { id: "s1-10", name: "Bauphysik U-Wert", lekt: 6, tb: "TB5",
-      explain: "Der U-Wert beschreibt den Wärmedurchgang eines Bauteils in W/(m²K) – je kleiner, desto besser die Dämmung.",
-      formulas: "U = 1 / R_total\nR (pro Schicht) = d / λ   (d = Dicke, λ = Wärmeleitfähigkeit)",
-      method: "Den U-Wert eines einfachen Beispielprofils selbst durchrechnen und mit MINERGIE-Grenzwerten vergleichen." },
+        explain: "Berechnung des Wärmedurchgangskoeffizienten (U-Wert) von ein- und mehrschichtigen Bauteilen sowie von Fenstern (Uw-Wert) – das zentrale Mass für die Wärmedämmung im Metall-, Fenster- und Fassadenbau.",
+        theorySections: [
+          { type: "h", text: "Wärmedurchgang und U-Wert" },
+          { type: "p", text: "Am Wärmefluss durch Bauteile (Wand, Fenster, Decke) sind meist alle drei Übertragungsarten beteiligt – man spricht deshalb allgemein vom Wärmedurchgang. Das Mass dafür ist der Wärmedurchgangskoeffizient, kurz U-Wert. Er hängt von der Wärmeleitfähigkeit und Dicke der verwendeten Materialien ab, aber auch von Strahlung und Konvektion an den Oberflächen." },
+          { type: "code", text: "U-Wert: gibt an, wie viele Joule (Energie) pro Sekunde durch 1 m² eines Bauteils fliessen, wenn sich Innen- und Aussentemperatur um 1 K unterscheiden.\nEinheit: [W/(m²·K)]" },
+          { type: "note", tone: "tip", text: "Je kleiner der U-Wert eines Bauteils ist, desto geringer ist der Wärmedurchgang → desto besser die Wärmedämmung. Ein grosser U-Wert bedeutet eine schlechte Wärmedämmung." },
+          { type: "h", text: "Wärmestrom Φ" },
+          { type: "p", text: "Der Wärmestrom Φ ist die Energiemenge [W], die beim Ausgleich des Temperaturunterschieds auf der kälteren Seite austritt – bei Gebäuden z.B. der Heizungsverlust nach aussen." },
+          { type: "code", text: "Φ = U · A · ΔT      Einheit: [W]" },
+          { type: "h", text: "Wärmeleitfähigkeit λ (Lambda)" },
+          { type: "p", text: "Die spezifische Wärmeleitfähigkeit λ gibt an, welche Wärmemenge im Beharrungszustand (Dauerbeheizung) in 1 Sekunde durch 1 m² einer 1 m dicken Schicht eines Stoffes hindurchgeht, wenn die Temperaturdifferenz beider Oberflächen 1 K beträgt." },
+          { type: "code", text: "Einheit: [W/(m·K)]" },
+          { type: "table", headers: ["Baustoff", "λ Rechenwert [W/(m·K)]"], rows: [["Stahl", "50"], ["Aluminium", "200"], ["Beton", "2,1"], ["Edelstahl 1.4301", "15"], ["Steinwolle", "0,04"], ["Polyurethanschaum (PUR)", "0,02"], ["Expandiertes Polystyrol (EPS)", "0,035"]] },
+          { type: "h", text: "Wärmedurchlasswiderstand R und Wärmeübergangswiderstände Rsi/Rse" },
+          { type: "p", text: "Die Wärmedämmung erfolgt über einen inneren Widerstand, den ein Baustoff dem Wärmestrom entgegensetzt: den Wärmedurchlasswiderstand R." },
+          { type: "code", text: "R = s / λ        Einheit: [m²·K/W]   (s = Bauteildicke [m], λ = Wärmeleitfähigkeit)" },
+          { type: "p", text: "Zusätzlich wird die auftreffende Wärme nicht sofort vollständig aufgenommen bzw. abgegeben – es gibt innere und äussere Wärmeübergangswiderstände:" },
+          { type: "table", headers: ["Widerstand", "Wert [m²·K/W]"], rows: [["Rsi (innen)", "0,13"], ["Rse (aussen)", "0,04"], ["Rse für Bauteile im Erdreich", "0,00"]] },
+          { type: "h", text: "Gesamtwärmedurchgangswiderstand RT und U-Wert" },
+          { type: "code", text: "RT = Rsi + R + Rse\nU = 1 / RT\n\nMehrschichtiges Bauteil:  R = s1/λ1 + s2/λ2 + s3/λ3 + …" },
+          { type: "h", text: "Berechnungsbeispiel einschichtiges Bauteil" },
+          { type: "p", text: "Beton, s = 0,2 m, λ = 2,1 W/(m·K):" },
+          { type: "code", text: "R = 0,2/2,1 ≈ 0,0952 m²K/W\nRT = 0,13 + 0,0952 + 0,04 ≈ 0,2652 m²K/W\nU = 1/0,2652 ≈ 3,77 W/m²K" },
+          { type: "h", text: "Berechnungsbeispiel mehrschichtiges Bauteil" },
+          { type: "p", text: "Beton (s1=0,2m, λ1=2,1), Steinwolle (s2=0,12m, λ2=0,045), Verputz (s3=0,010m, λ3=0,87):" },
+          { type: "code", text: "R1=0,2/2,1≈0,0952 ; R2=0,12/0,045≈2,667 ; R3=0,010/0,87≈0,0115\nR=0,0952+2,667+0,0115≈2,774 m²K/W\nRT=0,13+2,774+0,04≈2,944 m²K/W\nU=1/2,944≈0,340 W/m²K" },
+          { type: "h", text: "Uw-Wert des Fensters (SN EN ISO 10077-1)" },
+          { type: "code", text: "Uw = (Ag·Ug + Af·Uf + lg·Ψg) / Aw" },
+          { type: "list", items: ["Uw = Wärmedurchgangskoeffizient des Fensters [W/(m²K)]", "Aw = Gesamte Fensterfläche = Ag + Af [m²]", "Ag = Glasfläche [m²]  ·  Ug = U-Wert des Glases [W/(m²K)]", "Af = Rahmenfläche [m²]  ·  Uf = U-Wert des Rahmens [W/(m²K)]", "lg = Länge des Glasumfanges (Übergang Rahmen–Glas) [m]", "Ψg = längenbezogener Wärmedurchgangskoeffizient [W/(m·K)]"] },
+          { type: "h", text: "Wärmebrücken" },
+          { type: "p", text: "Eine Wärmebrücke ist ein Bereich in Bauteilen, durch den örtlich mehr Wärme abfliesst als durch die benachbarten Bauteile – oft verursacht durch Materialwechsel, Geometrieänderungen oder Durchdringungen. Sie führen zu erhöhten Wärmeverlusten und bauphysikalischen Risiken (z.B. Oberflächenkondensat, Pilzbefall) und sollten konstruktiv vermieden werden." },
+          { type: "list", items: ["Geometrische Wärmebrücken: entstehen durch Vergrösserung der wärmeabgebenden gegenüber der wärmeaufnehmenden Oberfläche (typisch: Gebäudeecken).", "Materialbedingte Wärmebrücken: entstehen durch Baustoffe mit unterschiedlichen wärmetechnischen Eigenschaften.", "Lineare Wärmebrücke: Ψ (Psi), Einheit [W/(m·K)].", "Punktuelle Wärmebrücke: χ (Chi), Einheit [W/K]."] },
+          { type: "h", text: "Grenzwerte im Wohnungsbau (Aussenklima)" },
+          { type: "table", headers: ["Bauteil", "SIA 180", "MINERGIE", "MINERGIE-P"], rows: [["Steil-/Flachdach", "0,4", "0,15", "0,15"], ["Vertikale Wand", "0,4", "0,15", "0,15"], ["Fenster (Uw-Wert)", "2,4", "1,0", "0,8"], ["Türen (Ud-Wert)", "2,4", "1,2", "1,2"]] }
+        ],
+        method: "Immer zuerst eine Schichtenskizze mit s und λ pro Schicht zeichnen, dann Schritt für Schritt R je Schicht → R total → RT (mit Rsi/Rse) → U berechnen.",
+        flashcards: [
+          { q: "Was gibt der U-Wert an?", a: "Wie viele Joule (Energie) pro Sekunde durch 1 m² eines Bauteils fliessen, wenn Innen- und Aussentemperatur sich um 1 Kelvin unterscheiden" },
+          { q: "Einheit des U-Werts?", a: "W/(m²·K)" },
+          { q: "Formel für den Wärmestrom Φ (Phi)?", a: "Φ = U · A · ΔT" },
+          { q: "Formel für den Wärmedurchlasswiderstand einer Schicht?", a: "R = s / λ  (s = Dicke, λ = Wärmeleitfähigkeit)" },
+          { q: "Formel für den Gesamtwärmedurchgangswiderstand RT?", a: "RT = Rsi + R + Rse" },
+          { q: "Formel für den U-Wert aus RT?", a: "U = 1 / RT" },
+          { q: "Standardwerte für Rsi und Rse nach SN EN ISO 13786?", a: "Rsi = 0,13 m²K/W ; Rse = 0,04 m²K/W (im Erdreich: Rse = 0,00)" },
+          { q: "Wie berechnet man R bei einem mehrschichtigen Bauteil?", a: "Summe der Einzelwiderstände: R = s1/λ1 + s2/λ2 + s3/λ3 + …" },
+          { q: "Was bedeutet ein kleiner U-Wert?", a: "Guter, geringer Wärmedurchgang → gute Wärmedämmung" },
+          { q: "Was ist eine Wärmebrücke?", a: "Ein Bereich in Bauteilen, durch den die Wärme schneller nach aussen transportiert wird als durch die umgebenden Bauteile" },
+          { q: "Symbol und Einheit der linearen Wärmebrücke?", a: "Ψ (Psi), Einheit W/(m·K)" },
+          { q: "Symbol und Einheit der punktuellen Wärmebrücke?", a: "χ (Chi), Einheit W/K" }
+        ],
+        exercises: [
+          { group: "Wärmestrom berechnen", task: "Ein Schaufenster hat eine Glasfläche von 3,83 m². Der U-Wert des Glases beträgt 1,1 W/m²K. Wie gross ist der Wärmestrom bei ΔT = 42 K?", answer: "Φ = U·A·ΔT = 1,1·3,83·42 ≈ 176,9 W" },
+          { group: "Wärmestrom berechnen", task: "Eine Schaufensterfront (Länge 8,5 m, Höhe 2,5 m) hat einen U-Wert von 3,2 W/m²K. Innen t1=21°C, aussen t2=-12°C. Wie gross ist der Wärmestrom?", answer: "A=8,5·2,5=21,25 m² ; ΔT=21−(-12)=33K ; Φ=3,2·21,25·33 = 2244 W" },
+          { group: "Wärmestrom berechnen", task: "Nach der Sanierung hat dieselbe Front einen U-Wert von 1,2 W/m²K (gleiche Fläche und ΔT). Wie viel Energie wird pro Woche theoretisch eingespart?", answer: "Φneu=1,2·21,25·33=841,5W ; Einsparung=2244−841,5=1402,5W\n1 Woche = 604800 s → Energie = 1402,5·604800 ≈ 848 011 800 J ≈ 848 MJ ≈ 235,6 kWh" },
+          { group: "Wärmedurchlasswiderstand R berechnen (λ Beton = 2,1 W/mK)", task: "Wie gross ist der Wärmedurchlasswiderstand einer 15 cm dicken Betonwand?", answer: "R = s/λ = 0,15/2,1 ≈ 0,0714 m²K/W" },
+          { group: "U-Wert einschichtiges Bauteil berechnen", task: "Betonwand: s = 0,2 m, λ = 2,1 W/(m·K). Berechne R, RT und U.", answer: "R=0,2/2,1≈0,0952 m²K/W\nRT=Rsi+R+Rse=0,13+0,0952+0,04≈0,2652 m²K/W\nU=1/RT=1/0,2652≈3,77 W/m²K" },
+          { group: "U-Wert mehrschichtiges Bauteil berechnen", task: "Wand aus Beton (s1=0,2m, λ1=2,1), Steinwolle (s2=0,12m, λ2=0,045) und Verputz (s3=0,010m, λ3=0,87). Berechne R, RT und U.", answer: "R1=0,2/2,1≈0,0952 ; R2=0,12/0,045≈2,667 ; R3=0,010/0,87≈0,0115\nR=0,0952+2,667+0,0115≈2,774 m²K/W\nRT=0,13+2,774+0,04≈2,944 m²K/W\nU=1/2,944≈0,340 W/m²K" }
+        ],
+        applications: [
+          { task: "Eine Fassadenwand besteht aus Backstein (s=0,25m, λ=0,5 W/mK), Steinwolle (s=0,10m, λ=0,04 W/mK) und Verputz (s=0,02m, λ=0,87 W/mK). Berechne den U-Wert und vergleiche ihn mit dem SIA-180-Grenzwert für vertikale Wände (0,4 W/m²K).", answer: "R1=0,25/0,5=0,5 ; R2=0,10/0,04=2,5 ; R3=0,02/0,87≈0,023\nR=0,5+2,5+0,023≈3,023 m²K/W\nRT=0,13+3,023+0,04≈3,193 m²K/W\nU=1/3,193≈0,313 W/m²K\nVergleich SIA180 (0,4): erfüllt (0,313 < 0,4). MINERGIE (0,15): nicht erfüllt." },
+          { task: "Berechne den Uw-Wert eines Fensters mit Ag=1,2 m² (Ug=0,7 W/m²K), Af=0,4 m² (Uf=1,4 W/m²K), lg=4,2 m und Ψg=0,03 W/(mK).", answer: "Aw=Ag+Af=1,6 m²\nUw=(Ag·Ug+Af·Uf+lg·Ψg)/Aw=(1,2·0,7+0,4·1,4+4,2·0,03)/1,6=(0,84+0,56+0,126)/1,6=1,526/1,6≈0,954 W/m²K" }
+        ],
+        examOpen: { timeMin: 35, totalPoints: 20, passPoints: 12, parts: [
+          { title: "Theorie (4 Punkte)", questions: [
+              { q: "Wie lautet die Formel für den U-Wert aus RT?", points: 1, answer: "U = 1 / RT" },
+              { q: "Wie lautet die Formel für den Wärmedurchlasswiderstand einer Schicht?", points: 1, answer: "R = s / λ" },
+              { q: "Nenne die Standardwerte von Rsi und Rse.", points: 1, answer: "Rsi = 0,13 m²K/W ; Rse = 0,04 m²K/W" },
+              { q: "Was bedeutet ein kleiner U-Wert?", points: 1, answer: "Eine gute Wärmedämmung / geringer Wärmedurchgang" }
+            ] },
+          { title: "Rechnen (12 Punkte)", questions: [
+              { q: "Wie gross ist der Wärmedurchlasswiderstand R einer 12 cm dicken Steinwolle-Schicht (λ=0,04 W/mK)?", points: 2, answer: "R = 0,12/0,04 = 3,0 m²K/W" },
+              { q: "Berechne R, RT und U für eine einschichtige Backsteinwand: s=0,3m, λ=0,5 W/mK.", points: 3, answer: "R=0,3/0,5=0,6 m²K/W ; RT=0,13+0,6+0,04=0,77 m²K/W ; U=1/0,77≈1,30 W/m²K" },
+              { q: "Ein Bauteil hat A=12 m², U=0,9 W/m²K, ΔT=28K. Berechne den Wärmestrom Φ.", points: 2, answer: "Φ=0,9·12·28=302,4 W" },
+              { q: "Mehrschichtige Wand: Backstein s1=0,15m λ1=0,5 ; EPS s2=0,08m λ2=0,035 ; Verputz s3=0,015m λ3=0,87. Berechne R, RT und U.", points: 5, answer: "R1=0,15/0,5=0,3 ; R2=0,08/0,035≈2,286 ; R3=0,015/0,87≈0,0172\nR=0,3+2,286+0,0172≈2,603 m²K/W\nRT=0,13+2,603+0,04≈2,773 m²K/W\nU=1/2,773≈0,361 W/m²K" }
+            ] },
+          { title: "Anwenden (4 Punkte)", questions: [
+              { q: "Erfüllt die Wand aus der letzten Rechenaufgabe (U≈0,361) den SIA-180-Grenzwert für Wände (0,4 W/m²K)? Begründe.", points: 2, answer: "Ja, 0,361 < 0,4 → die Anforderung ist erfüllt." },
+              { q: "Nenne zwei konstruktive Massnahmen, um Wärmebrücken zu vermeiden.", points: 2, answer: "Z.B.: durchgehende, ununterbrochene Dämmschicht; thermische Trennung bei durchstossenden Metallteilen (z.B. Konsolen, Befestigungen); Vermeidung von Geometriesprüngen an Ecken." }
+            ] }
+          ] } },
     { id: "s1-11", name: "Skizzieren: Treppen, Geländer, Fenster, Türen", lekt: 30, tb: "TB6",
-      explain: "Freihand- und Massstabskizzen von Standardbaugruppen: Wangentreppen und Stufenanschlüsse, Geländer (Pfosten, Handlauf, Füllstäbe), Fenster- und Türprofile inkl. Anschlussdetails.",
-      method: "Täglich eine Baugruppe dreifach üben: Vorlage abzeichnen → aus dem Gedächtnis skizzieren → mit Bemassung beschriften." },
+        explain: "Grundlagen des Konstruierens und Skizzierens: Berufsbild, Skizzierwerkzeuge, Strichstärken, Vermassungsregeln und Konstruktionsrichtlinien – die Basis für alle Skizzierthemen. Danach Freihand- und Massstabskizzen von Treppen, Geländern, Fenstern und Türen mit korrekter Bemassung üben.",
+        theorySections: [
+          { type: "h", text: "Der Beruf Metallbaukonstrukteur/in EFZ" },
+          { type: "p", text: "Metallbaukonstrukteurinnen und Metallbaukonstrukteure EFZ sind Fachleute in technischen Büros von Unternehmen des Metall-, Stahl-, Fenster- und Fassadenbaus. Sie befassen sich mit der zeichnerischen und konstruktiven Bearbeitung von Projekten, erstellen die Planunterlagen nach Kundenwunsch und sichern die Qualität der Projektausführung – unter Rücksicht auf die eigene Sicherheit, die Sicherheit anderer und den Umweltschutz." },
+          { type: "note", tone: "tip", text: "Am Qualifikationsverfahren (QV) wird in der Grundlagenarbeit (GA) von Hand konstruiert: 4 anspruchsvolle Konstruktionsaufgaben aus Metall-, Fassaden- oder Stahlbau." },
+          { type: "h", text: "Skizzierwerkzeuge und Grundregeln" },
+          { type: "list", items: ["Skizziert wird mit Bleistift oder Filzstift, ohne Zeichnungsbrett – der Massstab und das Geodreieck dürfen als Hilfsmittel verwendet werden.", "Für das Zeichnen gelten die AM-Suisse-Zeichnungsrichtlinien, der Normenauszug und die SIA 400 (Planbearbeitung im Hochbau).", "Vermasst wird mit dem Massstab; die Masslinien sind feiner zu zeichnen als die Konstruktionslinien.", "Bei mehreren gleichen Profilen wird immer nur eines vollständig skizziert.", "Zeitvorgaben sind einzuhalten.", "Bauseitige Gegebenheiten (Isolation, Platten, Mauerwerk usw.) werden gemäss AM-Suisse-Richtlinien schraffiert.", "Das Aufgabenblatt ist sorgfältig zu studieren, Massvorgaben sind einzuhalten und einzuzeichnen."] },
+          { type: "h", text: "Strichstärken" },
+          { type: "table", headers: ["Strichstärke", "Verwendung"], rows: [["Ø 0,7 mm", "Körperkanten (sichtbar)"], ["Ø 0,5 mm", "Unsichtbare Linien, Schnittkanten, strichpunktierte Begrenzungen"], ["Ø 0,3 mm", "Vermassungslinien, Schraffuren"]] },
+          { type: "h", text: "Vermassungsregeln" },
+          { type: "list", items: ["Alle Masse, die für Herstellung, Zusammenbau und Montage benötigt werden, müssen eingetragen werden.", "Jede Abmessung wird dort eingetragen, wo sie am meisten dient.", "Grundsätzlich wird von innen nach aussen oder von aussen nach innen vermasst.", "Unsichtbare Kanten oder Details werden nur vermasst, wenn nötig oder für das Planverständnis hilfreich.", "Masslinien verlaufen parallel zu den vermassten Kanten, sind dünne Volllinien (0,3mm) mit sich kreuzenden Enden.", "Die Begrenzung der Masslinien erfolgt mit Strich (45°), Pfeil oder Punkt.", "Zahlen werden parallel zur Masslinie eingetragen: über der horizontalen bzw. links der vertikalen Masslinie, in der Mitte.", "Nicht massstäblich gezeichnete, aber vermasste Bauteile werden unterstrichen.", "Symbole (ø Durchmesser, R Radius, □ Vierkant) werden vor die Masszahl geschrieben.", "Zusatzinformationen (Mauermass, Flügel, Glas usw.) werden ebenfalls vor die Masszahl geschrieben."] },
+          { type: "h", text: "Wichtige Masse: Bauherrschaft/Architektur vs. Metallbau" },
+          { type: "table", headers: ["Für Architekt/in und Bauleiter/in", "Für Metallbaukonstrukteur/in und Metallbauer/in"], rows: [["Baumasse (Mauerlichtmasse)", "Zuschnittmasse (Rahmenmass, Flügelmass)"], ["Durchgangsmasse (Türen, Tore)", "Ergänzungsmasse (als Kontrolle)"], ["Ansichtsbreiten", "Glasgrössen, Paneelgrössen, Glasfalzmasse"], ["Koten", "Beschriftung aller Materialien (Profile, Glas, Beschläge, Schrauben)"]] },
+          { type: "h", text: "Konstruieren – Grundbegriff" },
+          { type: "p", text: "Die meisten Arbeiten in unserem Beruf setzen sich aus Einzelteilen zusammen (Halbfabrikate, Bleche, Verbindungsmittel, Beschläge usw.) – man nennt sie Konstruktionselemente. „Konstruieren“ bedeutet, diese Elemente zusammenzufügen und zu verbinden. Ziel ist eine Lösung mit minimalem Aufwand an Material und Arbeitszeit, die dennoch in jeder Beziehung fachgerecht ist." },
+          { type: "h", text: "Richtlinien für eine gute Konstruktion" },
+          { type: "list", items: ["Zweckmässigkeit: Jedes Bauteil muss dem vorgesehenen Verwendungszweck entsprechen (Ästhetik und Beanspruchung).", "Stabilität: Jedes Konstruktionselement muss den Anforderungen der Statik und Festigkeitslehre genügen.", "Dauerhaftigkeit: Kunde/in hat Anspruch auf eine dauerhafte Arbeit (Werkstoffwahl, Beschläge, Korrosionsschutz).", "Die gute Form: richtet sich nach Wünschen des Architekten, darf aber nie auf Kosten der Stabilität/Dauerhaftigkeit gehen.", "Die Fertigung: möglichst geringer Arbeitsaufwand, kurze Lieferfristen (Montagestunden sind teurer als Werkstattstunden!).", "Die Konkurrenzfähigkeit: möglichst kostengünstige Konstruktion (handelsübliche Profile, gleiche Längen/Grössen).", "Normengerecht: aktuelle Normen und Vorschriften müssen eingehalten werden.", "Bauphysik: bauphysikalische Grundsätze zwingend berücksichtigen, um Bauschäden zu vermeiden.", "Sicherheitstechnische Richtigkeit: Sicherheitsnormen, Brandschutz und Elektrotechnik-Grundkenntnisse beachten."] },
+          { type: "h", text: "Garantiefristen (SIA 118 / Obligationenrecht)" },
+          { type: "list", items: ["2 Jahre auf offene (sichtbare) Mängel", "5 Jahre für verdeckte Mängel", "10 Jahre für absichtlich verschwiegene Mängel"] },
+          { type: "h", text: "EN 1090 – Ausführung von Stahl- und Aluminiumtragwerken" },
+          { type: "p", text: "Die EN 1090 verlangt eine Zertifizierung des Konformitätsnachweisverfahrens mit werkseigener Produktionskontrolle (WPK, nach EN 1090-1) sowie der Schweisstechnologie (nach EN ISO 3834)." },
+          { type: "list", items: ["EN 1090-1: Konformitätsnachweisverfahren für tragende Bauteile.", "EN 1090-2: Technische Regeln für die Ausführung von Stahltragwerken.", "EN 1090-3: Technische Regeln für die Ausführung von Aluminiumtragwerken."] },
+          { type: "p", text: "Die WPK verlangt regelmässige, dokumentierte interne Kontrollen (Verantwortung/Qualifikation des Personals, Planung/Bemessung, richtige Werkstoffe, Vorgehen bei Abweichungen, Prüfungsdurchführung)." },
+          { type: "table", headers: ["Ausführungsklasse (EXC)", "Anforderungen"], rows: [["EXC1", "Geringe Anforderungen"], ["EXC2 (Standard, falls keine Angabe)", "Mittlere Anforderungen"], ["EXC3", "Hohe Anforderungen"], ["EXC4", "Sehr hohe Anforderungen"]] }
+        ],
+        method: "Täglich eine Baugruppe dreifach üben: Vorlage abzeichnen → aus dem Gedächtnis skizzieren → mit korrekter Bemassung nach den gelernten Regeln beschriften.",
+        flashcards: [
+          { q: "Was macht ein/e Metallbaukonstrukteur/in EFZ?", a: "Zeichnerische und konstruktive Bearbeitung von Projekten in technischen Büros des Metall-, Stahl-, Fenster- und Fassadenbaus; erstellt Planunterlagen und sichert die Qualität der Ausführung." },
+          { q: "Welche Hilfsmittel sind beim Skizzieren erlaubt?", a: "Massstab und Geodreieck – aber kein Zeichnungsbrett" },
+          { q: "Strichstärke für sichtbare Körperkanten?", a: "Ø 0,7 mm" },
+          { q: "Strichstärke für unsichtbare Linien, Schnittkanten, strichpunktierte Begrenzungen?", a: "Ø 0,5 mm" },
+          { q: "Strichstärke für Vermassungslinien und Schraffuren?", a: "Ø 0,3 mm" },
+          { q: "Welche Norm regelt die Planbearbeitung im Hochbau?", a: "SIA 400" },
+          { q: "Welches Symbol steht für Durchmesser, Radius und Vierkant?", a: "ø, R, □ (jeweils vor die Masszahl geschrieben)" },
+          { q: "Was sind Zuschnittmasse und für wen sind sie wichtig?", a: "Rahmen- und Flügelmass – wichtig für den Metallbaukonstrukteur/die Metallbaukonstrukteurin" },
+          { q: "Was sind Baumasse und für wen sind sie wichtig?", a: "Mauerlichtmasse – wichtig für Architekt/in und Bauleiter/in" },
+          { q: "Nenne drei Richtlinien für eine gute Konstruktion.", a: "Z.B. Zweckmässigkeit, Stabilität, Dauerhaftigkeit, gute Form, Fertigung, Konkurrenzfähigkeit, Normengerecht" },
+          { q: "Wie lange gilt die Garantiefrist für verdeckte Mängel (SIA 118 / OR)?", a: "5 Jahre" },
+          { q: "Was regelt EN 1090-1?", a: "Das Konformitätsnachweisverfahren für tragende Bauteile aus Stahl und Aluminium" },
+          { q: "Welche Ausführungsklasse (EXC) gilt automatisch, wenn keine Angabe gemacht wird?", a: "EXC2 (mittlere Anforderungen)" }
+        ],
+        exercises: [
+          { group: "Strichstärken zuordnen", task: "Welche Strichstärke verwendest du für eine sichtbare Körperkante?", answer: "Ø 0,7 mm" },
+          { group: "Strichstärken zuordnen", task: "Welche Strichstärke für eine Vermassungslinie oder Schraffur?", answer: "Ø 0,3 mm" },
+          { group: "Strichstärken zuordnen", task: "Welche Strichstärke für eine verdeckte (unsichtbare) Kante?", answer: "Ø 0,5 mm" },
+          { group: "Vermassungsregeln anwenden", task: "Ein Bauteil ist nicht massstäblich gezeichnet, soll aber trotzdem vermasst werden. Was musst du tun?", answer: "Die Masszahl unterstreichen." },
+          { group: "Vermassungsregeln anwenden", task: "Wo wird eine Abmessung grundsätzlich eingetragen?", answer: "Dort, wo sie am meisten dient bzw. am besten verständlich ist." },
+          { group: "Vermassungsregeln anwenden", task: "Welches Symbol schreibst du vor die Masszahl eines Rundrohrs mit 42 mm Durchmesser?", answer: "ø42" },
+          { group: "Konstruktionsrichtlinien zuordnen", task: "Ein Kunde wünscht eine Eingangstür, die auch nach 15 Jahren intensiver Nutzung noch einwandfrei funktioniert. Welche Richtlinie steht im Vordergrund?", answer: "Die Dauerhaftigkeit" },
+          { group: "Konstruktionsrichtlinien zuordnen", task: "Ein Konstrukteur wählt für ein Geländer handelsübliche Profile statt einer aufwändigen Sonderanfertigung. Welche Richtlinie wendet er damit vor allem an?", answer: "Die Fertigung / Konkurrenzfähigkeit (kostengünstige, einfache Herstellung mit möglichst wenig Arbeitsaufwand)" },
+          { group: "Normen und Ausführungsklassen", task: "Ein Betrieb macht für ein Stahlbauteil keine Angabe zur Ausführungsklasse. Welche EXC gilt automatisch?", answer: "EXC2" },
+          { group: "Normen und Ausführungsklassen", task: "Nach welcher Norm wird die werkseigene Produktionskontrolle (WPK) für tragende Stahlbauteile gefordert?", answer: "EN 1090-1" }
+        ],
+        applications: [
+          { task: "Skizziere ein einfaches Vierkantrohr-Profil (z.B. 40×40 mm) in 3 Ansichten und vermasse es gemäss den gelernten Regeln (Masslinien 0,3mm, Symbole vor der Masszahl, Vermassung von innen nach aussen oder umgekehrt). Notiere, welche Strichstärke du für welche Linienart verwendest.", answer: "Kontrolle anhand der Regeln: Körperkanten 0,7mm, unsichtbare Kanten/Schnittkanten 0,5mm, Mass-/Schraffurlinien 0,3mm; Masslinien parallel zur vermassten Kante, Zahlen parallel zur Masslinie über/links davon, ø vor der Masszahl für den Durchmesser." },
+          { task: "Notiere zu einem Bauteil aus deinem Betrieb (z.B. Fenstergriff, Türband, Geländerpfosten), welche der Konstruktionsrichtlinien (Zweckmässigkeit, Stabilität, Dauerhaftigkeit, gute Form, Fertigung, Konkurrenzfähigkeit, Normengerecht, Bauphysik, Sicherheitstechnische Richtigkeit) dabei besonders wichtig waren und begründe kurz warum.", answer: "Individuelle Antwort – wichtig ist eine nachvollziehbare Begründung anhand der 9 gelernten Richtlinien." }
+        ],
+        examOpen: { timeMin: 30, totalPoints: 16, passPoints: 10, parts: [
+          { title: "Grundlagen (6 Punkte)", questions: [
+              { q: "Welche drei Strichstärken gibt es und wofür stehen sie?", points: 3, answer: "0,7mm = Körperkanten ; 0,5mm = unsichtbare Linien/Schnittkanten ; 0,3mm = Vermassungslinien/Schraffuren" },
+              { q: "Welche Norm regelt die Planbearbeitung im Hochbau?", points: 1, answer: "SIA 400" },
+              { q: "Was bedeutet die Ausführungsklasse EXC2?", points: 1, answer: "Mittlere Anforderungen – gilt automatisch, wenn keine andere Ausführungsklasse angegeben ist" },
+              { q: "Wie lange gilt die Garantiefrist für offene (sichtbare) Mängel nach SIA 118?", points: 1, answer: "2 Jahre" }
+            ] },
+          { title: "Vermassung (6 Punkte)", questions: [
+              { q: "Zähle vier Vermassungsregeln auf.", points: 4, answer: "Z.B.: alle für Herstellung/Montage nötigen Masse eintragen; Masslinien parallel zur vermassten Kante; Symbole vor der Masszahl; nicht massstäblich gezeichnete, aber vermasste Bauteile unterstreichen (je 1 Punkt für 4 korrekte Regeln)" },
+              { q: "Nenne den Unterschied zwischen Baumassen und Zuschnittmassen.", points: 2, answer: "Baumasse (Mauerlichtmasse) sind für Architekt/in und Bauleiter/in wichtig; Zuschnittmasse (Rahmen-/Flügelmass) sind für den Metallbaukonstrukteur/die -konstrukteurin wichtig" }
+            ] },
+          { title: "Anwendung (4 Punkte)", questions: [
+              { q: "Ein Kunde verlangt eine möglichst günstige, aber normkonforme Stahlkonstruktion. Nenne zwei Richtlinien, die hier besonders zum Tragen kommen, und erkläre kurz warum.", points: 4, answer: "Z.B. Konkurrenzfähigkeit (kostengünstige Lösung mit handelsüblichen Profilen) und Normengerecht (Einhaltung aktueller Normen/Vorschriften ist rechtlich zwingend, unabhängig vom Preis)" }
+            ] }
+          ] } },
     { id: "s1-12", name: "Skizzieren: Gitter, Vordächer, Stahlbau", lekt: 19, tb: "TB6",
-      explain: "Skizzieren von Gitterrostkonstruktionen, Vordachtragwerken (Konsolen, Wasserabläufe) und klassischen Stahlbauteilen wie Trägern, Stützen und Anschlüssen.",
-      method: "Reale Bauteile fotografieren und als bemasste Skizze nachzeichnen (Foto-zu-Skizze-Übung)." }
+        explain: "Gitter und Roste im Metallbau: bewegliche und feststehende Gitterarten, Fenstergitterformen, Gitteranordnung nach Befestigungsort sowie Herstellung und Montage. Dazu Skizzieren von Vordachtragwerken und klassischen Stahlbauteilen.",
+        theorySections: [
+          { type: "note", tone: "tip", text: "Merke: Gitter sind licht- und luftdurchlässige Zier- oder Sicherheitselemente für Gebäude und Anlagen." },
+          { type: "h", text: "Bewegliche Gitter" },
+          { type: "p", text: "Bewegliche Gitter werden als Gittertür oder mit Gelenken als Scherengitter oder Rollgitter gebaut. Scheren- und Rollgitter haben Gelenke und laufen in Führungsschienen. Zum Antrieb der Rollgitter dienen Getriebemotoren oder in die Rohrwelle eingebaute Rohrmotoren. Bei leichten Gittern sorgt eine Spannfeder für den Gewichtsausgleich." },
+          { type: "h", text: "Feststehende Gitter" },
+          { type: "list", items: ["Raumteiler: Gitterelemente, die Räume unterteilen und gestalten; sie beginnen über dem Boden und enden entweder in der Decke oder in einem Rahmen. Sie gestatten den Durchgang.", "Trenngitter: können anstelle von Trennwänden Räume abtrennen und den Durchgang verhindern. Sie stehen zwischen Mauern, Pfosten oder Stützen. Begrenzen Trenngitter Grundstücke, werden sie Frontgitter genannt.", "Ziergitter: wirken dekorativ und schmücken Treppengeländer, Heizkörpernischen und Grundstücksgrenzen.", "Türgitter: sollen meist die Glasfüllung vor Zerstörung schützen, Einbrüche erschweren und zusätzlich schmücken.", "Fenstergitter: sollen das unerlaubte Durchsteigen von Fenstern verhindern und werden nach der Form ihrer Gitterstäbe benannt."] },
+          { type: "h", text: "Fenstergitterformen" },
+          { type: "p", text: "Neben ebenen Gittern gibt es Kastengitter und das seit der Barockzeit bekannte Korbgitter." },
+          { type: "h", text: "Gitteranordnung nach Befestigungsort" },
+          { type: "p", text: "Nach dem Befestigungsort unterscheidet man die gegen Herausreissen besonders sicheren Innenwandgitter, die Laibungsgitter und die Aussenwandgitter." },
+          { type: "h", text: "Gitterherstellung und -montage" },
+          { type: "list", items: ["Gitter werden aus vorgefertigten Massivprofilen durch Nieten oder Schweissen gefügt.", "Schutzgitter müssen den Anforderungen an den Einbruchschutz entsprechen: Mindestmasse der Stabquerschnitte sowie die Abstände der waagrechten und senkrechten Stäbe und der Abstand zwischen Fassade und Gitter hängen von der geforderten Widerstandsklasse ab.", "Die Stäbe sollen miteinander verschweisst sein, die Stabenden müssen mindestens 80 mm tief im Bauwerk verankert werden.", "Weil eine gleichmässige Stabform eintönig wirkt, werden Gitter aufgelockert durch: Verwendung verschiedener Stabquerschnitte, oder Anordnung von handwerklich oder industriell vorgefertigten geschmiedeten Zierstäben."] },
+          { type: "h", text: "Praxisaufträge zum Gitterbau" },
+          { type: "p", text: "Zwei typische Aufträge aus der Praxis vertiefen das Thema: ein Recherche-Auftrag zu Gitterarten, Einteilung und Montagebeispielen (inkl. eigener Skizze eines Fenstergitters), sowie ein vollständiger Konstruktionsauftrag für ein reales Fenstergitter (Schnitte, Ansicht, Stückliste, Gewichtsberechnung, Arbeitsplan und Befestigungsskizze) – siehe die Anwendungsaufgaben unten." }
+        ],
+        method: "Reale Gitter (Fenstergitter, Rollgitter, Ziergitter) fotografieren und als bemasste Skizze nachzeichnen (Foto-zu-Skizze-Übung); jede Gitterart einem der gelernten Begriffe zuordnen.",
+        flashcards: [
+          { q: "Was sind Gitter (Definition)?", a: "Licht- und luftdurchlässige Zier- oder Sicherheitselemente für Gebäude und Anlagen" },
+          { q: "Nenne zwei bewegliche Gitterarten.", a: "Scherengitter und Rollgitter (beide mit Gelenken, laufen in Führungsschienen)" },
+          { q: "Womit wird bei leichten Rollgittern der Gewichtsausgleich sichergestellt?", a: "Mit einer Spannfeder" },
+          { q: "Womit werden schwere Rollgitter angetrieben?", a: "Mit Getriebemotoren oder in die Rohrwelle eingebauten Rohrmotoren" },
+          { q: "Was ist ein Raumteiler?", a: "Ein feststehendes Gitterelement, das Räume unterteilt/gestaltet, beginnt über dem Boden und endet in Decke/Rahmen; gestattet den Durchgang" },
+          { q: "Was ist ein Trenngitter?", a: "Ersetzt Trennwände, steht zwischen Mauern/Pfosten/Stützen und verhindert den Durchgang" },
+          { q: "Wie heisst ein Trenngitter an der Grundstücksgrenze?", a: "Frontgitter" },
+          { q: "Wofür dient ein Türgitter?", a: "Schützt die Glasfüllung vor Zerstörung, erschwert Einbrüche und wirkt zusätzlich schmückend" },
+          { q: "Nenne die drei Fenstergitterformen.", a: "Ebenes Gitter, Kastengitter, Korbgitter (seit der Barockzeit bekannt)" },
+          { q: "Nenne die drei Arten der Gitteranordnung nach Befestigungsort.", a: "Innenwandgitter, Laibungsgitter, Aussenwandgitter" },
+          { q: "Welche Gitteranordnung ist besonders sicher gegen Herausreissen?", a: "Aussenwandgitter" },
+          { q: "Wie werden Gitter meist gefügt?", a: "Aus vorgefertigten Massivprofilen durch Nieten oder Schweissen" },
+          { q: "Wie tief müssen Stabenden mindestens im Bauwerk verankert werden?", a: "Mindestens 80 mm" },
+          { q: "Wodurch wird eine eintönige Gitterwirkung aufgelockert?", a: "Durch verschiedene Stabquerschnitte oder handwerklich/industriell vorgefertigte, geschmiedete Zierstäbe" }
+        ],
+        exercises: [
+          { group: "Gitterarten zuordnen", task: "Ein Gitter läuft in einer Führungsschiene und wird über einen in der Rohrwelle eingebauten Rohrmotor angetrieben. Um welche Gitterart handelt es sich?", answer: "Rollgitter" },
+          { group: "Gitterarten zuordnen", task: "Ein Gitter trennt zwei Räume ab, steht zwischen zwei Pfosten und verhindert den Durchgang vollständig. Wie heisst diese Gitterart?", answer: "Trenngitter" },
+          { group: "Gitterarten zuordnen", task: "Ein dekoratives Gitter schmückt ein Treppengeländer. Wie wird diese Gitterart genannt?", answer: "Ziergitter" },
+          { group: "Fenstergitter", task: "Ein Fenstergitter soll das unerlaubte Durchsteigen verhindern und wird nach der Form seiner Stäbe benannt. Welche 3 Formen gibt es?", answer: "Ebenes Gitter, Kastengitter, Korbgitter" },
+          { group: "Fenstergitter", task: "Welche Gitteranordnung gilt als besonders sicher gegen Herausreissen?", answer: "Aussenwandgitter" },
+          { group: "Montage & Herstellung", task: "Wie tief müssen die Stabenden eines Fenstergitters mindestens im Mauerwerk verankert sein?", answer: "Mindestens 80 mm" },
+          { group: "Montage & Herstellung", task: "Wie werden die Gitterstäbe untereinander verbunden?", answer: "Sie werden miteinander verschweisst" }
+        ],
+        applications: [
+          { task: "Recherche-Auftrag „Gitterbau“: Lies Seite 313 im Fachbuch „Metallbautechnik Fachbildung“ (Kapitel 17 „Gitter und Roste“), recherchiere bei Bedarf ergänzend im Internet, und erstelle eine 1–2-seitige Zusammenfassung mit: Bereichen des Metallbaus, in denen Gitter vorkommen; Einteilung der Gitter nach Funktion, Einsatzort, Gebäudeart, Konstruktion, Herstellung und Lage; einem Montagebeispiel für ein Gitter in einer Post oder Bank; einer Überlegung zur Spezialkonstruktion eines Fenstergitters in einem Gefängnis; sowie einer eigenen Skizze eines Fenstergitters mit Erläuterung der gewählten Montageart. Zeit: 1 Lektion (Rest Hausaufgabe).", answer: "Offene Recherchearbeit – als Grundlage dient die Theorie zu beweglichen/feststehenden Gittern, Fenstergitterformen und Gitteranordnung oben; wichtig sind die geforderten 5 Punkte vollständig und nachvollziehbar zu behandeln." },
+          { task: "Konstruktionsauftrag „Fenstergitter“ (Teil 1–3): Erstelle auf A3 die Schnitte A–A und B–B im Massstab 1:1 sowie die Ansicht im Massstab 1:10 inkl. Vermassung und Beschriftung (saubere Darstellung, Blatteinteilung beachten). Erstelle eine Stückliste gemäss den Positionen der Ansicht. Berechne das Gewicht des feuerverzinkten Fenstergitters anhand der Gewichtsangaben aus dem Tabellenbuch.", answer: "Konstruktions-/Berechnungsauftrag – Gewicht = Summe aus (Profillänge × Metergewicht aus Tabellenbuch) über alle Positionen der Stückliste; Schnitte/Ansicht nach den Vermassungsregeln aus dem Grundlagenthema erstellen." },
+          { task: "Arbeitsplan erstellen: Beschreibe für das Fenstergitter einen genauen Arbeitsplan vom Zuschnitt bis zur Bereitstellung fürs Feuerverzinken. Nenne zu jedem Arbeitsschritt Werkzeuge, Maschinen und Besonderheiten (z.B. Sägen der Pfosten/Handlaufs/Bodenplatten mit der Kreissäge und richtiger Gehrung; Anzeichnen, Körnen, Vorbohren, Bohren der Löcher; Zusammenheften, Masskontrolle, Schweissen, erneute Masskontrolle und Richten).", answer: "Individueller Arbeitsplan – mindestens: Zuschnitt (Kreissäge, Gehrung), Anreissen/Körnen/Bohren, Heften, Masskontrolle, Schweissen, Richten, Masskontrolle, Bereitstellung für die Feuerverzinkung; je Schritt Werkzeug/Maschine und Besonderheit nennen." }
+        ],
+        examOpen: { timeMin: 30, totalPoints: 16, passPoints: 10, parts: [
+          { title: "Theorie (6 Punkte)", questions: [
+              { q: "Was versteht man unter einem Gitter (Definition)?", points: 1, answer: "Ein licht- und luftdurchlässiges Zier- oder Sicherheitselement für Gebäude und Anlagen" },
+              { q: "Nenne die zwei beweglichen Gitterarten mit Gelenken.", points: 2, answer: "Scherengitter und Rollgitter" },
+              { q: "Nenne die drei Fenstergitterformen.", points: 3, answer: "Ebenes Gitter, Kastengitter, Korbgitter" }
+            ] },
+          { title: "Anwenden (6 Punkte)", questions: [
+              { q: "Welche Gitterart verhindert den Durchgang zwischen zwei Räumen vollständig?", points: 2, answer: "Trenngitter" },
+              { q: "Welche Gitteranordnung ist am sichersten gegen Herausreissen und warum?", points: 2, answer: "Aussenwandgitter – weil es aussen am Mauerwerk verankert ist und sich dadurch besonders schwer aus der Wand herausreissen lässt" },
+              { q: "Wie tief müssen Gitterstäbe mindestens verankert werden und wie werden sie untereinander verbunden?", points: 2, answer: "Mindestens 80 mm tief verankert, miteinander verschweisst" }
+            ] },
+          { title: "Praxis (4 Punkte)", questions: [
+              { q: "Beschreibe kurz den Ablauf zur Herstellung eines Fenstergitters von Zuschnitt bis Feuerverzinken (mind. 4 Schritte).", points: 4, answer: "Z.B.: Zuschnitt der Profile (Kreissäge, Gehrung) → Anreissen/Körnen/Bohren → Zusammenheften und Masskontrolle → Schweissen, erneute Masskontrolle und Richten → Bereitstellung für die Feuerverzinkung (je 1 Punkt für einen sinnvollen, korrekt eingeordneten Schritt)" }
+            ] }
+          ] } }
   ]},
   { sem: 2, title: "Semester 2", topics: [
     { id: "s2-01", name: "Bauphysik U-Wert (Vertiefung)", lekt: 7, tb: "TB5",
