@@ -1418,78 +1418,247 @@ window.CURRICULUM = [
             ] }
           ] } },
     { id: "s1-11", name: "Skizzieren: Treppen, Geländer, Fenster, Türen", lekt: 30, tb: "TB6",
-        explain: "Grundlagen des Konstruierens und Skizzierens: Berufsbild, Skizzierwerkzeuge, Strichstärken, Vermassungsregeln und Konstruktionsrichtlinien – die Basis für alle Skizzierthemen. Danach Freihand- und Massstabskizzen von Treppen, Geländern, Fenstern und Türen mit korrekter Bemassung üben.",
-        theorySections: [
-          { type: "h", text: "Der Beruf Metallbaukonstrukteur/in EFZ" },
-          { type: "p", text: "Metallbaukonstrukteurinnen und Metallbaukonstrukteure EFZ sind Fachleute in technischen Büros von Unternehmen des Metall-, Stahl-, Fenster- und Fassadenbaus. Sie befassen sich mit der zeichnerischen und konstruktiven Bearbeitung von Projekten, erstellen die Planunterlagen nach Kundenwunsch und sichern die Qualität der Projektausführung – unter Rücksicht auf die eigene Sicherheit, die Sicherheit anderer und den Umweltschutz." },
-          { type: "note", tone: "tip", text: "Am Qualifikationsverfahren (QV) wird in der Grundlagenarbeit (GA) von Hand konstruiert: 4 anspruchsvolle Konstruktionsaufgaben aus Metall-, Fassaden- oder Stahlbau." },
-          { type: "h", text: "Skizzierwerkzeuge und Grundregeln" },
-          { type: "list", items: ["Skizziert wird mit Bleistift oder Filzstift, ohne Zeichnungsbrett – der Massstab und das Geodreieck dürfen als Hilfsmittel verwendet werden.", "Für das Zeichnen gelten die AM-Suisse-Zeichnungsrichtlinien, der Normenauszug und die SIA 400 (Planbearbeitung im Hochbau).", "Vermasst wird mit dem Massstab; die Masslinien sind feiner zu zeichnen als die Konstruktionslinien.", "Bei mehreren gleichen Profilen wird immer nur eines vollständig skizziert.", "Zeitvorgaben sind einzuhalten.", "Bauseitige Gegebenheiten (Isolation, Platten, Mauerwerk usw.) werden gemäss AM-Suisse-Richtlinien schraffiert.", "Das Aufgabenblatt ist sorgfältig zu studieren, Massvorgaben sind einzuhalten und einzuzeichnen."] },
-          { type: "h", text: "Strichstärken" },
-          { type: "table", headers: ["Strichstärke", "Verwendung"], rows: [["Ø 0,7 mm", "Körperkanten (sichtbar)"], ["Ø 0,5 mm", "Unsichtbare Linien, Schnittkanten, strichpunktierte Begrenzungen"], ["Ø 0,3 mm", "Vermassungslinien, Schraffuren"]] },
-          { type: "h", text: "Vermassungsregeln" },
-          { type: "list", items: ["Alle Masse, die für Herstellung, Zusammenbau und Montage benötigt werden, müssen eingetragen werden.", "Jede Abmessung wird dort eingetragen, wo sie am meisten dient.", "Grundsätzlich wird von innen nach aussen oder von aussen nach innen vermasst.", "Unsichtbare Kanten oder Details werden nur vermasst, wenn nötig oder für das Planverständnis hilfreich.", "Masslinien verlaufen parallel zu den vermassten Kanten, sind dünne Volllinien (0,3mm) mit sich kreuzenden Enden.", "Die Begrenzung der Masslinien erfolgt mit Strich (45°), Pfeil oder Punkt.", "Zahlen werden parallel zur Masslinie eingetragen: über der horizontalen bzw. links der vertikalen Masslinie, in der Mitte.", "Nicht massstäblich gezeichnete, aber vermasste Bauteile werden unterstrichen.", "Symbole (ø Durchmesser, R Radius, □ Vierkant) werden vor die Masszahl geschrieben.", "Zusatzinformationen (Mauermass, Flügel, Glas usw.) werden ebenfalls vor die Masszahl geschrieben."] },
-          { type: "h", text: "Wichtige Masse: Bauherrschaft/Architektur vs. Metallbau" },
-          { type: "table", headers: ["Für Architekt/in und Bauleiter/in", "Für Metallbaukonstrukteur/in und Metallbauer/in"], rows: [["Baumasse (Mauerlichtmasse)", "Zuschnittmasse (Rahmenmass, Flügelmass)"], ["Durchgangsmasse (Türen, Tore)", "Ergänzungsmasse (als Kontrolle)"], ["Ansichtsbreiten", "Glasgrössen, Paneelgrössen, Glasfalzmasse"], ["Koten", "Beschriftung aller Materialien (Profile, Glas, Beschläge, Schrauben)"]] },
-          { type: "h", text: "Konstruieren – Grundbegriff" },
-          { type: "p", text: "Die meisten Arbeiten in unserem Beruf setzen sich aus Einzelteilen zusammen (Halbfabrikate, Bleche, Verbindungsmittel, Beschläge usw.) – man nennt sie Konstruktionselemente. „Konstruieren“ bedeutet, diese Elemente zusammenzufügen und zu verbinden. Ziel ist eine Lösung mit minimalem Aufwand an Material und Arbeitszeit, die dennoch in jeder Beziehung fachgerecht ist." },
-          { type: "h", text: "Richtlinien für eine gute Konstruktion" },
-          { type: "list", items: ["Zweckmässigkeit: Jedes Bauteil muss dem vorgesehenen Verwendungszweck entsprechen (Ästhetik und Beanspruchung).", "Stabilität: Jedes Konstruktionselement muss den Anforderungen der Statik und Festigkeitslehre genügen.", "Dauerhaftigkeit: Kunde/in hat Anspruch auf eine dauerhafte Arbeit (Werkstoffwahl, Beschläge, Korrosionsschutz).", "Die gute Form: richtet sich nach Wünschen des Architekten, darf aber nie auf Kosten der Stabilität/Dauerhaftigkeit gehen.", "Die Fertigung: möglichst geringer Arbeitsaufwand, kurze Lieferfristen (Montagestunden sind teurer als Werkstattstunden!).", "Die Konkurrenzfähigkeit: möglichst kostengünstige Konstruktion (handelsübliche Profile, gleiche Längen/Grössen).", "Normengerecht: aktuelle Normen und Vorschriften müssen eingehalten werden.", "Bauphysik: bauphysikalische Grundsätze zwingend berücksichtigen, um Bauschäden zu vermeiden.", "Sicherheitstechnische Richtigkeit: Sicherheitsnormen, Brandschutz und Elektrotechnik-Grundkenntnisse beachten."] },
-          { type: "h", text: "Garantiefristen (SIA 118 / Obligationenrecht)" },
-          { type: "list", items: ["2 Jahre auf offene (sichtbare) Mängel", "5 Jahre für verdeckte Mängel", "10 Jahre für absichtlich verschwiegene Mängel"] },
-          { type: "h", text: "EN 1090 – Ausführung von Stahl- und Aluminiumtragwerken" },
-          { type: "p", text: "Die EN 1090 verlangt eine Zertifizierung des Konformitätsnachweisverfahrens mit werkseigener Produktionskontrolle (WPK, nach EN 1090-1) sowie der Schweisstechnologie (nach EN ISO 3834)." },
-          { type: "list", items: ["EN 1090-1: Konformitätsnachweisverfahren für tragende Bauteile.", "EN 1090-2: Technische Regeln für die Ausführung von Stahltragwerken.", "EN 1090-3: Technische Regeln für die Ausführung von Aluminiumtragwerken."] },
-          { type: "p", text: "Die WPK verlangt regelmässige, dokumentierte interne Kontrollen (Verantwortung/Qualifikation des Personals, Planung/Bemessung, richtige Werkstoffe, Vorgehen bei Abweichungen, Prüfungsdurchführung)." },
-          { type: "table", headers: ["Ausführungsklasse (EXC)", "Anforderungen"], rows: [["EXC1", "Geringe Anforderungen"], ["EXC2 (Standard, falls keine Angabe)", "Mittlere Anforderungen"], ["EXC3", "Hohe Anforderungen"], ["EXC4", "Sehr hohe Anforderungen"]] }
-        ],
-        method: "Täglich eine Baugruppe dreifach üben: Vorlage abzeichnen → aus dem Gedächtnis skizzieren → mit korrekter Bemassung nach den gelernten Regeln beschriften.",
+        explain: "Grundlagen des Konstruierens und Skizzierens, danach die konkreten Bauteile Treppen und Geländer: Formen, Bezeichnungen, die drei Grundformeln des Treppenbaus, gewendelte Treppen/Spindeltreppen sowie Geländer-Funktion, -Befestigung und die massgeblichen Normen (SIA 358, SUVA, SIGAB, VKF). Fenster und Türen folgen in einem späteren Update, sobald die entsprechenden Unterlagen vorliegen.",
+        method: "Täglich eine Baugruppe dreifach üben: Vorlage abzeichnen → aus dem Gedächtnis skizzieren → mit korrekter Bemassung nach den gelernten Regeln beschriften. Bei Treppen/Geländer immer zuerst die passende Formel bzw. Norm identifizieren, bevor gerechnet wird.",
         flashcards: [
-          { q: "Was macht ein/e Metallbaukonstrukteur/in EFZ?", a: "Zeichnerische und konstruktive Bearbeitung von Projekten in technischen Büros des Metall-, Stahl-, Fenster- und Fassadenbaus; erstellt Planunterlagen und sichert die Qualität der Ausführung." },
-          { q: "Welche Hilfsmittel sind beim Skizzieren erlaubt?", a: "Massstab und Geodreieck – aber kein Zeichnungsbrett" },
-          { q: "Strichstärke für sichtbare Körperkanten?", a: "Ø 0,7 mm" },
-          { q: "Strichstärke für unsichtbare Linien, Schnittkanten, strichpunktierte Begrenzungen?", a: "Ø 0,5 mm" },
-          { q: "Strichstärke für Vermassungslinien und Schraffuren?", a: "Ø 0,3 mm" },
-          { q: "Welche Norm regelt die Planbearbeitung im Hochbau?", a: "SIA 400" },
-          { q: "Welches Symbol steht für Durchmesser, Radius und Vierkant?", a: "ø, R, □ (jeweils vor die Masszahl geschrieben)" },
-          { q: "Was sind Zuschnittmasse und für wen sind sie wichtig?", a: "Rahmen- und Flügelmass – wichtig für den Metallbaukonstrukteur/die Metallbaukonstrukteurin" },
-          { q: "Was sind Baumasse und für wen sind sie wichtig?", a: "Mauerlichtmasse – wichtig für Architekt/in und Bauleiter/in" },
-          { q: "Nenne drei Richtlinien für eine gute Konstruktion.", a: "Z.B. Zweckmässigkeit, Stabilität, Dauerhaftigkeit, gute Form, Fertigung, Konkurrenzfähigkeit, Normengerecht" },
-          { q: "Wie lange gilt die Garantiefrist für verdeckte Mängel (SIA 118 / OR)?", a: "5 Jahre" },
-          { q: "Was regelt EN 1090-1?", a: "Das Konformitätsnachweisverfahren für tragende Bauteile aus Stahl und Aluminium" },
-          { q: "Welche Ausführungsklasse (EXC) gilt automatisch, wenn keine Angabe gemacht wird?", a: "EXC2 (mittlere Anforderungen)" }
+          { q: "Nenne die drei Unterthemen dieses Kapitels.", a: "Grundlagen des Konstruierens & Skizzierens, Treppen, Geländer" },
+          { q: "Schrittmassformel für Treppen?", a: "2·S + A = 59–65 cm (Zielwert 63 cm)" },
+          { q: "Welche Norm regelt Geländer und Brüstungen in der Schweiz?", a: "SIA 358" },
+          { q: "Strichstärke für sichtbare Körperkanten?", a: "Ø 0,7 mm" }
         ],
-        exercises: [
-          { group: "Strichstärken zuordnen", task: "Welche Strichstärke verwendest du für eine sichtbare Körperkante?", answer: "Ø 0,7 mm" },
-          { group: "Strichstärken zuordnen", task: "Welche Strichstärke für eine Vermassungslinie oder Schraffur?", answer: "Ø 0,3 mm" },
-          { group: "Strichstärken zuordnen", task: "Welche Strichstärke für eine verdeckte (unsichtbare) Kante?", answer: "Ø 0,5 mm" },
-          { group: "Vermassungsregeln anwenden", task: "Ein Bauteil ist nicht massstäblich gezeichnet, soll aber trotzdem vermasst werden. Was musst du tun?", answer: "Die Masszahl unterstreichen." },
-          { group: "Vermassungsregeln anwenden", task: "Wo wird eine Abmessung grundsätzlich eingetragen?", answer: "Dort, wo sie am meisten dient bzw. am besten verständlich ist." },
-          { group: "Vermassungsregeln anwenden", task: "Welches Symbol schreibst du vor die Masszahl eines Rundrohrs mit 42 mm Durchmesser?", answer: "ø42" },
-          { group: "Konstruktionsrichtlinien zuordnen", task: "Ein Kunde wünscht eine Eingangstür, die auch nach 15 Jahren intensiver Nutzung noch einwandfrei funktioniert. Welche Richtlinie steht im Vordergrund?", answer: "Die Dauerhaftigkeit" },
-          { group: "Konstruktionsrichtlinien zuordnen", task: "Ein Konstrukteur wählt für ein Geländer handelsübliche Profile statt einer aufwändigen Sonderanfertigung. Welche Richtlinie wendet er damit vor allem an?", answer: "Die Fertigung / Konkurrenzfähigkeit (kostengünstige, einfache Herstellung mit möglichst wenig Arbeitsaufwand)" },
-          { group: "Normen und Ausführungsklassen", task: "Ein Betrieb macht für ein Stahlbauteil keine Angabe zur Ausführungsklasse. Welche EXC gilt automatisch?", answer: "EXC2" },
-          { group: "Normen und Ausführungsklassen", task: "Nach welcher Norm wird die werkseigene Produktionskontrolle (WPK) für tragende Stahlbauteile gefordert?", answer: "EN 1090-1" }
-        ],
-        applications: [
-          { task: "Skizziere ein einfaches Vierkantrohr-Profil (z.B. 40×40 mm) in 3 Ansichten und vermasse es gemäss den gelernten Regeln (Masslinien 0,3mm, Symbole vor der Masszahl, Vermassung von innen nach aussen oder umgekehrt). Notiere, welche Strichstärke du für welche Linienart verwendest.", answer: "Kontrolle anhand der Regeln: Körperkanten 0,7mm, unsichtbare Kanten/Schnittkanten 0,5mm, Mass-/Schraffurlinien 0,3mm; Masslinien parallel zur vermassten Kante, Zahlen parallel zur Masslinie über/links davon, ø vor der Masszahl für den Durchmesser." },
-          { task: "Notiere zu einem Bauteil aus deinem Betrieb (z.B. Fenstergriff, Türband, Geländerpfosten), welche der Konstruktionsrichtlinien (Zweckmässigkeit, Stabilität, Dauerhaftigkeit, gute Form, Fertigung, Konkurrenzfähigkeit, Normengerecht, Bauphysik, Sicherheitstechnische Richtigkeit) dabei besonders wichtig waren und begründe kurz warum.", answer: "Individuelle Antwort – wichtig ist eine nachvollziehbare Begründung anhand der 9 gelernten Richtlinien." }
-        ],
-        examOpen: { timeMin: 30, totalPoints: 16, passPoints: 10, parts: [
-          { title: "Grundlagen (6 Punkte)", questions: [
-              { q: "Welche drei Strichstärken gibt es und wofür stehen sie?", points: 3, answer: "0,7mm = Körperkanten ; 0,5mm = unsichtbare Linien/Schnittkanten ; 0,3mm = Vermassungslinien/Schraffuren" },
-              { q: "Welche Norm regelt die Planbearbeitung im Hochbau?", points: 1, answer: "SIA 400" },
-              { q: "Was bedeutet die Ausführungsklasse EXC2?", points: 1, answer: "Mittlere Anforderungen – gilt automatisch, wenn keine andere Ausführungsklasse angegeben ist" },
-              { q: "Wie lange gilt die Garantiefrist für offene (sichtbare) Mängel nach SIA 118?", points: 1, answer: "2 Jahre" }
-            ] },
-          { title: "Vermassung (6 Punkte)", questions: [
-              { q: "Zähle vier Vermassungsregeln auf.", points: 4, answer: "Z.B.: alle für Herstellung/Montage nötigen Masse eintragen; Masslinien parallel zur vermassten Kante; Symbole vor der Masszahl; nicht massstäblich gezeichnete, aber vermasste Bauteile unterstreichen (je 1 Punkt für 4 korrekte Regeln)" },
-              { q: "Nenne den Unterschied zwischen Baumassen und Zuschnittmassen.", points: 2, answer: "Baumasse (Mauerlichtmasse) sind für Architekt/in und Bauleiter/in wichtig; Zuschnittmasse (Rahmen-/Flügelmass) sind für den Metallbaukonstrukteur/die -konstrukteurin wichtig" }
-            ] },
-          { title: "Anwendung (4 Punkte)", questions: [
-              { q: "Ein Kunde verlangt eine möglichst günstige, aber normkonforme Stahlkonstruktion. Nenne zwei Richtlinien, die hier besonders zum Tragen kommen, und erkläre kurz warum.", points: 4, answer: "Z.B. Konkurrenzfähigkeit (kostengünstige Lösung mit handelsüblichen Profilen) und Normengerecht (Einhaltung aktueller Normen/Vorschriften ist rechtlich zwingend, unabhängig vom Preis)" }
-            ] }
-          ] } },
+        subtopics: [
+          {
+            chapter: "K1", title: "Grundlagen des Konstruierens & Skizzierens",
+            theorySections: [
+              { type: "h", text: "Der Beruf Metallbaukonstrukteur/in EFZ" },
+              { type: "p", text: "Metallbaukonstrukteurinnen und Metallbaukonstrukteure EFZ sind Fachleute in technischen Büros von Unternehmen des Metall-, Stahl-, Fenster- und Fassadenbaus. Sie befassen sich mit der zeichnerischen und konstruktiven Bearbeitung von Projekten, erstellen die Planunterlagen nach Kundenwunsch und sichern die Qualität der Projektausführung – unter Rücksicht auf die eigene Sicherheit, die Sicherheit anderer und den Umweltschutz." },
+              { type: "note", tone: "tip", text: "Am Qualifikationsverfahren (QV) wird in der Grundlagenarbeit (GA) von Hand konstruiert: 4 anspruchsvolle Konstruktionsaufgaben aus Metall-, Fassaden- oder Stahlbau." },
+              { type: "h", text: "Skizzierwerkzeuge und Grundregeln" },
+              { type: "list", items: ["Skizziert wird mit Bleistift oder Filzstift, ohne Zeichnungsbrett – der Massstab und das Geodreieck dürfen als Hilfsmittel verwendet werden.", "Für das Zeichnen gelten die AM-Suisse-Zeichnungsrichtlinien, der Normenauszug und die SIA 400 (Planbearbeitung im Hochbau).", "Vermasst wird mit dem Massstab; die Masslinien sind feiner zu zeichnen als die Konstruktionslinien.", "Bei mehreren gleichen Profilen wird immer nur eines vollständig skizziert.", "Zeitvorgaben sind einzuhalten.", "Bauseitige Gegebenheiten (Isolation, Platten, Mauerwerk usw.) werden gemäss AM-Suisse-Richtlinien schraffiert.", "Das Aufgabenblatt ist sorgfältig zu studieren, Massvorgaben sind einzuhalten und einzuzeichnen."] },
+              { type: "h", text: "Strichstärken" },
+              { type: "table", headers: ["Strichstärke", "Verwendung"], rows: [["Ø 0,7 mm", "Körperkanten (sichtbar)"], ["Ø 0,5 mm", "Unsichtbare Linien, Schnittkanten, strichpunktierte Begrenzungen"], ["Ø 0,3 mm", "Vermassungslinien, Schraffuren"]] },
+              { type: "h", text: "Vermassungsregeln" },
+              { type: "list", items: ["Alle Masse, die für Herstellung, Zusammenbau und Montage benötigt werden, müssen eingetragen werden.", "Jede Abmessung wird dort eingetragen, wo sie am meisten dient.", "Grundsätzlich wird von innen nach aussen oder von aussen nach innen vermasst.", "Unsichtbare Kanten oder Details werden nur vermasst, wenn nötig oder für das Planverständnis hilfreich.", "Masslinien verlaufen parallel zu den vermassten Kanten, sind dünne Volllinien (0,3mm) mit sich kreuzenden Enden.", "Die Begrenzung der Masslinien erfolgt mit Strich (45°), Pfeil oder Punkt.", "Zahlen werden parallel zur Masslinie eingetragen: über der horizontalen bzw. links der vertikalen Masslinie, in der Mitte.", "Nicht massstäblich gezeichnete, aber vermasste Bauteile werden unterstrichen.", "Symbole (ø Durchmesser, R Radius, □ Vierkant) werden vor die Masszahl geschrieben.", "Zusatzinformationen (Mauermass, Flügel, Glas usw.) werden ebenfalls vor die Masszahl geschrieben."] },
+              { type: "h", text: "Wichtige Masse: Bauherrschaft/Architektur vs. Metallbau" },
+              { type: "table", headers: ["Für Architekt/in und Bauleiter/in", "Für Metallbaukonstrukteur/in und Metallbauer/in"], rows: [["Baumasse (Mauerlichtmasse)", "Zuschnittmasse (Rahmenmass, Flügelmass)"], ["Durchgangsmasse (Türen, Tore)", "Ergänzungsmasse (als Kontrolle)"], ["Ansichtsbreiten", "Glasgrössen, Paneelgrössen, Glasfalzmasse"], ["Koten", "Beschriftung aller Materialien (Profile, Glas, Beschläge, Schrauben)"]] },
+              { type: "h", text: "Konstruieren – Grundbegriff" },
+              { type: "p", text: "Die meisten Arbeiten in unserem Beruf setzen sich aus Einzelteilen zusammen (Halbfabrikate, Bleche, Verbindungsmittel, Beschläge usw.) – man nennt sie Konstruktionselemente. „Konstruieren“ bedeutet, diese Elemente zusammenzufügen und zu verbinden. Ziel ist eine Lösung mit minimalem Aufwand an Material und Arbeitszeit, die dennoch in jeder Beziehung fachgerecht ist." },
+              { type: "h", text: "Richtlinien für eine gute Konstruktion" },
+              { type: "list", items: ["Zweckmässigkeit: Jedes Bauteil muss dem vorgesehenen Verwendungszweck entsprechen (Ästhetik und Beanspruchung).", "Stabilität: Jedes Konstruktionselement muss den Anforderungen der Statik und Festigkeitslehre genügen.", "Dauerhaftigkeit: Kunde/in hat Anspruch auf eine dauerhafte Arbeit (Werkstoffwahl, Beschläge, Korrosionsschutz).", "Die gute Form: richtet sich nach Wünschen des Architekten, darf aber nie auf Kosten der Stabilität/Dauerhaftigkeit gehen.", "Die Fertigung: möglichst geringer Arbeitsaufwand, kurze Lieferfristen (Montagestunden sind teurer als Werkstattstunden!).", "Die Konkurrenzfähigkeit: möglichst kostengünstige Konstruktion (handelsübliche Profile, gleiche Längen/Grössen).", "Normengerecht: aktuelle Normen und Vorschriften müssen eingehalten werden.", "Bauphysik: bauphysikalische Grundsätze zwingend berücksichtigen, um Bauschäden zu vermeiden.", "Sicherheitstechnische Richtigkeit: Sicherheitsnormen, Brandschutz und Elektrotechnik-Grundkenntnisse beachten."] },
+              { type: "h", text: "Garantiefristen (SIA 118 / Obligationenrecht)" },
+              { type: "list", items: ["2 Jahre auf offene (sichtbare) Mängel", "5 Jahre für verdeckte Mängel", "10 Jahre für absichtlich verschwiegene Mängel"] },
+              { type: "h", text: "EN 1090 – Ausführung von Stahl- und Aluminiumtragwerken" },
+              { type: "p", text: "Die EN 1090 verlangt eine Zertifizierung des Konformitätsnachweisverfahrens mit werkseigener Produktionskontrolle (WPK, nach EN 1090-1) sowie der Schweisstechnologie (nach EN ISO 3834)." },
+              { type: "list", items: ["EN 1090-1: Konformitätsnachweisverfahren für tragende Bauteile.", "EN 1090-2: Technische Regeln für die Ausführung von Stahltragwerken.", "EN 1090-3: Technische Regeln für die Ausführung von Aluminiumtragwerken."] },
+              { type: "p", text: "Die WPK verlangt regelmässige, dokumentierte interne Kontrollen (Verantwortung/Qualifikation des Personals, Planung/Bemessung, richtige Werkstoffe, Vorgehen bei Abweichungen, Prüfungsdurchführung)." },
+              { type: "table", headers: ["Ausführungsklasse (EXC)", "Anforderungen"], rows: [["EXC1", "Geringe Anforderungen"], ["EXC2 (Standard, falls keine Angabe)", "Mittlere Anforderungen"], ["EXC3", "Hohe Anforderungen"], ["EXC4", "Sehr hohe Anforderungen"]] }
+            ],
+            flashcards: [
+              { q: "Was macht ein/e Metallbaukonstrukteur/in EFZ?", a: "Zeichnerische und konstruktive Bearbeitung von Projekten in technischen Büros des Metall-, Stahl-, Fenster- und Fassadenbaus; erstellt Planunterlagen und sichert die Qualität der Ausführung." },
+              { q: "Welche Hilfsmittel sind beim Skizzieren erlaubt?", a: "Massstab und Geodreieck – aber kein Zeichnungsbrett" },
+              { q: "Strichstärke für sichtbare Körperkanten?", a: "Ø 0,7 mm" },
+              { q: "Strichstärke für unsichtbare Linien, Schnittkanten, strichpunktierte Begrenzungen?", a: "Ø 0,5 mm" },
+              { q: "Strichstärke für Vermassungslinien und Schraffuren?", a: "Ø 0,3 mm" },
+              { q: "Welche Norm regelt die Planbearbeitung im Hochbau?", a: "SIA 400" },
+              { q: "Welches Symbol steht für Durchmesser, Radius und Vierkant?", a: "ø, R, □ (jeweils vor die Masszahl geschrieben)" },
+              { q: "Was sind Zuschnittmasse und für wen sind sie wichtig?", a: "Rahmen- und Flügelmass – wichtig für den Metallbaukonstrukteur/die Metallbaukonstrukteurin" },
+              { q: "Was sind Baumasse und für wen sind sie wichtig?", a: "Mauerlichtmasse – wichtig für Architekt/in und Bauleiter/in" },
+              { q: "Nenne drei Richtlinien für eine gute Konstruktion.", a: "Z.B. Zweckmässigkeit, Stabilität, Dauerhaftigkeit, gute Form, Fertigung, Konkurrenzfähigkeit, Normengerecht" },
+              { q: "Wie lange gilt die Garantiefrist für verdeckte Mängel (SIA 118 / OR)?", a: "5 Jahre" },
+              { q: "Was regelt EN 1090-1?", a: "Das Konformitätsnachweisverfahren für tragende Bauteile aus Stahl und Aluminium" },
+              { q: "Welche Ausführungsklasse (EXC) gilt automatisch, wenn keine Angabe gemacht wird?", a: "EXC2 (mittlere Anforderungen)" }
+            ],
+            exercises: [
+              { group: "Strichstärken zuordnen", task: "Welche Strichstärke verwendest du für eine sichtbare Körperkante?", answer: "Ø 0,7 mm" },
+              { group: "Strichstärken zuordnen", task: "Welche Strichstärke für eine Vermassungslinie oder Schraffur?", answer: "Ø 0,3 mm" },
+              { group: "Strichstärken zuordnen", task: "Welche Strichstärke für eine verdeckte (unsichtbare) Kante?", answer: "Ø 0,5 mm" },
+              { group: "Vermassungsregeln anwenden", task: "Ein Bauteil ist nicht massstäblich gezeichnet, soll aber trotzdem vermasst werden. Was musst du tun?", answer: "Die Masszahl unterstreichen." },
+              { group: "Vermassungsregeln anwenden", task: "Wo wird eine Abmessung grundsätzlich eingetragen?", answer: "Dort, wo sie am meisten dient bzw. am besten verständlich ist." },
+              { group: "Vermassungsregeln anwenden", task: "Welches Symbol schreibst du vor die Masszahl eines Rundrohrs mit 42 mm Durchmesser?", answer: "ø42" },
+              { group: "Konstruktionsrichtlinien zuordnen", task: "Ein Kunde wünscht eine Eingangstür, die auch nach 15 Jahren intensiver Nutzung noch einwandfrei funktioniert. Welche Richtlinie steht im Vordergrund?", answer: "Die Dauerhaftigkeit" },
+              { group: "Konstruktionsrichtlinien zuordnen", task: "Ein Konstrukteur wählt für ein Geländer handelsübliche Profile statt einer aufwändigen Sonderanfertigung. Welche Richtlinie wendet er damit vor allem an?", answer: "Die Fertigung / Konkurrenzfähigkeit (kostengünstige, einfache Herstellung mit möglichst wenig Arbeitsaufwand)" },
+              { group: "Normen und Ausführungsklassen", task: "Ein Betrieb macht für ein Stahlbauteil keine Angabe zur Ausführungsklasse. Welche EXC gilt automatisch?", answer: "EXC2" },
+              { group: "Normen und Ausführungsklassen", task: "Nach welcher Norm wird die werkseigene Produktionskontrolle (WPK) für tragende Stahlbauteile gefordert?", answer: "EN 1090-1" }
+            ],
+            applications: [
+              { task: "Skizziere ein einfaches Vierkantrohr-Profil (z.B. 40×40 mm) in 3 Ansichten und vermasse es gemäss den gelernten Regeln (Masslinien 0,3mm, Symbole vor der Masszahl, Vermassung von innen nach aussen oder umgekehrt). Notiere, welche Strichstärke du für welche Linienart verwendest.", answer: "Kontrolle anhand der Regeln: Körperkanten 0,7mm, unsichtbare Kanten/Schnittkanten 0,5mm, Mass-/Schraffurlinien 0,3mm; Masslinien parallel zur vermassten Kante, Zahlen parallel zur Masslinie über/links davon, ø vor der Masszahl für den Durchmesser." },
+              { task: "Notiere zu einem Bauteil aus deinem Betrieb (z.B. Fenstergriff, Türband, Geländerpfosten), welche der Konstruktionsrichtlinien (Zweckmässigkeit, Stabilität, Dauerhaftigkeit, gute Form, Fertigung, Konkurrenzfähigkeit, Normengerecht, Bauphysik, Sicherheitstechnische Richtigkeit) dabei besonders wichtig waren und begründe kurz warum.", answer: "Individuelle Antwort – wichtig ist eine nachvollziehbare Begründung anhand der 9 gelernten Richtlinien." }
+            ],
+            examOpen: { timeMin: 30, totalPoints: 16, passPoints: 10, parts: [
+              { title: "Grundlagen (6 Punkte)", questions: [
+                  { q: "Welche drei Strichstärken gibt es und wofür stehen sie?", points: 3, answer: "0,7mm = Körperkanten ; 0,5mm = unsichtbare Linien/Schnittkanten ; 0,3mm = Vermassungslinien/Schraffuren" },
+                  { q: "Welche Norm regelt die Planbearbeitung im Hochbau?", points: 1, answer: "SIA 400" },
+                  { q: "Was bedeutet die Ausführungsklasse EXC2?", points: 1, answer: "Mittlere Anforderungen – gilt automatisch, wenn keine andere Ausführungsklasse angegeben ist" },
+                  { q: "Wie lange gilt die Garantiefrist für offene (sichtbare) Mängel nach SIA 118?", points: 1, answer: "2 Jahre" }
+                ] },
+              { title: "Vermassung (6 Punkte)", questions: [
+                  { q: "Zähle vier Vermassungsregeln auf.", points: 4, answer: "Z.B.: alle für Herstellung/Montage nötigen Masse eintragen; Masslinien parallel zur vermassten Kante; Symbole vor der Masszahl; nicht massstäblich gezeichnete, aber vermasste Bauteile unterstreichen (je 1 Punkt für 4 korrekte Regeln)" },
+                  { q: "Nenne den Unterschied zwischen Baumassen und Zuschnittmassen.", points: 2, answer: "Baumasse (Mauerlichtmasse) sind für Architekt/in und Bauleiter/in wichtig; Zuschnittmasse (Rahmen-/Flügelmass) sind für den Metallbaukonstrukteur/die -konstrukteurin wichtig" }
+                ] },
+              { title: "Anwendung (4 Punkte)", questions: [
+                  { q: "Ein Kunde verlangt eine möglichst günstige, aber normkonforme Stahlkonstruktion. Nenne zwei Richtlinien, die hier besonders zum Tragen kommen, und erkläre kurz warum.", points: 4, answer: "Z.B. Konkurrenzfähigkeit (kostengünstige Lösung mit handelsüblichen Profilen) und Normengerecht (Einhaltung aktueller Normen/Vorschriften ist rechtlich zwingend, unabhängig vom Preis)" }
+                ] }
+              ] }
+          },
+          {
+            chapter: "K2", title: "Treppen: Grundlagen, Formen & Berechnung",
+            theorySections: [
+              { type: "h", text: "Definition: Wann spricht man von einer Treppe?" },
+              { type: "list", items: ["Der Steigungswinkel α liegt zwischen 10° und 45°.", "Die Treppe besteht aus mindestens einem Treppenlauf mit mindestens drei Treppenstufen."] },
+              { type: "note", tone: "tip", text: "Unter 10° spricht man eher von einer Rampe, über 45° eher von einer Leiter." },
+              { type: "h", text: "Die zwei entscheidenden Faktoren der Begehbarkeit" },
+              { type: "p", text: "Treppen dienen in erster Linie dem Personenverkehr, sollen im Bedarfsfall aber auch Warentransport (Traggepäck, Möbel) genügen. Die reibungslose Begehbarkeit hängt vor allem von zwei Faktoren ab: der Laufbreite (nutzbare Breite zwischen den Wangen/Handläufen) und dem Steigungsverhältnis." },
+              { type: "h", text: "Treppengrundriss: Lauflinie (Gehlinie)" },
+              { type: "p", text: "Die Lauflinie, auch Gehlinie genannt, liegt in der Mitte des Gehbereichs der Treppe und entspricht ihrer Laufrichtung (von unten nach oben). Alle Steigungs- und Auftrittsmasse werden auf dieser Linie gemessen bzw. geprüft." },
+              { type: "h", text: "Bezeichnungen an einer Treppe" },
+              { type: "table", headers: ["Zeichen/Begriff", "Bedeutung"], rows: [["s", "Steigung / Steigungshöhe – Höhe einer einzelnen Stufe"], ["a", "Auftritt / Auftrittsbreite – nutzbare Tiefe einer Trittstufe"], ["α", "Neigungswinkel (Steigungswinkel) der Treppe"], ["h", "Geschosshöhe – gesamte zu überwindende Höhe"], ["u", "Unterschneidung – Überstand der Trittstufe über die darunterliegende Setzstufe"], ["Setzstufe", "Verbindet zwei Trittstufen senkrecht (die \"Vorderseite\" einer Stufe)"], ["Antrittsstufe", "Erste Stufe eines Treppenlaufs (unten)"], ["Austrittsstufe", "Letzte Stufe eines Treppenlaufs (oben, vor dem Podest)"]] },
+              { type: "note", tone: "warn", text: "Weitere Formelzeichen (b, l, p, c, L) sind in der Skizze „Bezeichnungen an einer Treppe“ des Europalehrmittel Tabellenbuchs für Metallbautechnik definiert – dort nachschlagen und die eigene Skizze vollständig beschriften (siehe Anwendungsaufgabe unten)." },
+              { type: "h", text: "Treppenformen" },
+              { type: "p", text: "Man unterscheidet grundsätzlich zwischen Wangentreppen, Holmentreppen, geraden und gewendelten Treppen (mit und ohne Podest) sowie Spindeltreppen." },
+              { type: "h", text: "Steigungsverhältnis" },
+              { type: "p", text: "Das Steigungsverhältnis einer Treppe ist das Massverhältnis von der Steigungshöhe S zur Auftrittsbreite A, das für ein sicheres und bequemes Begehen verantwortlich ist. Je nach baulicher Situation sind Podesthöhe oder Treppenlauflänge vorgegeben; mit den drei folgenden Formeln lässt sich das passende Steigungsverhältnis ermitteln." },
+              { type: "h", text: "Die drei Grundformeln des Treppenbaus" },
+              { type: "code", text: "Schrittmassformel:        2·S + A = 59 – 65 cm   (Zielwert 63 cm, entspricht der durchschnittlichen Schrittlänge)\nBequemlichkeitsformel:     A − S = 12 cm\nSicherheitsformel:         A + S = 46 cm" },
+              { type: "note", tone: "tip", text: "Auftrittsbreiten ausserhalb von 27–33 cm sind unzweckmässig, da sie die normale Schuhlänge nicht berücksichtigen. Bei gewendelten Treppen wird die für das Steigungsverhältnis massgebende Auftrittsbreite A auf der Gehlinie gemessen. Der Neigungswinkel einer bequemen, geraden Treppe liegt üblicherweise bei ca. 30°–35°." },
+              { type: "h", text: "Stufenarten" },
+              { type: "list", items: ["Setzstufen: verbinden zwei Trittstufen, vermindern die Durchbiegung und verhindern die Durchsicht; erhöhen die Sicherheit, da nichts durchfallen kann.", "Winkelstufen: derselbe Effekt wie Setzstufen, erreicht durch Abkanten eines Stahlblechs.", "Wannentrittstufen: erhöhte Biegefestigkeit durch Umbiegen am vorderen und hinteren Ende der Stufe.", "Glastritte: seitlich mit Winkelauflager montiert.", "Gitterrosttritte: meist direkt in die Stahlwange geschraubt."] },
+              { type: "h", text: "Treppen mit gewendelten Läufen" },
+              { type: "p", text: "Ist zur Überwindung einer Stockwerks- oder Podesthöhe nicht genügend Grundrissfläche für eine gerade Treppe vorhanden, wird eine gewendelte Treppe geplant. Die Gehlinie wird in die Mitte der Treppenbreite gelegt; im Bereich der Krümmung folgt sie in gleichbleibendem Abstand der Form der inneren Wange. Die Trittkantenabstände im Bogenbereich werden als Kreisbogenlängen (nicht als Sehnenlängen) abgetragen." },
+              { type: "table", headers: ["Situation", "Mindestauftritt an der inneren Begrenzung"], rows: [["Wendelstufen, Wohngebäude mit ≤ 2 Wohnungen", "50 mm (an der schmalsten Stelle, Sehnenmass im Bogen)"], ["Wendelstufen, sonstige Gebäude", "100 mm (DIN 18065, Abs. 6.2)"], ["Spindeltreppen, Wohngebäude mit ≤ 2 Wohnungen", "kein Mindestauftritt vorgeschrieben"]] },
+              { type: "note", tone: "tip", text: "Bei Spindeltreppen liegt die Gehlinie leicht ausserhalb der Treppenmitte, bei 6/10 des Aussenradius x (nicht bei 5/10 = Mitte) – man geht davon aus, dass die Spindel selbst nicht direkt begangen wird." },
+              { type: "h", text: "Stufenverziehung (Proportionalitätsmethode)" },
+              { type: "p", text: "Ziel des gewendelten Treppenlaufs ist es, möglichst raumsparend den Höhenunterschied zu überwinden – dazu werden die Trittkanten verzogen. Je mehr Trittkanten verzogen werden, desto besser ist die Treppe begehbar und desto eleganter verläuft der Schwung. Neben der Proportionalitätsmethode gibt es auch die Kreisbogen- und die Winkelmethode (siehe Fachbuch «Metallbautechnik Fachbildung»)." },
+              { type: "list", items: ["Grundrissform der Treppenwangen im grossen Massstab aufzeichnen.", "Theoretische Lauflinie L (halbiert die Treppenbreite C) eintragen.", "Steigungsverhältnis aus der abgewickelten Lauflinienlänge und der Stockwerkhöhe h bestimmen.", "Auftrittsbreiten auf der gesamten Gehlinie abtragen.", "Kleinste Auftrittsbreite (100 mm) als Punkte b und c auf dem Bogen der inneren Wange abtragen.", "Anzahl der zu verziehenden Tritte festlegen (Verzugsbeginn ca. bei doppelter Treppenbreite, gemessen ab der äusseren Wange).", "Mit Radius- und Hilfslinienkonstruktion die Berührungspunkte der Trittkanten an der inneren Wange konstruieren, den Vorgang am anderen Treppenschenkel wiederholen.", "Die inneren Berührungspunkte über die abgetragenen Auftrittsbreiten bis zur äusseren Wange verlängern ergibt die gesuchten verzogenen Trittkanten."] },
+              { type: "h", text: "Planungsgrundlagen (9 Schritte)" },
+              { type: "list", items: ["Festlegung der Treppenart (baurechtlich).", "Treppenart nach Laufrichtung im Grundriss.", "Materialwahl für Wangen und Stufen.", "Dimensionierung der Treppenwangen.", "Festlegung von zulässigem Auftritt und Steigung.", "Gehbereich/Lauflinie festlegen, Auftritt und Steigung prüfen und festlegen.", "Lichte Durchgangshöhe beachten – muss > 200 cm betragen.", "Entscheid: Treppe offen oder mit Setzstufe geschlossen? Bei offenen Treppen muss die Unterschneidung > 3 cm betragen.", "Auswahl und Dimensionierung des Geländers."] },
+              { type: "h", text: "Treppenmontage" },
+              { type: "p", text: "Das Gewicht der Treppe wird meist unten über den Boden abgeleitet – die untere Befestigung sorgt vor allem dafür, dass sich die Treppe nicht verschieben kann. Oben wird die Treppe oft stirnseitig in Decke oder Boden befestigt, wodurch die Last der Treppe auf die Dübel wirkt; diese müssen entsprechend ausgewählt und dimensioniert werden." },
+              { type: "note", tone: "warn", text: "Bei Planung und Montage ist besonders zu beachten, dass die Treppe seitlich nicht schwingen kann. Auch statisch unbedenkliche, geringe Schwingungen erzeugen bei Benutzenden ein starkes Unsicherheitsgefühl; bei grösseren Schwingungen ist mit unsicheren Schritten zu rechnen. Längere Treppen werden daher oft zusätzlich seitlich in die Mauer verankert." },
+              { type: "h", text: "Schallschutz" },
+              { type: "p", text: "Bei Treppen in Gebäuden muss der Schallschutz berücksichtigt werden: der beim Begehen entstehende Trittschall darf konstruktiv nicht auf die Gebäudestruktur übertragen werden. Dies erreicht man durch elastische Lager oder Schallschutz-Dübel. Sind Schallschutzmassnahmen im Bereich der Tragstruktur nicht möglich, kann der Trittschall durch elastische Lagerung der Treppentritte selbst vermindert werden." }
+            ],
+            flashcards: [
+              { q: "Ab wann spricht man von einer \"Treppe\"?", a: "Steigungswinkel α zwischen 10° und 45° UND mindestens 3 Treppenstufen in einem Lauf" },
+              { q: "Was sind die zwei entscheidenden Faktoren für die Begehbarkeit einer Treppe?", a: "Laufbreite und Steigungsverhältnis" },
+              { q: "Was ist die Gehlinie (Lauflinie)?", a: "Die gedachte Linie in der Mitte des Gehbereichs; entspricht der Laufrichtung der Treppe" },
+              { q: "Nenne die fünf Treppenformen.", a: "Wangentreppen, Holmentreppen, gerade Treppen, gewendelte Treppen (mit/ohne Podest), Spindeltreppen" },
+              { q: "Schrittmassformel?", a: "2·S + A = 59–65 cm (Zielwert 63 cm)" },
+              { q: "Bequemlichkeitsformel?", a: "A − S = 12 cm" },
+              { q: "Sicherheitsformel?", a: "A + S = 46 cm" },
+              { q: "In welchem Bereich muss die Auftrittsbreite liegen, damit sie zweckmässig ist?", a: "27–33 cm" },
+              { q: "Wie gross ist der Neigungswinkel einer bequemen, geraden Treppe üblicherweise?", a: "ca. 30°–35°" },
+              { q: "Was ist eine Setzstufe?", a: "Verbindung zweier Trittstufen; vermindert Durchbiegung und Durchsicht, erhöht die Sicherheit" },
+              { q: "Was ist eine Winkelstufe?", a: "Eine durch Abkanten aus Stahlblech geformte Stufe mit demselben Effekt wie eine Setzstufe" },
+              { q: "Wie tief muss der Mindestauftritt von Wendelstufen in Wohngebäuden mit bis zu 2 Wohnungen mindestens sein?", a: "50 mm, an der schmalsten Stelle" },
+              { q: "Wie tief muss der Mindestauftritt von Wendelstufen in sonstigen Gebäuden sein?", a: "100 mm (DIN 18065)" },
+              { q: "Wie gross muss die lichte Durchgangshöhe über einer Treppe mindestens sein?", a: "Mehr als 200 cm" },
+              { q: "Wie gross muss die Unterschneidung bei offenen Treppen (ohne Setzstufe) mindestens sein?", a: "Mehr als 3 cm" },
+              { q: "Warum werden längere Treppen oft seitlich in die Mauer verankert?", a: "Um seitliches Schwingen zu verhindern, das ein Unsicherheitsgefühl erzeugt und bei stärkerer Ausprägung zu unsicheren Schritten führt" }
+            ],
+            exercises: [
+              { group: "Steigungsverhältnis prüfen", task: "Eine Treppe hat S = 17 cm und A = 29 cm. Prüfe alle drei Formeln (Schrittmass-, Bequemlichkeits-, Sicherheitsformel). Ist die Treppe normgerecht?", answer: "Schrittmass: 2·17+29 = 63 cm ✓ (Zielbereich 59–65 cm)\nBequemlichkeit: 29−17 = 12 cm ✓ (genau erfüllt)\nSicherheit: 29+17 = 46 cm ✓ (genau erfüllt)\n→ Alle drei Formeln sind erfüllt: eine ideale, bequeme und sichere Treppe." },
+              { group: "Steigungsverhältnis prüfen", task: "Eine Treppe hat S = 19 cm und A = 24 cm. Prüfe die Schrittmassformel und beurteile die Auftrittsbreite.", answer: "Schrittmass: 2·19+24 = 62 cm — liegt im Zielbereich 59–65 cm ✓. Aber A = 24 cm liegt UNTER dem zweckmässigen Bereich von 27–33 cm → der Auftritt ist trotz erfüllter Schrittmassformel zu schmal und unzweckmässig." },
+              { group: "Steigungsverhältnis prüfen", task: "Eine gerade Treppe muss eine Geschosshöhe von H = 2720 mm überwinden. Wähle eine passende Steigungshöhe S (Richtwert 17–18 cm) und berechne die Anzahl Steigungen nS sowie die Anzahl Auftritte nA.", answer: "Mit S = 170 mm: nS = 2720/170 = 16 Steigungen (glatt). nA = nS−1 = 15 Auftritte.\nKontrolle über die Schrittmassformel: 2·17+A = 63 → A = 29 cm (liegt im 27–33-cm-Bereich) ✓" },
+              { group: "Treppenbezeichnungen", task: "Wie heisst die erste Stufe einer Treppe (unten)?", answer: "Antrittsstufe" },
+              { group: "Treppenbezeichnungen", task: "Wie heisst die letzte Stufe einer Treppe (oben, vor dem Podest)?", answer: "Austrittsstufe" },
+              { group: "Treppenbezeichnungen", task: "Welches Formelzeichen bezeichnet die Steigungshöhe, welches die Auftrittsbreite?", answer: "S = Steigungshöhe, A = Auftrittsbreite" },
+              { group: "Gewendelte Treppen", task: "Warum wird bei gewendelten Treppen die Auftrittsbreite A auf der Gehlinie gemessen und nicht am inneren Rand?", answer: "Weil die Stufen am inneren Rand viel zu schmal wären (Sicherheitsrisiko). Die Gehlinie liegt in der Mitte des tatsächlich genutzten Gehbereichs und liefert realistische, sichere Auftrittsmasse." },
+              { group: "Gewendelte Treppen", task: "Wie gross ist der Mindestauftritt von Wendelstufen in einem Einfamilienhaus (1 Wohnung)?", answer: "50 mm, an der schmalsten Stelle der inneren Begrenzung" },
+              { group: "Berechnungsaufgabe: viertel gewendelte Treppe (Angaben: L1=2760mm, L2=2600mm, B=1200mm, r=100mm, H=2380mm)", task: "Wähle eine passende Steigungshöhe S und bestimme die Anzahl Steigungen nS, die Anzahl Auftritte nA sowie die daraus resultierende Ziel-Auftrittsbreite A (Schrittmassformel).", answer: "S = 170 mm (17 cm) passt gut: nS = 2380/170 = 14 Steigungen (glatt). nA = nS−1 = 13 Auftritte.\nSchrittmassformel: 2·17+A = 63 → A = 29 cm — liegt im zweckmässigen Bereich 27–33 cm ✓" },
+              { group: "Berechnungsaufgabe: viertel gewendelte Treppe (Angaben: L1=2760mm, L2=2600mm, B=1200mm, r=100mm, H=2380mm)", task: "Berechne die Länge des gebogenen Gehlinien-Abschnitts über die viertel Wendelung.", answer: "Die Gehlinie liegt in der Mitte der Treppenbreite B, also B/2 = 600 mm vom inneren Wangenradius entfernt: Gehlinienradius = r + B/2 = 100+600 = 700 mm.\nBogenlänge (90°) = π/2 · 700 mm ≈ 1100 mm.\nDie geraden Streckenanteile vor/nach dem Bogen werden direkt auf der massstäblichen Grundrisszeichnung abgegriffen." },
+              { group: "Berechnungsaufgabe: Spindeltreppe (Ø2200mm, Drehung 360°, H=3000mm, Gehlinie bei 6/10 des Aussenradius)", task: "Berechne die Länge der Gehlinie im Grundriss.", answer: "Aussenradius x = Ø2200/2 = 1100 mm. Gehlinienradius = 6/10 · 1100 = 660 mm.\nGehlinienlänge (voller Kreis, 360°) = 2π·660 ≈ 4147 mm ≈ 4,15 m" },
+              { group: "Berechnungsaufgabe: Spindeltreppe (Ø2200mm, Drehung 360°, H=3000mm, Gehlinie bei 6/10 des Aussenradius)", task: "Bestimme die Anzahl Steigungen nS, die Steigungshöhe s, die Anzahl Auftritte nA, die Auftrittsbreite A und den Steigungswinkel α.", answer: "Mit nS = 17: s = 3000/17 ≈ 176,5 mm. nA = nS−1 = 16. A = Gehlinienlänge/nA = 4147/16 ≈ 259 mm.\nKontrolle Schrittmassformel: 2·17,65+25,9 ≈ 61,2 cm (im Zielbereich 59–65 cm) ✓\nSteigungswinkel: α = arctan(s/A) = arctan(176,5/259) ≈ 34,3°" }
+            ],
+            applications: [
+              { task: "Skizziere eine gerade Treppe mit 15 Steigungen und einer Steigungshöhe von 18 cm. Berechne die Zielauftrittsbreite mit der Schrittmassformel und prüfe sie mit der Bequemlichkeits- und der Sicherheitsformel.", answer: "Schrittmass: 2·18+A = 63 → A = 27 cm.\nBequemlichkeit: A−S = 27−18 = 9 cm (Zielwert 12 cm, leicht abweichend, aber nahe dran).\nSicherheit: A+S = 27+18 = 45 cm (Zielwert 46 cm, praktisch erfüllt).\n→ Eine akzeptable, aber leicht steile Treppe – der Auftritt liegt am unteren Rand des 27–33-cm-Bereichs." },
+              { task: "Ein Treppenlauf soll seitlich nicht schwingen können. Beschreibe zwei konstruktive Massnahmen aus dem Kapitel Treppenmontage, mit denen dies verhindert wird.", answer: "Seitliche Verankerung längerer Treppen in die Mauer; korrekt dimensionierte, stirnseitig in Decke/Boden verankerte Dübel oben sowie eine feste untere Befestigung gegen Verschieben." },
+              { task: "Lernauftrag aus dem Kursdokument: Lade dir die BFU-Broschüre „Treppen“ herunter und erstelle eine Übersicht mit den wichtigsten Punkten daraus.", answer: "Offene Recherchearbeit gemäss Vorgabe im Kursdokument – keine feste Musterlösung, Ziel ist eine eigenständige, vollständige Zusammenfassung der BFU-Sicherheitsempfehlungen zu Treppen." }
+            ],
+            examOpen: { timeMin: 35, totalPoints: 20, passPoints: 12, parts: [
+              { title: "Theorie (6 Punkte)", questions: [
+                  { q: "Ab wann spricht man von einer Treppe (2 Kriterien)?", points: 2, answer: "Steigungswinkel α zwischen 10° und 45°; mindestens 3 Treppenstufen in einem Lauf" },
+                  { q: "Nenne die drei Grundformeln des Treppenbaus.", points: 3, answer: "Schrittmassformel, Bequemlichkeitsformel, Sicherheitsformel" },
+                  { q: "In welchem Bereich muss die Auftrittsbreite liegen, damit sie zweckmässig ist?", points: 1, answer: "27–33 cm" }
+                ] },
+              { title: "Rechnen (10 Punkte)", questions: [
+                  { q: "Eine Treppe hat S=18cm, A=28cm. Prüfe alle drei Formeln.", points: 3, answer: "Schrittmass: 2·18+28=64cm (im Bereich 59–65 ✓); Bequemlichkeit: 28−18=10cm (nahe am Zielwert 12cm, akzeptabel); Sicherheit: 28+18=46cm ✓ genau erfüllt" },
+                  { q: "Geschosshöhe H=2550mm, gewählte Steigungshöhe S=170mm. Berechne nS und nA.", points: 2, answer: "nS = 2550/170 = 15 ; nA = 15−1 = 14" },
+                  { q: "Berechne mit der Schrittmassformel die Ziel-Auftrittsbreite A für S=17cm.", points: 2, answer: "2·17+A = 63 → A = 29 cm" },
+                  { q: "Eine Spindeltreppe (Ø1800mm) hat die Gehlinie bei 6/10 des Aussenradius. Berechne die Gehlinienlänge für eine volle 360°-Drehung.", points: 3, answer: "x = 1800/2 = 900mm ; Gehlinienradius = 0,6·900 = 540mm ; Länge = 2π·540 ≈ 3393 mm ≈ 3,39 m" }
+                ] },
+              { title: "Anwenden (4 Punkte)", questions: [
+                  { q: "Ein Bauherr möchte eine offene Treppe (ohne Setzstufen). Welche Mindestanforderung an die Unterschneidung gilt, und warum ist diese wichtig?", points: 2, answer: "Mindestens 3 cm Unterschneidung; wichtig, damit die Stufen ausreichend Auflagefläche/Sicherheit bieten und ein Durchrutschen des Fusses verhindert wird." },
+                  { q: "Warum werden längere gerade Treppen oft zusätzlich seitlich in die Mauer verankert?", points: 2, answer: "Um seitliches Schwingen zu verhindern, das bei Benutzenden ein Unsicherheitsgefühl auslöst und bei stärkerer Ausprägung zu unsicheren Schritten führen kann." }
+                ] }
+              ] }
+          },
+          {
+            chapter: "K3", title: "Geländer: Funktion, Befestigung & Normen",
+            theorySections: [
+              { type: "h", text: "Funktion von Geländern" },
+              { type: "p", text: "Geländer, Brüstungen und Handläufe erfüllen eine wichtige Funktion bei Gebäuden: Sie schützen vor Stürzen und Abstürzen aus der Höhe. Kinder sind durch ihre Neugier und ihren Übermut besonders gefährdet, ältere Menschen durch altersbedingte Störungen des Gleichgewichts, abnehmende Sehfähigkeit sowie mögliche Schwächeanfälle. Insbesondere in öffentlichen Gebäuden sind zusätzlich Menschen mit eingeschränkter Mobilität zu berücksichtigen; dort muss auch mit ausserordentlichem Gedränge und Paniksituationen gerechnet werden." },
+              { type: "note", tone: "tip", text: "Quelle: BFU Geländer." },
+              { type: "h", text: "Regelwerke rund um Geländer" },
+              { type: "table", headers: ["Regelwerk", "Anwendungsbereich"], rows: [["SIA 358", "Grundnorm für Geländer und Brüstungen in der Schweiz; definiert Gefährdungsbilder und Grenzmasse"], ["BFU-Broschüre „Geländer und Brüstungen“", "Praxisnahe Ergänzung zur SIA 358"], ["SUVA-Broschüre Geländer", "Zusätzlich für Industriegeländer, teils strenger als die SIA 358"], ["SIGAB-Richtlinie „Ganzglasgeländer“", "Für Geländer und Brüstungen aus Glas"], ["VKF-Brandschutzrichtlinie Flucht- und Rettungswege", "Für Geländer entlang von Flucht- und Rettungswegen"]] },
+              { type: "h", text: "Gefährdungsbilder gemäss SIA 358" },
+              { type: "p", text: "Die SIA 358 definiert typische Arten, wie eine Absturzsicherung überwunden werden kann: begehbar, besteigbar und bekletterbar. Je leichter ein Geländerelement zu begehen, besteigen oder erklettern ist, desto strenger sind die daraus abgeleiteten Grenzmasse." },
+              { type: "note", tone: "warn", text: "Die genauen Definitionen der drei Begriffe sowie die konkreten Grenzmasse sind Teil der Lernaufgabe unten (Auswertung der SIA 358 und der BFU-Broschüre) – sie sind nicht Teil dieses Kursdokuments und müssen selbst recherchiert werden." },
+              { type: "h", text: "Geländer Befestigung" },
+              { type: "p", text: "Man unterscheidet grundsätzlich drei Befestigungsarten (z.B. aufgesetzt auf der Deckenkante, seitlich an der Deckenstirn befestigt, oder in die Deckenkonstruktion eingelassen). Welche Art zum Einsatz kommt, hängt von der Statik, dem angrenzenden Bauteil und den geforderten Lasten ab." },
+              { type: "h", text: "Geländer Statik" },
+              { type: "p", text: "Geländer müssen definierte Horizontal- und Vertikallasten (Holmlasten) gemäss SIA-Norm aufnehmen können, ohne sich unzulässig zu verformen. Die genauen Lastwerte sind Gegenstand des Fachartikels „Metall“ bzw. der SIA-Normen und werden im Rahmen der Recherche-Aufgabe eigenständig festgehalten." },
+              { type: "h", text: "Geländer Montage" },
+              { type: "p", text: "Für die praktische Montage gelten die Merkblätter TK 005 und TK 007 der AM Suisse mit konkreten Ausführungsdetails zu Befestigungsmitteln, Abständen und Ausführungsqualität." },
+              { type: "h", text: "Industriegeländer" },
+              { type: "p", text: "Für Geländer in Industriebauten (Betriebe, Lager, Anlagen) gilt zusätzlich die SUVA-Broschüre Geländer. Sie stellt teilweise strengere oder andere Anforderungen als die SIA 358, z.B. bezüglich Handlaufhöhe, Durchtrittssicherheit oder Fussleisten gegen herabfallende Gegenstände." },
+              { type: "h", text: "Glasgeländer und Ganzglasgeländer" },
+              { type: "p", text: "Für Geländer und Brüstungen aus Glas gilt zusätzlich die SIGAB-Richtlinie „Ganzglasgeländer“. Sie regelt Anforderungen an Glasart, Glasdicke, Verankerung und die Resttragfähigkeit im Bruchfall." },
+              { type: "h", text: "VKF-Verordnung: Flucht- und Rettungswege" },
+              { type: "p", text: "Geländer entlang von Flucht- und Rettungswegen müssen zusätzlich die VKF-Brandschutzrichtlinie einhalten – z.B. Mindestbreiten der Fluchtwege einhalten und dürfen keine Stolperfallen bilden." }
+            ],
+            flashcards: [
+              { q: "Wovor schützen Geländer, Brüstungen und Handläufe?", a: "Vor Stürzen bzw. Abstürzen aus der Höhe" },
+              { q: "Welche Personengruppen sind laut BFU besonders gefährdet?", a: "Kinder (Neugier/Übermut) und ältere Menschen (Gleichgewichtsstörungen, abnehmende Sehfähigkeit, Schwächeanfälle)" },
+              { q: "Welche Norm regelt Geländer und Brüstungen in der Schweiz?", a: "SIA 358" },
+              { q: "Nenne die drei Gefährdungsbilder gemäss SIA 358.", a: "begehbar, besteigbar, bekletterbar" },
+              { q: "Welche Broschüre ergänzt die SIA 358 praxisnah?", a: "Die BFU-Broschüre „Geländer und Brüstungen“" },
+              { q: "Welches Regelwerk gilt zusätzlich für Industriegeländer?", a: "Die SUVA-Broschüre Geländer" },
+              { q: "Welche Richtlinie regelt Ganzglasgeländer?", a: "Die SIGAB-Richtlinie „Ganzglasgeländer“" },
+              { q: "Welche Verordnung betrifft Geländer entlang von Flucht- und Rettungswegen?", a: "Die VKF-Brandschutzrichtlinie Flucht- und Rettungswege" },
+              { q: "Nach welchen Merkblättern richtet sich die Geländermontage?", a: "TK 005 und TK 007 (AM Suisse)" },
+              { q: "Was muss ein Geländer statisch aufnehmen können?", a: "Definierte Horizontal- und Vertikallasten (Holmlasten) gemäss SIA-Norm, ohne unzulässige Verformung" }
+            ],
+            exercises: [
+              { group: "Regelwerke zuordnen", task: "Welches Regelwerk ist zusätzlich für ein Geländer auf einem Fabrikationsboden (Industriebetrieb) massgebend?", answer: "Die SUVA-Broschüre Geländer" },
+              { group: "Regelwerke zuordnen", task: "Welches Regelwerk gilt für ein Ganzglasgeländer auf einem privaten Balkon (zusätzlich zur SIA 358)?", answer: "Die SIGAB-Richtlinie „Ganzglasgeländer“" },
+              { group: "Regelwerke zuordnen", task: "Welches Merkblatt regelt die praktische Montage eines Geländers?", answer: "TK 005 / TK 007 (AM Suisse)" },
+              { group: "Gefährdungsbilder", task: "Nenne die drei Gefährdungsbilder der SIA 358 in eigenen Worten.", answer: "begehbar (man kann auf das Element stehen), besteigbar (man kann sich daran hochziehen/daraufsteigen), bekletterbar (man kann daran hochklettern, z.B. an waagrechten Sprossen)" },
+              { group: "Gefährdungsbilder", task: "Warum unterscheidet die SIA 358 zwischen begehbar, besteigbar und bekletterbar?", answer: "Weil davon abhängt, wie leicht insbesondere Kinder ein Geländer überwinden können – je leichter, desto strenger die daraus abgeleiteten Grenzmasse." },
+              { group: "Verantwortung & Anwendungsbereich", task: "Muss ein Geländer bei einer Absturzhöhe über 12 m höher als 1 m sein?", answer: "Teil der Lernaufgabe (SIA 358 / BFU-Broschüre) – die genaue Antwort ist in den beiden Originalquellen zu recherchieren und zu begründen." }
+            ],
+            applications: [
+              { task: "Lernaufgabe aus dem Kursdokument: Lade dir die BFU-Broschüre „Geländer und Brüstungen“ sowie die SIA-Norm 358 herunter und beantworte: (1) Welche drei Gefährdungsbilder werden durch die SIA 358 definiert? (2) Was ist unter begehbar, besteigbar und bekletterbar zu verstehen? (3) Welche Masse sind zwingend einzuhalten (mit Bild)? (4) Welche Masse gelten abweichend bei einem Treppengeländer? (5) Wer ist verantwortlich, wenn ein normwidriges Geländer verbaut wird? (6) Ab welcher Absturzhöhe braucht es eine Absturzsicherung? (7) Müssen Geländer bei einer Absturzhöhe über 12 m höher als 1 m sein? (8) Wo liegen die Unterschiede zwischen der SIA 358 und der BFU-Broschüre?", answer: "Offene Rechercheaufgabe direkt aus dem Kursdokument – es gibt keine vorgegebene Musterlösung, da Norm und Broschüre nicht Teil dieses Uploads sind; die Antworten sind eigenständig aus den beiden Originalquellen zu erarbeiten." },
+              { task: "Auftrag: Halte schriftlich die wichtigsten Erkenntnisse zur Geländer-Statik aus einem aktuellen Fachartikel „Metall“ fest (Holmlasten, zulässige Verformung).", answer: "Offene Recherchearbeit gemäss Vorgabe im Kursdokument." },
+              { task: "Lernauftrag: Notiere die wichtigsten Unterschiede der SUVA-Vorschrift gegenüber der SIA-358-Norm für Industriegeländer.", answer: "Offene Rechercheaufgabe gemäss Vorgabe im Kursdokument – Fokus auf branchenspezifische Abweichungen (z.B. Handlaufhöhe, Durchtrittssicherheit, Fussleisten)." }
+            ],
+            examOpen: { timeMin: 25, totalPoints: 16, passPoints: 10, parts: [
+              { title: "Theorie (6 Punkte)", questions: [
+                  { q: "Wovor schützen Geländer?", points: 1, answer: "Vor Stürzen/Abstürzen aus der Höhe" },
+                  { q: "Welche Norm regelt Geländer und Brüstungen in der Schweiz?", points: 1, answer: "SIA 358" },
+                  { q: "Nenne die drei Gefährdungsbilder der SIA 358.", points: 3, answer: "begehbar, besteigbar, bekletterbar" },
+                  { q: "Welche Broschüre ergänzt die SIA 358 praxisnah?", points: 1, answer: "Die BFU-Broschüre „Geländer und Brüstungen“" }
+                ] },
+              { title: "Zuordnen (6 Punkte)", questions: [
+                  { q: "Ein Geländer wird in einer Industriehalle montiert. Welches Regelwerk gilt zusätzlich zur SIA 358?", points: 2, answer: "Die SUVA-Broschüre Geländer" },
+                  { q: "Ein Geländer besteht komplett aus Glas. Welche Richtlinie gilt zusätzlich?", points: 2, answer: "Die SIGAB-Richtlinie „Ganzglasgeländer“" },
+                  { q: "Ein Geländer verläuft entlang eines Fluchtwegs. Welche Verordnung ist zusätzlich zu beachten?", points: 2, answer: "Die VKF-Brandschutzrichtlinie Flucht- und Rettungswege" }
+                ] },
+              { title: "Anwenden (4 Punkte)", questions: [
+                  { q: "Ein Betrieb plant ein Geländer für eine Industriehalle. Welche zwei Regelwerke muss der/die Konstrukteur/in mindestens berücksichtigen, und warum reicht die SIA 358 allein hier nicht?", points: 4, answer: "SIA 358 (allgemeine Geländernorm) UND SUVA-Broschüre Geländer (branchenspezifisch für Industriebauten); die SIA 358 allein reicht nicht, weil die SUVA für Industriegeländer teils strengere/andere Anforderungen stellt (z.B. Durchtrittssicherheit, Handlaufhöhe), die branchenspezifisch zusätzlich gelten." }
+                ] }
+              ] }
+          }
+        ] },
     { id: "s1-12", name: "Skizzieren: Gitter, Vordächer, Stahlbau", lekt: 19, tb: "TB6",
         explain: "Gitter und Roste im Metallbau: bewegliche und feststehende Gitterarten, Fenstergitterformen, Gitteranordnung nach Befestigungsort sowie Herstellung und Montage. Dazu Skizzieren von Vordachtragwerken und klassischen Stahlbauteilen.",
         theorySections: [
